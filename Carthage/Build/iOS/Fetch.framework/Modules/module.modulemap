@@ -1,0 +1,4 @@
+framework module Fetch {
+  header "Fetch-Swift.h"
+  requires objc
+}

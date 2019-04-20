@@ -1,0 +1,73 @@
+name: TUFlix
+options:
+  xcodeVersion: 10.2
+settings:
+  base:
+    DEVELOPMENT_TEAM: 4KWS28V9EP
+    SWIFT_VERSION: "5.0"
+  configs:
+    Release:
+      SWIFT_COMPILATION_MODE: wholemodule
+attributes:
+  ORGANIZATIONNAME: aaa - all about apps GmbH
+targets:
+  TUFlix:
+    type: application
+    platform: iOS
+    deploymentTarget: "11.0"
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.krakora.tuflix
+    info:
+      path: TUFlix/SupportingFiles/Info.plist
+      properties:
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UIRequiresFullScreen: YES
+        UILaunchStoryboardName: LaunchScreen
+        UIRequiredDeviceCapabilities: [armv7]
+        ITSAppUsesNonExemptEncryption: NO
+        LSRequiresIPhoneOS: YES
+        _Configuration: $(CONFIGURATION)
+    sources: 
+      - TUFlix
+    dependencies:
+      - target: TUFlixKit
+      - carthage: Alamofire
+      - carthage: AlamofireImage
+      - carthage: DataSource
+      - carthage: Differ
+      - carthage: Fetch
+      - carthage: KeychainAccess
+      - carthage: ReactiveCocoa
+      - carthage: ReactiveSwift
+      - carthage: Result
+      - carthage: SimpleButton
+    postCompileScripts:
+      - script: |
+                if which swiftlint >/dev/null; then
+                  swiftlint
+                else
+                  echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
+                fi
+        name: SwiftLint
+  TUFlixKit:
+    type: framework
+    platform: iOS
+    deploymentTarget: "11.0"
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.krakora.tuflixKit
+    info:
+      path: TUFlixKit/SupportingFiles/Info.plist
+      properties:
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+    sources: 
+      - TUFlixKit
+    dependencies:
+      - carthage: Alamofire
+      - carthage: AlamofireImage
+      - carthage: Fetch
+      - carthage: KeychainAccess
+      - carthage: ReactiveSwift
+      - carthage: Result

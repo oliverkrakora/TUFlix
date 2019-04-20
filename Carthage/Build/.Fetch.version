@@ -1,0 +1,10 @@
+{
+  "commitish" : "f1f250963b87a335746354a7499938e951045dae",
+  "iOS" : [
+    {
+      "name" : "Fetch",
+      "hash" : "449dde55e2fb237002b91113206a1f3c8c068b8eea753213e8aceb3e94ddeff1",
+      "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
+    }
+  ]
+}

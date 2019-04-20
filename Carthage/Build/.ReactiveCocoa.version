@@ -1,0 +1,25 @@
+{
+  "commitish" : "9.0.0",
+  "iOS" : [
+    {
+      "name" : "ReactiveMapKit",
+      "hash" : "5fd94f99cec4c79105304c00c8f667a600351bc3080e747d20e0afd9e328e618",
+      "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
+    },
+    {
+      "name" : "ReactiveMapKit",
+      "hash" : "5fd94f99cec4c79105304c00c8f667a600351bc3080e747d20e0afd9e328e618",
+      "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
+    },
+    {
+      "name" : "ReactiveCocoa",
+      "hash" : "197718f4d169f76bce1c73a92b89741a3c057e778d3b544cd9ec07eb7b3ef12d",
+      "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
+    },
+    {
+      "name" : "ReactiveCocoa",
+      "hash" : "197718f4d169f76bce1c73a92b89741a3c057e778d3b544cd9ec07eb7b3ef12d",
+      "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
+    }
+  ]
+}
