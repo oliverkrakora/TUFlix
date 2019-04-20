@@ -13,22 +13,9 @@
 
 ---
 
-⚡️ Swift: x.x 📱 iOS 11.0 🌎 [API Docs](http://linktoswaggerdocs)
+⚡️ Swift: 5.0📱 iOS 11.0 
 
 ---
 
-Project description in 1-5 sentences.
+An app to watch your lectures from TU Vienna on the go.
 
-[Screenshots]
-
-## Structure
-
-TODO
-
-## Documentation
-
-Where do I find API docs, wireframes, etc.?
-
-## Bitrise
-
-Is Bitrise CI setup?

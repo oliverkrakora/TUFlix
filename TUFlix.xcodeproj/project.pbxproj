@@ -25,6 +25,7 @@
 		5C2A3F78226B17EA00B5D178 /* Series.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2A3F77226B17EA00B5D178 /* Series.swift */; };
 		5C2A3F7A226B188700B5D178 /* SeriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2A3F79226B188700B5D178 /* SeriesViewModel.swift */; };
 		5C2A3F7C226B1CCA00B5D178 /* SeriesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2A3F7B226B1CCA00B5D178 /* SeriesDetailViewController.swift */; };
+		5C2A3F7E226B23C800B5D178 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5C2A3F7D226B23C800B5D178 /* README.md */; };
 		5C42A3CD947D58A71B85606297E26D8F /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0EABEF86C57F15E989586EF33E4CE65 /* ReactiveSwift.framework */; };
 		5CF278D0226A65D40057C609 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF278CF226A65D40057C609 /* MainViewController.swift */; };
 		5CF278D3226A66B50057C609 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF278D2226A66B50057C609 /* MainViewModel.swift */; };
@@ -104,6 +105,7 @@
 		5C2A3F77226B17EA00B5D178 /* Series.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Series.swift; sourceTree = "<group>"; };
 		5C2A3F79226B188700B5D178 /* SeriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesViewModel.swift; sourceTree = "<group>"; };
 		5C2A3F7B226B1CCA00B5D178 /* SeriesDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesDetailViewController.swift; sourceTree = "<group>"; };
+		5C2A3F7D226B23C800B5D178 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5CF278CC226A61730057C609 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		5CF278CF226A65D40057C609 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		5CF278D2226A66B50057C609 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 		81DC8A0EC73BBB2D24C4F048E75C2601 = {
 			isa = PBXGroup;
 			children = (
+				5C2A3F7D226B23C800B5D178 /* README.md */,
 				5CF278CC226A61730057C609 /* Cartfile */,
 				954BA3516564BC31F4871B9ECC9F9141 /* TUFlix */,
 				96D3A1B3F7FCF59BAEC021307191EFD7 /* TUFlixKit */,
@@ -515,6 +518,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C2A3F7E226B23C800B5D178 /* README.md in Resources */,
 				B476EB1D85DEB45230F1F62FB82F374B /* Assets.xcassets in Resources */,
 				5CF278DE226A73A10057C609 /* EpisodeCell.xib in Resources */,
 				5C2A3F76226B165900B5D178 /* SeriesCell.xib in Resources */,
