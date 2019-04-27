@@ -20,6 +20,8 @@ class MainViewController: UIViewController {
     
     // MARK: Properties
     
+    private let pagingHelper = PagedScrollViewHelper(pageOffset: .relative(0.8))
+    
     private lazy var dataSource: DataSource = {
       return DataSource(cellDescriptors: [
         EpisodeCell.cellDescriptor,
@@ -47,6 +49,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.searchController = UISearchController(searchResultsController: nil)
+        dataSource.fallbackDelegate = self
         tableView.dataSource = dataSource
         tableView.delegate = dataSource
         tableView.tableFooterView = UIView()
@@ -64,26 +67,14 @@ class MainViewController: UIViewController {
     
     // MARK: Networking
     private func loadData() {
-        switch viewModel.contentType {
-        case .episodes:
-            disposable = viewModel.fetchEpisodes.apply().startWithResult { [weak self] result in
-                switch result {
-                case .success(let value):
-                    self?.setupDataSource(with: value)
-                case .failure(let error):
-                    print(error)
-                    #warning("Handle error")
-                }
-            }
-        case .series:
-            disposable = viewModel.fetchSeries.apply().startWithResult { [weak self] result in
-                switch result {
-                case .success(let value):
-                    self?.setupDataSource(with: value)
-                case .failure(let error):
-                    print(error)
-                    #warning("Handle error")
-                }
+        viewModel.loadData { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success:
+                self.setupDataSource(with: self.viewModel.currentPageItems)
+            case .failure:
+                #warning("Handle error")
             }
         }
     }
@@ -99,6 +90,17 @@ class MainViewController: UIViewController {
     
     @IBAction private func contentTypeDidChange() {
         viewModel.contentType = ContentType(rawValue: contentTypeSegmentedControl.selectedSegmentIndex)!
+        guard !viewModel.hasContent else {
+            setupDataSource(with: viewModel.currentPageItems)
+            return
+        }
+        loadData()
+    }
+}
+
+extension MainViewController: UITableViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard pagingHelper.shouldLoadNextPage(for: scrollView) else { return }
         loadData()
     }
 }
