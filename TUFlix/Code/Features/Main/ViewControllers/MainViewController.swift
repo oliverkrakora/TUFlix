@@ -10,6 +10,7 @@ import UIKit
 import DataSource
 import Fetch
 import ReactiveSwift
+import StatefulViewController
 
 class MainViewController: UIViewController {
     
@@ -47,7 +48,8 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupStatefulViews()
+                
         navigationItem.searchController = UISearchController(searchResultsController: nil)
         dataSource.fallbackDelegate = self
         tableView.dataSource = dataSource
@@ -56,9 +58,11 @@ class MainViewController: UIViewController {
         contentTypeDidChange()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupInitialViewState()
         tableView.indexPathForSelectedRow.flatMap { self.tableView.deselectRow(at: $0, animated: true) }
+
     }
     
     deinit {
@@ -67,6 +71,7 @@ class MainViewController: UIViewController {
     
     // MARK: Networking
     private func loadData() {
+        startLoading()
         viewModel.loadData { [weak self] result in
             guard let self = self else { return }
             
@@ -76,6 +81,7 @@ class MainViewController: UIViewController {
             case .failure:
                 #warning("Handle error")
             }
+            self.endLoading()
         }
     }
     
@@ -83,7 +89,7 @@ class MainViewController: UIViewController {
     
     private func setupDataSource(with content: [Any]) {
         dataSource.sections = [Section(items: content)]
-        dataSource.reloadDataAnimated(tableView)
+        dataSource.reloadData(tableView, animated: false)
     }
     
     // MARK: Actions
@@ -95,6 +101,21 @@ class MainViewController: UIViewController {
             return
         }
         loadData()
+    }
+}
+
+extension MainViewController: StatefulViewController {
+    
+    func hasContent() -> Bool {
+        return viewModel.hasContent
+    }
+    
+    private func setupStatefulViews() {
+        self.emptyView = EmptyStateView.loadFromNib(type: EmptyStateView.self)?.prepare(with: "No data to show")
+        self.loadingView = LoadingStateView.loadFromNib(type: LoadingStateView.self)?.prepare(with: "Loading data")
+        self.errorView = ErrorStateView.loadFromNib(type: ErrorStateView.self)?.prepare(with: "Failed to load data", retryClosure: { [weak self] in
+            self?.loadData()
+        })
     }
 }
 

@@ -8,6 +8,7 @@ struct Appearance {
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().barTintColor = UIColor(named: "primaryColor")!
         UINavigationBar.appearance().tintColor = UIColor(named: "primaryTextColor")!
+        UISearchBar.appearance().tintColor = .white
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "primaryTextColor")!]
         UISegmentedControl.appearance().tintColor = UIColor(named: "primaryTextColor")!
     }

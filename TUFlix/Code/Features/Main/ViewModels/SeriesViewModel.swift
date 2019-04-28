@@ -16,12 +16,11 @@ class SeriesViewModel {
     
     let model: Series
     
-    lazy var fetchEpisodes: Action<(), [EpisodeViewModel], FetchError> = {
-        return Action { [unowned self] _ in
-            return API.Series.fetchEpisodes(for: self.model.id).fetch()
-                .map { $0.model.map { EpisodeViewModel(model: $0) } }
-        }
-    }()
+    let episodePager: PagedResource<SearchResult<Episode>>
+    
+    var episodes: [EpisodeViewModel] {
+        return episodePager.items.map { EpisodeViewModel(model: $0) }
+    }
     
     var formattedTitle: String? {
         return model.title
@@ -35,8 +34,17 @@ class SeriesViewModel {
         return model.contributor
     }
     
-    init(series: Series) {
-        self.model = series
+    var hasContent: Bool {
+        return !episodes.isEmpty
+    }
+    
+    init(model: Series) {
+        self.model = model
+        let episodeResource = API.Series.pageEpisodes(for: model.id)
+        self.episodePager = PagedResource(initalPage: episodeResource, resourceConstructor: { (_, currentPage) in
+            let pageConfig = API.PagingConfig(limit: currentPage.limit, offset: currentPage.offset + currentPage.limit)
+            return API.Series.pageEpisodes(for: model.id, config: pageConfig)
+        })
     }
 }
 

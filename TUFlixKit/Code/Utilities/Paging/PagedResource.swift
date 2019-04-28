@@ -11,6 +11,7 @@ import Fetch
 
 public enum PagingError: Error {
     case pagingInProgress
+    case pagingReachedEnd
     case fetchError(FetchError)
 }
 
@@ -28,6 +29,8 @@ public class PagedResource<Page: PageProtocol> {
     
     public private(set) var pages: [Page] = []
     
+    public private(set) var items: [Page.Item] = []
+    
     private var currentPageRequestToken: RequestToken?
     
     public let constructPageResource: PageResourceConstructor
@@ -44,8 +47,14 @@ public class PagedResource<Page: PageProtocol> {
         if force {
             reset()
         }
+        
         guard currentPageRequestToken == nil || currentPageRequestToken!.isCancelled else {
             callback(.failure(.pagingInProgress))
+            return
+        }
+        
+        guard hasMorePages else {
+            callback(.failure(.pagingReachedEnd))
             return
         }
         
@@ -57,8 +66,11 @@ public class PagedResource<Page: PageProtocol> {
                 if value.model.items.count == 0 || (self.pages.first?.total != nil && (self.pages.first?.total == value.model.total)) {
                     self.hasMorePages = false
                 }
-                self.pages.append(value.model)
-                callback(.success(value.model))
+                let page = value.model
+                self.pages.append(page)
+                self.items.append(contentsOf: page.items)
+                self.currentPage = self.constructPageResource(self.currentPage, page)
+                callback(.success(page))
             case .failure(let error):
                 print(error)
                 callback(.failure(.fetchError(error)))
@@ -74,5 +86,6 @@ public class PagedResource<Page: PageProtocol> {
         hasMorePages = true
         currentPage = initialPage
         pages.removeAll()
+        items.removeAll()
     }
 }

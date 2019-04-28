@@ -45,29 +45,11 @@ class MainViewModel {
     var currentPageItems: [Any] {
         switch contentType {
         case .episodes:
-            return episodePageResource.pages.reduce(into: [], { (arr, result) in
-                arr += result.items.map { EpisodeViewModel(model: $0) }
-            })
+            return episodePageResource.items.map { EpisodeViewModel(model: $0) }
         case .series:
-            return seriesPageResource.pages.reduce(into: [], { (arr, result) in
-                arr += result.items.map { SeriesViewModel(series: $0) }
-            })
+            return seriesPageResource.items.map { SeriesViewModel(model: $0) }
         }
     }
-
-    lazy var fetchEpisodes: Action<(), [EpisodeViewModel], FetchError> = {
-        return Action { _ in
-            return API.Episode.allEpisodes().fetch()
-                .map { $0.model.map { EpisodeViewModel(model: $0) } }
-        }
-    }()
-    
-    lazy var fetchSeries: Action<(), [SeriesViewModel], FetchError> = {
-        return Action { _ in
-            return API.Series.allSeries().fetch()
-                .map { $0.model.map { SeriesViewModel(series: $0) } }
-        }
-    }()
     
     init() {
         episodePageResource = PagedResource(initalPage: API.Episode.page()) { [unowned self] _, currentPage in

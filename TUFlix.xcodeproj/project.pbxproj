@@ -31,6 +31,14 @@
 		5CB4792522750AA300116ADE /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB4792422750AA300116ADE /* SearchResult.swift */; };
 		5CB4792622750B7000116ADE /* PageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB4791E2275023800116ADE /* PageProtocol.swift */; };
 		5CB4792722750B7300116ADE /* PagedResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB479202275025B00116ADE /* PagedResource.swift */; };
+		5CB4792A2275B50D00116ADE /* EmptyStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CB479292275B50D00116ADE /* EmptyStateView.xib */; };
+		5CB4792C2275B57400116ADE /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB4792B2275B57400116ADE /* EmptyStateView.swift */; };
+		5CB4792E2275B6A300116ADE /* LoadingStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB4792D2275B6A300116ADE /* LoadingStateView.swift */; };
+		5CB479302275B6AC00116ADE /* LoadingStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CB4792F2275B6AC00116ADE /* LoadingStateView.xib */; };
+		5CB479322275B7C500116ADE /* ErrorStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CB479312275B7C500116ADE /* ErrorStateView.xib */; };
+		5CB479342275B7CE00116ADE /* ErrorStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB479332275B7CE00116ADE /* ErrorStateView.swift */; };
+		5CB479362275B9F200116ADE /* Nibable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB479352275B9F200116ADE /* Nibable.swift */; };
+		5CB479382275BB8600116ADE /* StatefulViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB479372275BB8600116ADE /* StatefulViewController.framework */; };
 		5CF278D0226A65D40057C609 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF278CF226A65D40057C609 /* MainViewController.swift */; };
 		5CF278D3226A66B50057C609 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF278D2226A66B50057C609 /* MainViewModel.swift */; };
 		5CF278D5226A679E0057C609 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF278D4226A679E0057C609 /* Episode.swift */; };
@@ -88,7 +96,6 @@
 /* Begin PBXFileReference section */
 		0767FF5A509C34BCC3D7365C08E49778 /* DataSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DataSource.framework; sourceTree = "<group>"; };
 		0A9C2623715B622A4B4EE668BD7DBB05 /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
-		0D5EBC56826459BF998DBE42100004D2 /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		1341B66715E2BB7A24269DE226B97A92 /* TUFlixKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TUFlixKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		14EFCC307A501F925C94D08A799A25D2 /* TUFlixKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TUFlixKit.h; sourceTree = "<group>"; };
 		207E57FB390BC5F7B076F06386932640 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
@@ -114,6 +121,14 @@
 		5CB479202275025B00116ADE /* PagedResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagedResource.swift; sourceTree = "<group>"; };
 		5CB479222275070600116ADE /* PagedScrollViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagedScrollViewHelper.swift; sourceTree = "<group>"; };
 		5CB4792422750AA300116ADE /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
+		5CB479292275B50D00116ADE /* EmptyStateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyStateView.xib; sourceTree = "<group>"; };
+		5CB4792B2275B57400116ADE /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		5CB4792D2275B6A300116ADE /* LoadingStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingStateView.swift; sourceTree = "<group>"; };
+		5CB4792F2275B6AC00116ADE /* LoadingStateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingStateView.xib; sourceTree = "<group>"; };
+		5CB479312275B7C500116ADE /* ErrorStateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorStateView.xib; sourceTree = "<group>"; };
+		5CB479332275B7CE00116ADE /* ErrorStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStateView.swift; sourceTree = "<group>"; };
+		5CB479352275B9F200116ADE /* Nibable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nibable.swift; sourceTree = "<group>"; };
+		5CB479372275BB8600116ADE /* StatefulViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StatefulViewController.framework; path = Carthage/Build/iOS/StatefulViewController.framework; sourceTree = "<group>"; };
 		5CF278CC226A61730057C609 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		5CF278CF226A65D40057C609 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		5CF278D2226A66B50057C609 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
@@ -156,6 +171,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CB479382275BB8600116ADE /* StatefulViewController.framework in Frameworks */,
 				440FE804E506A1700F23F77BDC98B85D /* TUFlixKit.framework in Frameworks */,
 				28D582C42216A45B484EA882CE6D177C /* Alamofire.framework in Frameworks */,
 				BEDC787D538482CBA737CA1196F2474A /* DataSource.framework in Frameworks */,
@@ -233,6 +249,7 @@
 		518A825D9E587779A60F74EB4F5CBE3A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5CB479372275BB8600116ADE /* StatefulViewController.framework */,
 				D8CEC0E8AD211AC1954F453EB6B3D652 /* Carthage */,
 			);
 			name = Frameworks;
@@ -269,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				5CB479222275070600116ADE /* PagedScrollViewHelper.swift */,
+				5CB479352275B9F200116ADE /* Nibable.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -280,6 +298,19 @@
 				5CB479202275025B00116ADE /* PagedResource.swift */,
 			);
 			path = Paging;
+			sourceTree = "<group>";
+		};
+		5CB479282275B4FD00116ADE /* States */ = {
+			isa = PBXGroup;
+			children = (
+				5CB479292275B50D00116ADE /* EmptyStateView.xib */,
+				5CB4792B2275B57400116ADE /* EmptyStateView.swift */,
+				5CB4792F2275B6AC00116ADE /* LoadingStateView.xib */,
+				5CB4792D2275B6A300116ADE /* LoadingStateView.swift */,
+				5CB479312275B7C500116ADE /* ErrorStateView.xib */,
+				5CB479332275B7CE00116ADE /* ErrorStateView.swift */,
+			);
+			path = States;
 			sourceTree = "<group>";
 		};
 		5CF278CE226A65C10057C609 /* ViewControllers */ = {
@@ -415,7 +446,7 @@
 		E7EF3D487E10CDD9D9FF759768BAE017 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0D5EBC56826459BF998DBE42100004D2 /* .gitkeep */,
+				5CB479282275B4FD00116ADE /* States */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -550,8 +581,11 @@
 				B476EB1D85DEB45230F1F62FB82F374B /* Assets.xcassets in Resources */,
 				5CF278DE226A73A10057C609 /* EpisodeCell.xib in Resources */,
 				5C2A3F76226B165900B5D178 /* SeriesCell.xib in Resources */,
+				5CB4792A2275B50D00116ADE /* EmptyStateView.xib in Resources */,
 				4EFC4BF6881C627E1872FA54DFDCBCF6 /* LaunchScreen.storyboard in Resources */,
+				5CB479322275B7C500116ADE /* ErrorStateView.xib in Resources */,
 				145216C364A6F206895DB6CE7C2D4D85 /* Main.storyboard in Resources */,
+				5CB479302275B6AC00116ADE /* LoadingStateView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,6 +605,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/ReactiveCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ReactiveSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/StatefulViewController.framework",
 			);
 			name = Carthage;
 			outputPaths = (
@@ -581,6 +616,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ReactiveCocoa.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ReactiveSwift.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Result.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/StatefulViewController.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -611,13 +647,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CB4792C2275B57400116ADE /* EmptyStateView.swift in Sources */,
 				5C2A3F7C226B1CCA00B5D178 /* SeriesDetailViewController.swift in Sources */,
 				765B657B0FA46A02854F40E5261A6246 /* AppCoordinator.swift in Sources */,
+				5CB4792E2275B6A300116ADE /* LoadingStateView.swift in Sources */,
+				5CB479362275B9F200116ADE /* Nibable.swift in Sources */,
 				D51A245877C12FF7791CCEB4D18B055E /* AppDelegate.swift in Sources */,
 				1EAB36C8CC0DBD7E8117E80CF93DFCA7 /* Appearance.swift in Sources */,
 				FD4670FF755136787AADDCA49B4C2A9C /* Coordinator.swift in Sources */,
 				9E981D660AD773A5D4B6E806579AC616 /* MainCoordinator.swift in Sources */,
 				5CF278DC226A73990057C609 /* EpisodeCell.swift in Sources */,
+				5CB479342275B7CE00116ADE /* ErrorStateView.swift in Sources */,
 				5C2A3F74226B164500B5D178 /* SeriesCell.swift in Sources */,
 				5AF789D7875CDB0EB2651C359F837485 /* NavigationCoordinator.swift in Sources */,
 				5CF278E0226A75400057C609 /* EpisodeViewModel.swift in Sources */,

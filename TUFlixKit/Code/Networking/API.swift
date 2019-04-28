@@ -36,6 +36,14 @@ public class API {
             )
         }
         
+        public static func search(for episodeName: String, config: PagingConfig = .default) -> Resource<SearchResult<TUFlixKit.Episode>> {
+            return Resource(
+                path: "/search/episode.json",
+                urlParameters: ["limit": config.limit, "offset": config.offset, "q": episodeName],
+                rootKeys: ["search-results"]
+            )
+        }
+        
         public static func allEpisodes() -> Resource<[TUFlixKit.Episode]> {
             return Resource(
                 path: "/search/episode.json",
@@ -55,27 +63,19 @@ public class API {
             )
         }
         
-        public static func pageEpisodes(for seriesId: String, config: PagingConfig = .default) -> Resource<SearchResult<TUFlixKit.Episode>> {
+        public static func search(for seriesName: String, config: PagingConfig = .default) -> Resource<SearchResult<TUFlixKit.Episode>> {
             return Resource(
                 path: "/search/series.json",
-                urlParameters: ["limit": config.limit, "offset": config.offset],
+                urlParameters: ["limit": config.limit, "offset": config.offset, "q": seriesName],
                 rootKeys: ["search-results"]
             )
         }
         
-        public static func allSeries() -> Resource<[TUFlixKit.Series]> {
+        public static func pageEpisodes(for seriesId: String, config: PagingConfig = .default) -> Resource<SearchResult<TUFlixKit.Episode>> {
             return Resource(
                 path: "/search/series.json",
-                urlParameters: ["limit": 20, "offset": 0],
-                rootKeys: ["search-results", "result"]
-            )
-        }
-        
-        public static func fetchEpisodes(for seriesId: String) -> Resource<[TUFlixKit.Episode]> {
-            return Resource(
-                path: "/search/episode.json",
-                urlParameters: ["limit": 20, "offset": 0, "sid": seriesId],
-                rootKeys: ["search-results", "result"]
+                urlParameters: ["limit": config.limit, "offset": config.offset, "sid": seriesId],
+                rootKeys: ["search-results"]
             )
         }
     }

@@ -9,6 +9,7 @@
 import UIKit
 import DataSource
 import ReactiveSwift
+import StatefulViewController
 
 class SeriesDetailViewController: UIViewController {
     
@@ -17,6 +18,8 @@ class SeriesDetailViewController: UIViewController {
     @IBOutlet private var tableView: UITableView!
     
     // MARK: Properties
+    
+    private let pagingHelper = PagedScrollViewHelper(pageOffset: .relative(0.8))
     
     private lazy var dataSource: DataSource = {
        return DataSource(cellDescriptors: [
@@ -40,11 +43,20 @@ class SeriesDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupStatefulViews()
         navigationItem.title = viewModel.formattedTitle
+        
+        dataSource.fallbackDelegate = self
         tableView.dataSource = dataSource
         tableView.delegate = dataSource
         tableView.tableFooterView = UIView()
+        setupDataSource(with: viewModel.episodes)
         loadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupInitialViewState()
     }
     
     deinit {
@@ -54,19 +66,47 @@ class SeriesDetailViewController: UIViewController {
     // MARK: Networking
     
     private func loadData() {
-        disposable = viewModel.fetchEpisodes.apply().startWithResult { [weak self] result in
+        startLoading()
+        
+        viewModel.episodePager.loadNext { [weak self] result in
+            guard let self = self else { return }
+            
             switch result {
-            case .success(let value):
-                self?.setupDataSource(with: value)
-            case .failure(let error):
-                print(error)
+            case .success:
+                self.setupDataSource(with: self.viewModel.episodes)
+            case .failure:
                 #warning("Handle error")
             }
+            
+            self.endLoading()
         }
     }
     
     private func setupDataSource(with content: [EpisodeViewModel]) {
         dataSource.sections = [Section(items: content)]
         dataSource.reloadDataAnimated(tableView)
+    }
+}
+
+extension SeriesDetailViewController: UITableViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard pagingHelper.shouldLoadNextPage(for: scrollView) else { return }
+        
+        loadData()
+    }
+}
+
+extension SeriesDetailViewController: StatefulViewController {
+    
+    func hasContent() -> Bool {
+        return viewModel.hasContent
+    }
+    
+    private func setupStatefulViews() {
+        self.emptyView = EmptyStateView.loadFromNib(type: EmptyStateView.self)?.prepare(with: "No data to show")
+        self.loadingView = LoadingStateView.loadFromNib(type: LoadingStateView.self)?.prepare(with: "Loading data")
+        self.errorView = ErrorStateView.loadFromNib(type: ErrorStateView.self)?.prepare(with: "Failed to load data", retryClosure: { [weak self] in
+            self?.loadData()
+        })
     }
 }
