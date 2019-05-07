@@ -43,9 +43,9 @@ public class PagedResource<Page: PageProtocol> {
         self.constructPageResource = resourceConstructor
     }
     
-    public func loadNext(force: Bool = false, _ callback: @escaping PageResultClosure) {
-        if force {
-            reset()
+    public func loadNext(reset: Bool = false, _ callback: @escaping PageResultClosure) {
+        if reset {
+            self.reset()
         }
         
         guard currentPageRequestToken == nil || currentPageRequestToken!.isCancelled else {
@@ -63,9 +63,10 @@ public class PagedResource<Page: PageProtocol> {
             
             switch result {
             case .success(let value):
-                if value.model.items.count == 0 || (self.pages.first?.total != nil && (self.pages.first?.total == value.model.total)) {
+                if value.model.items.count == 0 || !value.model.hasNext {
                     self.hasMorePages = false
                 }
+                
                 let page = value.model
                 self.pages.append(page)
                 self.items.append(contentsOf: page.items)

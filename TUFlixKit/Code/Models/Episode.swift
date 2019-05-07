@@ -30,23 +30,32 @@ public struct Episode: Equatable, Cacheable {
         }
         
         public struct Media: Equatable, Codable {
-            public enum MimeType: String, Codable {
-                case mp4 = "video/mp4"
-                case mpeg = "audio/mpeg"
-                case other
-            }
             
             private enum CodingKeys: String, CodingKey {
-                case id
-                case mimeType = "mimetype"
-                case url
-                case durationInMs = "duration"
+                case tracks = "track"
             }
             
-            public let id: String?
-            public let mimeType: MimeType?
-            public let url: URL?
-            public let durationInMs: Int?
+            public struct Track: Equatable, Codable {
+                private enum CodingKeys: String, CodingKey {
+                    case id
+                    case mimeType = "mimetype"
+                    case url
+                    case durationInMs = "duration"
+                }
+                
+                public enum MimeType: String, Codable {
+                    case mp4 = "video/mp4"
+                    case mpeg = "audio/mpeg"
+                    case other
+                }
+                
+                public let id: String?
+                public let mimeType: MimeType?
+                public let url: URL?
+                public let durationInMs: Int?
+            }
+            
+            public let tracks: [Track]?
         }
     }
     

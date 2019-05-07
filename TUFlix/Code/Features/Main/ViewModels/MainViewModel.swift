@@ -60,14 +60,14 @@ class MainViewModel {
         }
     }
     
-    func loadData(force: Bool = false, callback: @escaping (Result<Any, PagingError>) -> Void) {
+    func loadData(reset: Bool = false, callback: @escaping (Result<Any, PagingError>) -> Void) {
         switch contentType {
         case .episodes:
-            return episodePageResource.loadNext(force: force) { result in
+            return episodePageResource.loadNext(reset: reset) { result in
                 callback(result.map { $0 as Any })
             }
         case .series:
-            return seriesPageResource.loadNext(force: force) { result in
+            return seriesPageResource.loadNext(reset: reset) { result in
                 callback(result.map { $0 as Any })
             }
         }

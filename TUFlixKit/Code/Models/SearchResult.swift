@@ -26,6 +26,11 @@ public struct SearchResult<Item: SearchResultItem>: PageProtocol {
     
     public let total: Int?
     
+    public var hasNext: Bool {
+        guard let total = total else { return true }
+        return offset < total
+    }
+    
     public let items: [Item]
     
     public init(from decoder: Decoder) throws {
@@ -35,10 +40,10 @@ public struct SearchResult<Item: SearchResultItem>: PageProtocol {
         total = try Int(container.decode(String.self, forKey: .total))!
         
         do {
-            items = try container.decode([Item].self, forKey: .items)
+            items = try container.decodeIfPresent([Item].self, forKey: .items) ?? []
         } catch {
-            let item = try container.decode(Item.self, forKey: .items)
-            items = [item]
+            let item = try container.decodeIfPresent(Item.self, forKey: .items)
+            items = item.flatMap { [$0] } ?? []
         }
     }
 }

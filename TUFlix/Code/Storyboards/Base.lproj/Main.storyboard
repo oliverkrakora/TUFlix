@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cRT-xV-Fd3">
-                                <rect key="frame" x="0.0" y="88" width="375" height="724"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -27,7 +27,7 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="cRT-xV-Fd3" secondAttribute="bottom" id="5MN-5Y-95t"/>
                             <constraint firstItem="gOC-d3-5fk" firstAttribute="trailing" secondItem="cRT-xV-Fd3" secondAttribute="trailing" id="dCx-MP-ODt"/>
-                            <constraint firstItem="cRT-xV-Fd3" firstAttribute="top" secondItem="gOC-d3-5fk" secondAttribute="top" id="frL-Ut-Y8j"/>
+                            <constraint firstItem="cRT-xV-Fd3" firstAttribute="top" secondItem="byx-ir-LQo" secondAttribute="top" id="frL-Ut-Y8j"/>
                             <constraint firstItem="cRT-xV-Fd3" firstAttribute="leading" secondItem="gOC-d3-5fk" secondAttribute="leading" id="knB-e8-qvV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gOC-d3-5fk"/>

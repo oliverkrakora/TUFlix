@@ -50,10 +50,20 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         setupStatefulViews()
                 
-        navigationItem.searchController = UISearchController(searchResultsController: nil)
+        navigationItem.searchController = {
+           let controller = UISearchController(searchResultsController: nil)
+            controller.obscuresBackgroundDuringPresentation = false
+            return controller
+        }()
         dataSource.fallbackDelegate = self
         tableView.dataSource = dataSource
         tableView.delegate = dataSource
+        tableView.refreshControl = {
+           let refreshControl = UIRefreshControl()
+            refreshControl.tintColor = .white
+           refreshControl.addTarget(self, action: #selector(forceRefresh), for: .valueChanged)
+            return refreshControl
+        }()
         tableView.tableFooterView = UIView()
         contentTypeDidChange()
     }
@@ -70,9 +80,14 @@ class MainViewController: UIViewController {
     }
     
     // MARK: Networking
-    private func loadData() {
+    
+    @objc private func forceRefresh() {
+        loadData(force: true)
+    }
+    
+    private func loadData(force: Bool = false) {
         startLoading()
-        viewModel.loadData { [weak self] result in
+        viewModel.loadData(reset: force) { [weak self] result in
             guard let self = self else { return }
             
             switch result {
@@ -81,6 +96,7 @@ class MainViewController: UIViewController {
             case .failure:
                 #warning("Handle error")
             }
+            self.tableView.refreshControl?.endRefreshing()
             self.endLoading()
         }
     }

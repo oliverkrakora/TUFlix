@@ -11,8 +11,7 @@ import Foundation
 public protocol PageProtocol: Decodable {
     associatedtype Item: Decodable
     
-    var offset: Int { get }
-    var limit: Int { get }
-    var total: Int? { get }
+    var hasNext: Bool { get }
+    
     var items: [Item] { get }
 }

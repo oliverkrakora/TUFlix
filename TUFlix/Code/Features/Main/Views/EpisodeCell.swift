@@ -19,6 +19,8 @@ class EpisodeCell: UITableViewCell {
     
     @IBOutlet private var durationLabel: UILabel!
     
+    @IBOutlet private var footerStackView: UIStackView!
+    
     func configure(with episode: EpisodeViewModel, isPartOfSeries: Bool = false) {
         titleLabel.text = {
             if isPartOfSeries {

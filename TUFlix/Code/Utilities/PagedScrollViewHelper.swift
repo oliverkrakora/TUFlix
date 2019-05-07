@@ -12,16 +12,6 @@ class PagedScrollViewHelper {
     
     enum PageOffset {
         case relative(CGFloat)
-        case absolute(CGFloat)
-        
-        func absoluteValue(in scrollView: UIScrollView) -> CGFloat {
-            switch self {
-            case .absolute(let value):
-                return value
-            case .relative(let relative):
-                return CGFloat(relative) * scrollView.contentSize.height
-            }
-        }
     }
     
     let pageAtOffset: PageOffset
@@ -31,6 +21,10 @@ class PagedScrollViewHelper {
     }
     
     func shouldLoadNextPage(for scrollView: UIScrollView) -> Bool {
-        return (scrollView.contentOffset.y + scrollView.frame.height) >= pageAtOffset.absoluteValue(in: scrollView)
+        switch pageAtOffset {
+        case .relative(let value):
+            let adjustedContentSize = abs(scrollView.contentSize.height - scrollView.bounds.height)
+            return (scrollView.contentOffset.y / adjustedContentSize) > value
+        }
     }
 }

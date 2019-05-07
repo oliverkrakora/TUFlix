@@ -13,13 +13,13 @@ public struct Config {
             return URL(string: "https://oc-presentation.ltcc.tuwien.ac.at")!
         }
 
-        static let stubRequests = true
+        static let stubRequests = false
         static var timeout: TimeInterval = 120.0
 
         static var verboseLogging: Bool {
             switch Environment.current() {
             case .debug, .staging:
-                return true
+                return false
             case .release:
                 return false
             }
