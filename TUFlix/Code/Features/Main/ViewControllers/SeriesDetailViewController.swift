@@ -25,9 +25,14 @@ class SeriesDetailViewController: UIViewController {
        return DataSource(cellDescriptors: [
         EpisodeCell.cellDescriptor.configure { (viewModel, cell, _) in
             cell.configure(with: viewModel, isPartOfSeries: true)
-        }
+            }.didSelect { [unowned self] (viewModel, _) in
+                self.playEpisode(viewModel)
+                return .keepSelected
+            }
         ])
     }()
+    
+    var playEpisode: ((EpisodeViewModel) -> Void)!
     
     private var disposable: Disposable?
     
@@ -57,6 +62,7 @@ class SeriesDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupInitialViewState()
+        tableView.indexPathForSelectedRow.flatMap { self.tableView.deselectRow(at: $0, animated: true) }
     }
     
     deinit {
@@ -84,7 +90,7 @@ class SeriesDetailViewController: UIViewController {
     
     private func setupDataSource(with content: [EpisodeViewModel]) {
         dataSource.sections = [Section(items: content)]
-        dataSource.reloadDataAnimated(tableView)
+        dataSource.reloadData(tableView, animated: false)
     }
 }
 

@@ -26,9 +26,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="cRT-xV-Fd3" secondAttribute="bottom" id="5MN-5Y-95t"/>
-                            <constraint firstItem="gOC-d3-5fk" firstAttribute="trailing" secondItem="cRT-xV-Fd3" secondAttribute="trailing" id="dCx-MP-ODt"/>
+                            <constraint firstAttribute="trailing" secondItem="cRT-xV-Fd3" secondAttribute="trailing" id="dCx-MP-ODt"/>
                             <constraint firstItem="cRT-xV-Fd3" firstAttribute="top" secondItem="byx-ir-LQo" secondAttribute="top" id="frL-Ut-Y8j"/>
-                            <constraint firstItem="cRT-xV-Fd3" firstAttribute="leading" secondItem="gOC-d3-5fk" secondAttribute="leading" id="knB-e8-qvV"/>
+                            <constraint firstItem="cRT-xV-Fd3" firstAttribute="leading" secondItem="byx-ir-LQo" secondAttribute="leading" id="knB-e8-qvV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gOC-d3-5fk"/>
                     </view>
@@ -41,9 +41,6 @@
                                 <segment title="Episodes"/>
                                 <segment title="Series"/>
                             </segments>
-                            <connections>
-                                <action selector="contentTypeDidChange" destination="jUz-Hh-okO" eventType="valueChanged" id="QH1-rJ-Oy9"/>
-                            </connections>
                         </segmentedControl>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
@@ -71,9 +68,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="YAF-U4-7ua" firstAttribute="trailing" secondItem="EeB-Et-uCW" secondAttribute="trailing" id="cBe-bR-xZa"/>
+                            <constraint firstAttribute="trailing" secondItem="EeB-Et-uCW" secondAttribute="trailing" id="cBe-bR-xZa"/>
                             <constraint firstItem="EeB-Et-uCW" firstAttribute="top" secondItem="v76-Pe-1xg" secondAttribute="top" id="kUn-8Q-yjg"/>
-                            <constraint firstItem="EeB-Et-uCW" firstAttribute="leading" secondItem="YAF-U4-7ua" secondAttribute="leading" id="mo1-t0-dXd"/>
+                            <constraint firstItem="EeB-Et-uCW" firstAttribute="leading" secondItem="v76-Pe-1xg" secondAttribute="leading" id="mo1-t0-dXd"/>
                             <constraint firstAttribute="bottom" secondItem="EeB-Et-uCW" secondAttribute="bottom" id="qo4-H4-Vyl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YAF-U4-7ua"/>

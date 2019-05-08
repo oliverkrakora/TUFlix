@@ -10,8 +10,7 @@ import Foundation
 import TUFlixKit
 import DataSource
 
-class EpisodeViewModel {
-    private let uuid = UUID()
+struct EpisodeViewModel {
     let model: Episode
     
     var durationInSeconds: TimeInterval? {
@@ -24,6 +23,14 @@ class EpisodeViewModel {
         return model.title
     }
     
+    var streamableVideoURL: URL? {
+        return model.mediaPackage?.media?.tracks?.first(where: { $0.mimeType == .mp4 })?.url
+    }
+    
+    var streamableAudioURL: URL? {
+        return model.mediaPackage?.media?.tracks?.first(where: { $0.mimeType == .mpeg })?.url
+    }
+
     var formattedCreatorName: String? {
         return model.mediaPackage?.creator?.creator
     }
