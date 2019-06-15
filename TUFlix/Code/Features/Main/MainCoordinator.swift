@@ -59,7 +59,7 @@ class MainCoordinator: Coordinator {
             return API.Series.pageEpisodes(for: series.model.id, config: config)
         }, mapping: EpisodeViewModel.init)
         
-        let vc = EpisodeListViewController(title: series.model.title, viewModel: viewModel)
+        let vc = EpisodeListViewController(title: series.model.title, viewModel: viewModel, isPartOfSeries: true)
         vc.selectEpisodeClosure = { [unowned self] viewModel in
             self.playEpisode(viewModel)
         }
