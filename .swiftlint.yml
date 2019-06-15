@@ -23,6 +23,7 @@ disabled_rules:
     #- colon
     #- comma
     #- control_statement
+    - nesting
 
 # paths to ignore during linting. Takes precedence over `included`.
 excluded:

@@ -5,8 +5,8 @@ import Fetch
 public class API {
     
     public struct PagingConfig {
-        public let limit: Int
-        public let offset: Int
+        public var limit: Int
+        public var offset: Int
         
         public init(limit: Int, offset: Int) {
             self.limit = limit
@@ -43,14 +43,6 @@ public class API {
                 rootKeys: ["search-results"]
             )
         }
-        
-        public static func allEpisodes() -> Resource<[TUFlixKit.Episode]> {
-            return Resource(
-                path: "/search/episode.json",
-                urlParameters: ["limit": 20, "offset": 0],
-                rootKeys: ["search-results", "result"]
-            )
-        }
     }
     
     public struct Series {
@@ -63,7 +55,7 @@ public class API {
             )
         }
         
-        public static func search(for seriesName: String, config: PagingConfig = .default) -> Resource<SearchResult<TUFlixKit.Episode>> {
+        public static func search(for seriesName: String, config: PagingConfig = .default) -> Resource<SearchResult<TUFlixKit.Series>> {
             return Resource(
                 path: "/search/series.json",
                 urlParameters: ["limit": config.limit, "offset": config.offset, "q": seriesName],

@@ -9,9 +9,9 @@
 import Foundation
 import Fetch
 
-public typealias SearchResultItem = Cacheable & Equatable
+public typealias SearchResultItem = Codable & Equatable
 
-public struct SearchResult<Item: SearchResultItem>: PageProtocol {
+public struct SearchResult<Item: SearchResultItem>: Decodable {
     
     private enum CodingKeys: String, CodingKey {
         case offset

@@ -3,7 +3,7 @@
   "iOS" : [
     {
       "name" : "Result",
-      "hash" : "ef023eacb3f0877fb73c05bbdf0cde26030b043217f4b035341bc3a7fed84feb",
+      "hash" : "70c88e4cd5f81680c75a8f3a8432551f7bfcaf21c9dc176138330280236fc359",
       "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
     }
   ]

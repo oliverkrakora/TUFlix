@@ -1,88 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina5_9" orientation="portrait">
+    <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <scenes>
-        <!--Main View Controller-->
-        <scene sceneID="bIa-ft-te6">
-            <objects>
-                <viewController storyboardIdentifier="MainViewController" id="jUz-Hh-okO" customClass="MainViewController" customModule="TUFlix" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="byx-ir-LQo">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cRT-xV-Fd3">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="cRT-xV-Fd3" secondAttribute="bottom" id="5MN-5Y-95t"/>
-                            <constraint firstAttribute="trailing" secondItem="cRT-xV-Fd3" secondAttribute="trailing" id="dCx-MP-ODt"/>
-                            <constraint firstItem="cRT-xV-Fd3" firstAttribute="top" secondItem="byx-ir-LQo" secondAttribute="top" id="frL-Ut-Y8j"/>
-                            <constraint firstItem="cRT-xV-Fd3" firstAttribute="leading" secondItem="byx-ir-LQo" secondAttribute="leading" id="knB-e8-qvV"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="gOC-d3-5fk"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Upl-kA-myA">
-                        <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="7qB-6m-Xp3">
-                            <rect key="frame" x="97.666666666666686" y="7" width="180" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <segments>
-                                <segment title="Episodes"/>
-                                <segment title="Series"/>
-                            </segments>
-                        </segmentedControl>
-                    </navigationItem>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <connections>
-                        <outlet property="contentTypeSegmentedControl" destination="7qB-6m-Xp3" id="8Uo-Wk-EvA"/>
-                        <outlet property="tableView" destination="cRT-xV-Fd3" id="gwY-Da-FHA"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BST-Cy-Quk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="16.800000000000001" y="82.758620689655174"/>
-        </scene>
-        <!--Series Detail View Controller-->
-        <scene sceneID="wMs-Lp-BjB">
-            <objects>
-                <viewController storyboardIdentifier="SeriesDetailViewController" id="8Pg-a0-Gl4" customClass="SeriesDetailViewController" customModule="TUFlix" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="v76-Pe-1xg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EeB-Et-uCW">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="EeB-Et-uCW" secondAttribute="trailing" id="cBe-bR-xZa"/>
-                            <constraint firstItem="EeB-Et-uCW" firstAttribute="top" secondItem="v76-Pe-1xg" secondAttribute="top" id="kUn-8Q-yjg"/>
-                            <constraint firstItem="EeB-Et-uCW" firstAttribute="leading" secondItem="v76-Pe-1xg" secondAttribute="leading" id="mo1-t0-dXd"/>
-                            <constraint firstAttribute="bottom" secondItem="EeB-Et-uCW" secondAttribute="bottom" id="qo4-H4-Vyl"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="YAF-U4-7ua"/>
-                    </view>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <connections>
-                        <outlet property="tableView" destination="EeB-Et-uCW" id="Tgq-YV-WSg"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TDT-4W-Shv" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="825" y="83"/>
-        </scene>
-    </scenes>
+    <scenes/>
 </document>

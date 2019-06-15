@@ -30,6 +30,7 @@ class EpisodeCell: UITableViewCell {
         }()
         
         creatorTitleLabel.text = episode.formattedCreatorName
+        creatorTitleLabel.isHidden = episode.formattedCreatorName?.isEmpty ?? true
         creationDateLabel.text = episode.formattedCreationDate
         creationDateLabel.isHidden = isPartOfSeries
         durationLabel.text = episode.formattedDuration

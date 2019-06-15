@@ -1,30 +1,27 @@
 //
-//  Nibable.swift
-//  TUFlix
+//  UIView+Nib.swift
+//  Toolsense
 //
-//  Created by Oliver Krakora on 28.04.19.
-//  Copyright © 2019 aaa - all about apps GmbH. All rights reserved.
+//  Created by Oliver Krakora on 07.02.19.
+//  Copyright © 2019 aaa - all about apps Gmbh. All rights reserved.
 //
 
 import UIKit
 
-protocol Nibable {
-    static func loadFromNib<T: UIView>(from bundle: Bundle) -> T?
-    
-    static func loadFromNib<T: UIView>(type: T.Type, bundle: Bundle) -> T?
+protocol Nibable: UIView {
+    static func load(from bundle: Bundle) -> Self?
 }
 
 extension UIView: Nibable {
     
     /// Tries to load a view from its nib if possible
+    /// - Parameter bundle: The bundle from where to load the nib
     /// - Returns: Nil if there is no such nib
-    static func loadFromNib<T: UIView>(from bundle: Bundle = Bundle.main) -> T? {
-        guard let nibContent = bundle.loadNibNamed("\(self)", owner: self, options: nil)?.first as? T else { return nil }
-        return nibContent
+    static func load(from bundle: Bundle = Bundle.main) -> Self? {
+        return loadFromNib(type: self, from: bundle)
     }
     
-    static func loadFromNib<T: UIView>(type: T.Type, bundle: Bundle = Bundle.main) -> T? {
-        let view: T? = loadFromNib(from: bundle)
-        return view
+    private static func loadFromNib<T>(type: T.Type, from bundle: Bundle = Bundle.main) -> T? {
+        return bundle.loadNibNamed("\(type)", owner: self, options: nil)?.first as? T
     }
 }

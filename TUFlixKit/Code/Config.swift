@@ -17,9 +17,10 @@ public struct Config {
         static var timeout: TimeInterval = 120.0
 
         static var verboseLogging: Bool {
+            return false
             switch Environment.current() {
             case .debug, .staging:
-                return false
+                return true
             case .release:
                 return false
             }

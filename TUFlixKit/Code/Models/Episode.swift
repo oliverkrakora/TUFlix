@@ -9,7 +9,7 @@
 import Foundation
 import Fetch
 
-public struct Episode: Equatable, Cacheable {
+public struct Episode: Equatable, Codable {
     
     public struct MediaPackage: Equatable, Codable {
         
@@ -26,7 +26,20 @@ public struct Episode: Equatable, Cacheable {
         public let creator: Creator?
         
         public struct Creator: Equatable, Codable {
-            public let creator: String
+            public let creator: String?
+            
+            public init(from decoder: Decoder) throws {
+                let container = try decoder.container(keyedBy: CodingKeys.self)
+                self.creator = try? container.decode(String.self, forKey: .creator)
+            }
+        }
+        
+        public init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.id = try? container.decodeIfPresent(String.self, forKey: .id)
+            self.durationInMs = try? container.decodeIfPresent(String.self, forKey: .durationInMs)
+            self.media = try? container.decodeIfPresent(Media.self, forKey: .media)
+            self.creator = try? container.decodeIfPresent(Creator.self, forKey: .creator)
         }
         
         public struct Media: Equatable, Codable {
@@ -46,7 +59,13 @@ public struct Episode: Equatable, Cacheable {
                 public enum MimeType: String, Codable {
                     case mp4 = "video/mp4"
                     case mpeg = "audio/mpeg"
+                    case mp3 = "audio/mp3"
                     case other
+                    
+                    public init(from decoder: Decoder) throws {
+                        let container = try decoder.singleValueContainer()
+                        self = try MimeType(rawValue: container.decode(String.self)) ?? .other
+                    }
                 }
                 
                 public let id: String?

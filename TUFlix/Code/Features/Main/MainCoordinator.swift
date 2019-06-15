@@ -1,5 +1,6 @@
 import UIKit
 import AVKit
+import TUFlixKit
 
 class MainCoordinator: Coordinator {
     
@@ -10,8 +11,27 @@ class MainCoordinator: Coordinator {
     private var navigationController: UINavigationController!
     
     init() {
-        let vc = MainViewController.create()
+        let episodeViewModel = ListViewModel<Episode, EpisodeViewModel>(resourceProvider: { config in
+            return API.Episode.page(with: config)
+        }, searchResourceProvider: { (config, searchTerm) in
+            return API.Episode.search(for: searchTerm, config: config)
+        },
+           mapping: EpisodeViewModel.init)
+        
+        let episodeVC = EpisodeListViewController(title: "Episodes", viewModel: episodeViewModel)
+        
+        let seriesViewModel = ListViewModel<Series, SeriesViewModel>(resourceProvider: { config in
+            return API.Series.page(with: config)
+        }, searchResourceProvider: { (config, searchTerm) in
+            return API.Series.search(for: searchTerm, config: config)
+        },
+           mapping: SeriesViewModel.init)
+        
+        let seriesVC = SeriesListViewController(title: "Series", viewModel: seriesViewModel)
+        
+        let vc = PageViewController.create(with: [episodeVC, seriesVC])
         navigationController = UINavigationController(rootViewController: vc)
+        navigationController.view.backgroundColor = UIColor(named: "primaryColor")!
         var rootViewController: UIViewController = navigationController
         
         if UIDevice.current.userInterfaceIdiom == .pad {
@@ -23,20 +43,27 @@ class MainCoordinator: Coordinator {
         
         super.init(rootViewController: rootViewController)
         
-        vc.showSeriesDetails = { [unowned self] series in
-            self.showSeriesDetails(with: series)
+        episodeVC.selectEpisodeClosure = { [unowned self] viewModel in
+            self.playEpisode(viewModel)
         }
         
-        vc.playEpisode = { [unowned self] episode in
-            self.playEpisode(episode)
+        seriesVC.selectSeriesClosure = { [unowned self] viewModel in
+            self.showSeriesDetails(with: viewModel)
         }
     }
     
     func showSeriesDetails(with series: SeriesViewModel) {
-        let vc = SeriesDetailViewController.create(with: series)
-        vc.playEpisode = { [unowned self] episode in
-            self.playEpisode(episode)
+        let viewModel = ListViewModel<Episode, EpisodeViewModel>(resourceProvider: { config in
+            return API.Series.pageEpisodes(for: series.model.id, config: config)
+        }, searchResourceProvider: { (config, _) in
+            return API.Series.pageEpisodes(for: series.model.id, config: config)
+        }, mapping: EpisodeViewModel.init)
+        
+        let vc = EpisodeListViewController(title: series.model.title, viewModel: viewModel)
+        vc.selectEpisodeClosure = { [unowned self] viewModel in
+            self.playEpisode(viewModel)
         }
+        
         navigationController.pushViewController(vc, animated: true)
     }
     
