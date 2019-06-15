@@ -1,0 +1,11 @@
+strings:
+    inputs: TUFlix/SupportingFiles/Localizable.strings
+    outputs:
+        - templateName: structured-swift4
+          output: TUFlix/Code/Strings.swift
+
+xcassets:
+    inputs: TUFlix/Assets/Assets.xcassets
+    outputs:
+        - templateName: swift4
+          output: TUFlix/Code/Utilities/Assets.swift

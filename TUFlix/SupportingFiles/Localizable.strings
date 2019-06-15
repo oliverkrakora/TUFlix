@@ -1,0 +1,33 @@
+/* 
+  Localizable.strings
+  TUFlix
+
+  Created by Oliver Krakora on 15.06.19.
+  Copyright © 2019 aaa - all about apps GmbH. All rights reserved.
+*/
+
+"global.cancel.title" = "Cancel";
+
+"global.ok.title" = "Ok";
+
+"global.empty_state.title" = "No data to show";
+
+"global.loading_state.title" = "Loading data";
+
+"global.error_state.title" = "An error occured";
+
+"global.retry_title" = "Retry";
+
+"episodes.title" = "Episodes";
+
+"episodes.select_play_source.title" = "Select how you would like to consume the episode";
+
+"episodes.select_play_video.title" = "Video";
+
+"episodes.select_play_audio.title" = "Audio";
+
+"episodes.play_unavailable.title" = "The selected episode can not be streamed";
+
+"series.title" = "Series";
+
+

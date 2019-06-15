@@ -159,9 +159,9 @@ extension ListViewController: StatefulViewController {
     }
     
     private func setupStatefulViews() {
-        emptyView = EmptyStateView.load()?.prepare(with: "No data to show", subtitle: nil, insets: .zero)
-        loadingView = LoadingStateView.load()?.prepare(with: "Loading data")
-        errorView = ErrorStateView.load()?.prepare(with: "An error occurred", insets: .zero, retryClosure: { [weak self] in
+        emptyView = EmptyStateView.load()?.prepare(with: L10n.Global.EmptyState.title, subtitle: nil, insets: .zero)
+        loadingView = LoadingStateView.load()?.prepare(with: L10n.Global.LoadingState.title)
+        errorView = ErrorStateView.load()?.prepare(with: L10n.Global.ErrorState.title, insets: .zero, retryClosure: { [weak self] in
             self?.loadNextPage()
         })
     }

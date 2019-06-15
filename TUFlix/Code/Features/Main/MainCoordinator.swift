@@ -18,7 +18,7 @@ class MainCoordinator: Coordinator {
         },
            mapping: EpisodeViewModel.init)
         
-        let episodeVC = EpisodeListViewController(title: "Episodes", viewModel: episodeViewModel)
+        let episodeVC = EpisodeListViewController(title: L10n.Episodes.title, viewModel: episodeViewModel)
         
         let seriesViewModel = ListViewModel<Series, SeriesViewModel>(resourceProvider: { config in
             return API.Series.page(with: config)
@@ -27,11 +27,11 @@ class MainCoordinator: Coordinator {
         },
            mapping: SeriesViewModel.init)
         
-        let seriesVC = SeriesListViewController(title: "Series", viewModel: seriesViewModel)
+        let seriesVC = SeriesListViewController(title: L10n.Series.title, viewModel: seriesViewModel)
         
         let vc = PageViewController.create(with: [episodeVC, seriesVC])
         navigationController = UINavigationController(rootViewController: vc)
-        navigationController.view.backgroundColor = UIColor(named: "primaryColor")!
+        navigationController.view.backgroundColor = Asset.primaryColor.color
         var rootViewController: UIViewController = navigationController
         
         if UIDevice.current.userInterfaceIdiom == .pad {
@@ -71,16 +71,16 @@ class MainCoordinator: Coordinator {
         
         // Video and audio content available
         if let audio = episode.streamableAudioURL, let video = episode.streamableVideoURL {
-            let alert = UIAlertController(title: "Select how you would like to consume the episode", message: nil, preferredStyle: .actionSheet)
-            alert.addAction(UIAlertAction(title: "Video", style: .default, handler: { [unowned self] _ in
+            let alert = UIAlertController(title: L10n.Episodes.SelectPlaySource.title, message: nil, preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: L10n.Episodes.SelectPlayVideo.title, style: .default, handler: { [unowned self] _ in
                 self.displayPlayerController(with: video)
 
             }))
             
-            alert.addAction(UIAlertAction(title: "Audio", style: .default, handler: { [unowned self] _ in
+            alert.addAction(UIAlertAction(title: L10n.Episodes.SelectPlayAudio.title, style: .default, handler: { [unowned self] _ in
                 self.displayPlayerController(with: audio)
             }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: L10n.Global.Cancel.title, style: .cancel, handler: nil))
             displayAlert(alert)
         }
         // Only video content available
@@ -89,8 +89,8 @@ class MainCoordinator: Coordinator {
         }
         // No content available
         else {
-            let alert = UIAlertController(title: "The selected episode can not be streamed", message: nil, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            let alert = UIAlertController(title: L10n.Episodes.PlayUnavailable.title, message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: L10n.Global.Ok.title, style: .cancel, handler: nil))
             displayAlert(alert)
         }
     }

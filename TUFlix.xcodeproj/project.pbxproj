@@ -31,6 +31,9 @@
 		5C55D97822B55070002B4897 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BAD3322B3E77900B62F6D /* PageViewController.swift */; };
 		5C55D97A22B571AC002B4897 /* EpisodeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C55D97922B571AC002B4897 /* EpisodeListViewController.swift */; };
 		5C55D97C22B5769E002B4897 /* SeriesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C55D97B22B5769E002B4897 /* SeriesListViewController.swift */; };
+		5C55D98422B57E8B002B4897 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C55D98322B57E8B002B4897 /* Assets.swift */; };
+		5C55D98522B580E4002B4897 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C55D98122B57DFC002B4897 /* Strings.swift */; };
+		5C55D98622B582AF002B4897 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5C55D97F22B57D1A002B4897 /* Localizable.strings */; };
 		5C9BAD2522B2D90400B62F6D /* ScrollViewPagingHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BAD2422B2D90400B62F6D /* ScrollViewPagingHandler.swift */; };
 		5C9BAD3A22B53E4D00B62F6D /* PagingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BAD3922B53E4D00B62F6D /* PagingViewModel.swift */; };
 		5C9BAD3C22B5404A00B62F6D /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BAD3B22B5404A00B62F6D /* ListViewModel.swift */; };
@@ -62,7 +65,6 @@
 		BD228A810D19DA668838F51AA850DBCD /* TUFlixKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 14EFCC307A501F925C94D08A799A25D2 /* TUFlixKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BEDC787D538482CBA737CA1196F2474A /* DataSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0767FF5A509C34BCC3D7365C08E49778 /* DataSource.framework */; };
 		BF2159112C3CC53B2883C931D3B6C7B5 /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0EABEF86C57F15E989586EF33E4CE65 /* ReactiveSwift.framework */; };
-		C1BB0DACFBE328C323C0161AE89F1F7E /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207E57FB390BC5F7B076F06386932640 /* Strings.swift */; };
 		D51A245877C12FF7791CCEB4D18B055E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CB6466B7445467046772B7C84CAB5C /* AppDelegate.swift */; };
 		D92D78517F9CAAA99C89FC100E0365E6 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35ED2EC181CBE10879FC5651182ED054 /* Result.framework */; };
 		E231D66C7F1EC94E647C61931E4E0CBF /* Fetch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76F40CC6383429F6B1541CCD0DC4A0AD /* Fetch.framework */; };
@@ -100,7 +102,6 @@
 		0A9C2623715B622A4B4EE668BD7DBB05 /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
 		1341B66715E2BB7A24269DE226B97A92 /* TUFlixKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TUFlixKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		14EFCC307A501F925C94D08A799A25D2 /* TUFlixKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TUFlixKit.h; sourceTree = "<group>"; };
-		207E57FB390BC5F7B076F06386932640 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		23AF6B1E473045787AAF65EBA951C0FA /* NavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCoordinator.swift; sourceTree = "<group>"; };
 		299A67FF5356D3396D76B0E427EF923C /* example.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = example.json; sourceTree = "<group>"; };
 		2D438791F88858E36D68481427E5098A /* Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
@@ -122,6 +123,10 @@
 		5C55D97322B5419F002B4897 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		5C55D97922B571AC002B4897 /* EpisodeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeListViewController.swift; sourceTree = "<group>"; };
 		5C55D97B22B5769E002B4897 /* SeriesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesListViewController.swift; sourceTree = "<group>"; };
+		5C55D97D22B57CE4002B4897 /* swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = swiftgen.yml; sourceTree = "<group>"; };
+		5C55D97F22B57D1A002B4897 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		5C55D98122B57DFC002B4897 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		5C55D98322B57E8B002B4897 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		5C9BAD2422B2D90400B62F6D /* ScrollViewPagingHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewPagingHandler.swift; sourceTree = "<group>"; };
 		5C9BAD3322B3E77900B62F6D /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		5C9BAD3922B53E4D00B62F6D /* PagingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingViewModel.swift; sourceTree = "<group>"; };
@@ -241,7 +246,6 @@
 			children = (
 				4F150937FD16F00D1160B5C856E8CC86 /* Config.swift */,
 				36A8B2E1ACF0C5EE0244188FDAD09384 /* Environment.swift */,
-				207E57FB390BC5F7B076F06386932640 /* Strings.swift */,
 				F220050DE74305D6B46CA34BD902D8AD /* Extensions */,
 				5A4A94468052D1C68527029A10FF6CF9 /* Models */,
 				5B40292FE946E319BF42D5395588293C /* Networking */,
@@ -306,6 +310,7 @@
 		5CB4791C2275022300116ADE /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				5C55D98322B57E8B002B4897 /* Assets.swift */,
 				5CB479352275B9F200116ADE /* Nibable.swift */,
 				5C9BAD2422B2D90400B62F6D /* ScrollViewPagingHandler.swift */,
 			);
@@ -360,6 +365,7 @@
 			isa = PBXGroup;
 			children = (
 				5C2A3F7D226B23C800B5D178 /* README.md */,
+				5C55D97D22B57CE4002B4897 /* swiftgen.yml */,
 				5CF278CC226A61730057C609 /* Cartfile */,
 				954BA3516564BC31F4871B9ECC9F9141 /* TUFlix */,
 				96D3A1B3F7FCF59BAEC021307191EFD7 /* TUFlixKit */,
@@ -371,10 +377,11 @@
 		910641C40DD859C938A43497DCEDFCDB /* Code */ = {
 			isa = PBXGroup;
 			children = (
-				5CB4791C2275022300116ADE /* Utilities */,
+				5C55D98122B57DFC002B4897 /* Strings.swift */,
 				5DD015FCC671E75EEDD05CA47698965F /* AppCoordinator.swift */,
 				F1CB6466B7445467046772B7C84CAB5C /* AppDelegate.swift */,
 				99B0E472A52F70362212C2B0355192FB /* Appearance.swift */,
+				5CB4791C2275022300116ADE /* Utilities */,
 				DC245541D18314EF2DF3E92E8D7E0017 /* Coordinators */,
 				551BCEF2D132A760368F16793AE6C4C6 /* Extensions */,
 				B34031BF82E45B568B96908DAE4C83BF /* Features */,
@@ -485,6 +492,7 @@
 		FEFA9E0DD0E35B367B6351265B03F79B /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				5C55D97F22B57D1A002B4897 /* Localizable.strings */,
 				5B0B3F1238E58A2FB771F5AF9E43B36C /* Info.plist */,
 			);
 			path = SupportingFiles;
@@ -596,6 +604,7 @@
 				5CF278DE226A73A10057C609 /* EpisodeCell.xib in Resources */,
 				5C2A3F76226B165900B5D178 /* SeriesCell.xib in Resources */,
 				5CB4792A2275B50D00116ADE /* EmptyStateView.xib in Resources */,
+				5C55D98622B582AF002B4897 /* Localizable.strings in Resources */,
 				4EFC4BF6881C627E1872FA54DFDCBCF6 /* LaunchScreen.storyboard in Resources */,
 				5CB479322275B7C500116ADE /* ErrorStateView.xib in Resources */,
 				145216C364A6F206895DB6CE7C2D4D85 /* Main.storyboard in Resources */,
@@ -669,6 +678,7 @@
 				1EAB36C8CC0DBD7E8117E80CF93DFCA7 /* Appearance.swift in Sources */,
 				FD4670FF755136787AADDCA49B4C2A9C /* Coordinator.swift in Sources */,
 				5C55D97A22B571AC002B4897 /* EpisodeListViewController.swift in Sources */,
+				5C55D98422B57E8B002B4897 /* Assets.swift in Sources */,
 				9E981D660AD773A5D4B6E806579AC616 /* MainCoordinator.swift in Sources */,
 				5CF278DC226A73990057C609 /* EpisodeCell.swift in Sources */,
 				5CB479342275B7CE00116ADE /* ErrorStateView.swift in Sources */,
@@ -680,6 +690,7 @@
 				5CF278E0226A75400057C609 /* EpisodeViewModel.swift in Sources */,
 				70792B30EFA99501C77C3695C9AA1C6D /* Storyboard.swift in Sources */,
 				AC41AFBDF1A3525799DEE7DBDA4F2E4F /* TabBarCoordinator.swift in Sources */,
+				5C55D98522B580E4002B4897 /* Strings.swift in Sources */,
 				5C9BAD2522B2D90400B62F6D /* ScrollViewPagingHandler.swift in Sources */,
 				7AC65D543DBCF7326EA275513A9D06DA /* UIWindow+TopViewController.swift in Sources */,
 				5C2A3F7A226B188700B5D178 /* SeriesViewModel.swift in Sources */,
@@ -702,7 +713,6 @@
 				4E39C9083DFAB885E63C4845A60AB8A1 /* Resource+Reactive.swift in Sources */,
 				5C50A3B7228311DC00EDA1C0 /* Result+Error.swift in Sources */,
 				5C2A3F78226B17EA00B5D178 /* Series.swift in Sources */,
-				C1BB0DACFBE328C323C0161AE89F1F7E /* Strings.swift in Sources */,
 				5CB4792522750AA300116ADE /* SearchResult.swift in Sources */,
 				EEA73599AD3DFE2D922E257E5EC11C09 /* Weak.swift in Sources */,
 			);
