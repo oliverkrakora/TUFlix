@@ -44,6 +44,7 @@ class PageViewController: UIViewController {
         controller.dimsBackgroundDuringPresentation = false
         controller.hidesNavigationBarDuringPresentation = true
         controller.obscuresBackgroundDuringPresentation = false
+        controller.searchBar.barStyle = .black
         return controller
     }()
     
