@@ -9,9 +9,9 @@
 import Foundation
 import Fetch
 
-public struct Episode: Equatable, Codable {
+public struct Episode: Hashable, Codable {
     
-    public struct MediaPackage: Equatable, Codable {
+    public struct MediaPackage: Hashable, Codable {
         
         private enum CodingKeys: String, CodingKey {
             case id
@@ -25,7 +25,7 @@ public struct Episode: Equatable, Codable {
         public let media: Media?
         public let creator: Creator?
         
-        public struct Creator: Equatable, Codable {
+        public struct Creator: Hashable, Codable {
             public let creator: String?
             
             public init(from decoder: Decoder) throws {
@@ -42,13 +42,13 @@ public struct Episode: Equatable, Codable {
             self.creator = try? container.decodeIfPresent(Creator.self, forKey: .creator)
         }
         
-        public struct Media: Equatable, Codable {
+        public struct Media: Hashable, Codable {
             
             private enum CodingKeys: String, CodingKey {
                 case tracks = "track"
             }
             
-            public struct Track: Equatable, Codable {
+            public struct Track: Hashable, Codable {
                 private enum CodingKeys: String, CodingKey {
                     case id
                     case mimeType = "mimetype"

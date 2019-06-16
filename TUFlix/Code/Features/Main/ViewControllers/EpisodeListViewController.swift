@@ -25,8 +25,8 @@ class EpisodeListViewController: ListViewController<Episode, EpisodeViewModel> {
                     cell.configure(with: viewModel, isPartOfSeries: self.isPartOfSeries)
                 }
                 .didSelect { (viewModel, _) in
-                self.selectEpisodeClosure(viewModel)
-                return .keepSelected
+                    self.selectEpisodeClosure(viewModel)
+                    return .keepSelected
             }
         ]
     }

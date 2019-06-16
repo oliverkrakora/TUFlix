@@ -20,6 +20,7 @@
 		4E39C9083DFAB885E63C4845A60AB8A1 /* Resource+Reactive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581ED2E8578C13EE564B42241339DB4F /* Resource+Reactive.swift */; };
 		4EFC4BF6881C627E1872FA54DFDCBCF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75C5D4C607F5120EACF7FC969E24FADA /* LaunchScreen.storyboard */; };
 		5AF789D7875CDB0EB2651C359F837485 /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AF6B1E473045787AAF65EBA951C0FA /* NavigationCoordinator.swift */; };
+		5C1A10F922B623D400A3CDDF /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1A10F822B623D400A3CDDF /* KeyboardObserver.swift */; };
 		5C2A3F74226B164500B5D178 /* SeriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2A3F73226B164500B5D178 /* SeriesCell.swift */; };
 		5C2A3F76226B165900B5D178 /* SeriesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C2A3F75226B165900B5D178 /* SeriesCell.xib */; };
 		5C2A3F78226B17EA00B5D178 /* Series.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2A3F77226B17EA00B5D178 /* Series.swift */; };
@@ -114,6 +115,7 @@
 		55DA75217DDF2F0AFAAEA951656F7197 /* Differ.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Differ.framework; sourceTree = "<group>"; };
 		581ED2E8578C13EE564B42241339DB4F /* Resource+Reactive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Resource+Reactive.swift"; sourceTree = "<group>"; };
 		5B0B3F1238E58A2FB771F5AF9E43B36C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C1A10F822B623D400A3CDDF /* KeyboardObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserver.swift; sourceTree = "<group>"; };
 		5C2A3F73226B164500B5D178 /* SeriesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesCell.swift; sourceTree = "<group>"; };
 		5C2A3F75226B165900B5D178 /* SeriesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeriesCell.xib; sourceTree = "<group>"; };
 		5C2A3F77226B17EA00B5D178 /* Series.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Series.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				5C55D98322B57E8B002B4897 /* Assets.swift */,
 				5CB479352275B9F200116ADE /* Nibable.swift */,
 				5C9BAD2422B2D90400B62F6D /* ScrollViewPagingHandler.swift */,
+				5C1A10F822B623D400A3CDDF /* KeyboardObserver.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -683,6 +686,7 @@
 				5CF278DC226A73990057C609 /* EpisodeCell.swift in Sources */,
 				5CB479342275B7CE00116ADE /* ErrorStateView.swift in Sources */,
 				5C2A3F74226B164500B5D178 /* SeriesCell.swift in Sources */,
+				5C1A10F922B623D400A3CDDF /* KeyboardObserver.swift in Sources */,
 				5C9BAD3A22B53E4D00B62F6D /* PagingViewModel.swift in Sources */,
 				5C9BAD3C22B5404A00B62F6D /* ListViewModel.swift in Sources */,
 				5C55D97822B55070002B4897 /* PageViewController.swift in Sources */,

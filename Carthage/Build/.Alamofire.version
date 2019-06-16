@@ -1,9 +1,9 @@
 {
-  "commitish" : "5.0.0-beta.5",
+  "commitish" : "5.0.0-beta.6",
   "iOS" : [
     {
       "name" : "Alamofire",
-      "hash" : "9512d86409020e96fe8de9f675774e4cda1aa1ed29ef3070c03224529b370530",
+      "hash" : "4214942cebb0f3b1c6caaccef9536cc324b0b648aed14d57c29970fbc26bce5c",
       "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
     }
   ]

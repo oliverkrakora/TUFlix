@@ -18,6 +18,8 @@
 
 "global.retry_title" = "Retry";
 
+"global.retry_tap_title" = "Tap to retry";
+
 "episodes.title" = "Episodes";
 
 "episodes.select_play_source.title" = "Select how you would like to consume the episode";

@@ -1,4 +1,4 @@
 github "ReactiveCocoa/ReactiveCocoa" ~> 9.0
 github "allaboutapps/DataSource" ~> 7.0
-github "allaboutapps/Fetch" "ok-develop"
+github "allaboutapps/Fetch" ~> 1.0
 github "allaboutapps/StatefulViewController" ~> 5.0

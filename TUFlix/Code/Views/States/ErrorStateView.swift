@@ -13,22 +13,34 @@ class ErrorStateView: UIView, StatefulPlaceholderView {
     
     @IBOutlet private var titleLabel: UILabel!
     
-    @IBOutlet private var retryButton: UIButton!
-    
-    private var retryClosure: (() -> Void)?
+    @IBOutlet private var subtitleLabel: UILabel!
     
     private var insets: UIEdgeInsets = .zero
     
+    private var retry: (() -> Void)?
+    
+    private lazy var tapRecognizer: UITapGestureRecognizer = {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTap))
+        return tap
+    }()
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        if tapRecognizer.view == nil {
+            addGestureRecognizer(tapRecognizer)
+        }
+    }
+    
     @discardableResult
-    func prepare(with title: String, insets: UIEdgeInsets = .zero, retryClosure: (() -> Void)? = nil) -> ErrorStateView {
+    func prepare(with title: String, subtitle: String?, insets: UIEdgeInsets = .zero, retryClosure: (() -> Void)? = nil) -> ErrorStateView {
         self.titleLabel.text = title
+        self.subtitleLabel.text = subtitle
         self.insets = insets
-        self.retryClosure = retryClosure
-        self.retryButton.isHidden = retryClosure == nil
+        self.retry = retryClosure
         return self
     }
     
-    @IBAction private func retry(_ sender: Any) {
-        retryClosure?()
+    @objc private func didTap() {
+        retry?()
     }
 }

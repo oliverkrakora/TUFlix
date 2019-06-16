@@ -34,6 +34,8 @@ internal enum L10n {
   }
 
   internal enum Global {
+    /// Tap to retry
+    internal static let retryTapTitle = L10n.tr("Localizable", "global.retry_tap_title")
     /// Retry
     internal static let retryTitle = L10n.tr("Localizable", "global.retry_title")
     internal enum Cancel {

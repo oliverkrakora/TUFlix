@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="yvb-dO-tzL">
-                    <rect key="frame" x="16" y="419" width="382" height="58.5"/>
+                    <rect key="frame" x="16" y="425" width="382" height="46.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TITLE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVh-lK-cZ9">
                             <rect key="frame" x="0.0" y="0.0" width="382" height="20.5"/>
@@ -25,13 +25,12 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oFF-zT-SLr">
-                            <rect key="frame" x="0.0" y="28.5" width="382" height="30"/>
-                            <state key="normal" title="Retry button"/>
-                            <connections>
-                                <action selector="retry:" destination="iN0-l3-epB" eventType="touchUpInside" id="Xv8-Sh-P3J"/>
-                            </connections>
-                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="upz-Ny-0tn">
+                            <rect key="frame" x="0.0" y="28.5" width="382" height="18"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                 </stackView>
             </subviews>
@@ -43,7 +42,7 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
-                <outlet property="retryButton" destination="oFF-zT-SLr" id="KmB-GP-anw"/>
+                <outlet property="subtitleLabel" destination="upz-Ny-0tn" id="dAk-OR-hoq"/>
                 <outlet property="titleLabel" destination="eVh-lK-cZ9" id="oe9-dm-IL7"/>
             </connections>
         </view>

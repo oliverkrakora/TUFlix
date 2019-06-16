@@ -35,7 +35,7 @@ class ListViewController<Item: SearchResultItem, MappedItem>: UIViewController, 
         })
     }()
     
-    private var disposable: Disposable?
+    private var disposable = CompositeDisposable()
     
     private var requestDisposable: Disposable?
     
@@ -76,7 +76,7 @@ class ListViewController<Item: SearchResultItem, MappedItem>: UIViewController, 
     }
     
     deinit {
-        disposable?.dispose()
+        disposable.dispose()
     }
     
     private func setupTableView() {
@@ -117,15 +117,23 @@ class ListViewController<Item: SearchResultItem, MappedItem>: UIViewController, 
     
     // MARK: Bindings
     private func setupBindings() {
-        disposable = viewModel.items.producer.startWithValues { [weak self] episodes in
+        disposable += viewModel.items.producer.startWithValues { [weak self] episodes in
             self?.setupDataSource(with: episodes)
+        }
+        
+        disposable += KeyboardObserver.observeKeyboardChanges().observeValues { [weak self] notification in
+            if notification.willShow {
+                self?.tableView.contentInset.bottom = notification.keyboardHeight
+            } else {
+                 self?.tableView.contentInset.bottom = 0
+            }
         }
     }
     
     // MARK: DataSource
     private func setupDataSource(with episodes: [MappedItem]) {
         dataSource.sections = [Section(items: episodes)]
-        dataSource.reloadData(tableView, animated: false)
+        dataSource.reloadData(tableView, animated: true)
     }
     
     // MARK: Actions
@@ -148,7 +156,9 @@ class ListViewController<Item: SearchResultItem, MappedItem>: UIViewController, 
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        requestDisposable?.dispose()
         viewModel.searchTerm.value = ""
+        endLoading()
     }
 }
 
@@ -159,9 +169,13 @@ extension ListViewController: StatefulViewController {
     }
     
     private func setupStatefulViews() {
-        emptyView = EmptyStateView.load()?.prepare(with: L10n.Global.EmptyState.title, subtitle: nil, insets: .zero)
+        emptyView = EmptyStateView.load()?.prepare(with: L10n.Global.EmptyState.title, subtitle: L10n.Global.retryTapTitle, insets: .zero) { [weak self] in
+            self?.loadNextPage(reset: true)
+        }
+        
         loadingView = LoadingStateView.load()?.prepare(with: L10n.Global.LoadingState.title)
-        errorView = ErrorStateView.load()?.prepare(with: L10n.Global.ErrorState.title, insets: .zero, retryClosure: { [weak self] in
+        
+        errorView = ErrorStateView.load()?.prepare(with: L10n.Global.ErrorState.title, subtitle: L10n.Global.retryTapTitle, insets: .zero, retryClosure: { [weak self] in
             self?.loadNextPage()
         })
     }

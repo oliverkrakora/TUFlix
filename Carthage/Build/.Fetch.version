@@ -1,9 +1,9 @@
 {
-  "commitish" : "75806f2a936e88540f45a28a775930019d87b1c7",
+  "commitish" : "1.0.8",
   "iOS" : [
     {
       "name" : "Fetch",
-      "hash" : "6b61d793514c30387fdb25f75efd9c9d0dc26c1bdc1ba625fab425a17a90fad7",
+      "hash" : "2e77b4d5515ad1881315dce530f17f5d6b4667e80ad5d21d7e6718d2a4755eb0",
       "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
     }
   ]
