@@ -29,7 +29,7 @@ class ListViewController<Item: SearchResultItem, MappedItem>: UIViewController, 
     private var viewModel: ListViewModel<Item, MappedItem>!
     
     private lazy var pagingHelper: ScrollViewPagingHandler = {
-        return ScrollViewPagingHandler(threshold: 0.7,
+        return ScrollViewPagingHandler(threshold: 0.9,
                                        loadClosure: {
                                         self.loadNextPage()
         })

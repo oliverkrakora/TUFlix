@@ -21,18 +21,23 @@
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="TG7-AH-PWC">
                         <rect key="frame" x="16" y="8" width="382" height="66.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TITLE" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h71-gs-O7K">
-                                <rect key="frame" x="0.0" y="0.0" width="382" height="20.5"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Creator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ai5-aw-dky">
-                                <rect key="frame" x="0.0" y="26" width="382" height="18"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Mud-eE-P6a">
+                                <rect key="frame" x="0.0" y="0.0" width="382" height="43.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="252" text="TITLE" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h71-gs-O7K">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="20.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Creator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ai5-aw-dky">
+                                        <rect key="frame" x="0.0" y="25.5" width="382" height="18"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="XFm-Tu-xWk">
                                 <rect key="frame" x="0.0" y="52" width="382" height="14.5"/>
                                 <subviews>
@@ -57,22 +62,50 @@
                             </stackView>
                         </subviews>
                     </stackView>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZAC-WN-4av" customClass="TriangleView" customModule="TUFlix" customModuleProvider="target">
+                        <rect key="frame" x="384" y="0.0" width="30" height="30"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_filled" translatesAutoresizingMaskIntoConstraints="NO" id="IzZ-Ew-Grw">
+                                <rect key="frame" x="14" y="2" width="15" height="15"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="IzZ-Ew-Grw" secondAttribute="height" multiplier="1:1" id="Pm4-1j-fiD"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="IzZ-Ew-Grw" firstAttribute="top" secondItem="ZAC-WN-4av" secondAttribute="top" constant="2" id="7G9-nb-pf2"/>
+                            <constraint firstAttribute="width" secondItem="ZAC-WN-4av" secondAttribute="height" multiplier="1:1" id="RqI-ik-Jb9"/>
+                            <constraint firstAttribute="trailing" secondItem="IzZ-Ew-Grw" secondAttribute="trailing" constant="1" id="Yk1-7u-XPz"/>
+                            <constraint firstItem="IzZ-Ew-Grw" firstAttribute="height" secondItem="ZAC-WN-4av" secondAttribute="height" multiplier="0.5" id="bK4-sE-1fc"/>
+                            <constraint firstAttribute="height" constant="30" id="x0g-Dq-jsA"/>
+                        </constraints>
+                    </view>
                 </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="ZAC-WN-4av" secondAttribute="trailing" id="TQU-ag-rOt"/>
                     <constraint firstItem="TG7-AH-PWC" firstAttribute="top" secondItem="Rju-Ad-XrA" secondAttribute="top" constant="8" id="dI0-oP-vje"/>
                     <constraint firstAttribute="bottom" secondItem="TG7-AH-PWC" secondAttribute="bottom" constant="8" id="mgR-3C-sWe"/>
+                    <constraint firstItem="ZAC-WN-4av" firstAttribute="top" secondItem="Rju-Ad-XrA" secondAttribute="top" id="nR3-f1-rzl"/>
                     <constraint firstItem="TG7-AH-PWC" firstAttribute="leading" secondItem="Rju-Ad-XrA" secondAttribute="leading" constant="16" id="phV-fs-53G"/>
                     <constraint firstAttribute="trailing" secondItem="TG7-AH-PWC" secondAttribute="trailing" constant="16" id="tKd-xI-3Ds"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="creationDateLabel" destination="3Pb-po-etB" id="0hx-jZ-8oe"/>
                 <outlet property="creatorTitleLabel" destination="ai5-aw-dky" id="m8I-Ot-fJU"/>
                 <outlet property="durationLabel" destination="bPM-LI-5MS" id="XTI-o7-dWn"/>
                 <outlet property="footerStackView" destination="XFm-Tu-xWk" id="wWh-tW-u8t"/>
+                <outlet property="isFavoriteIndicatorView" destination="ZAC-WN-4av" id="qSC-CB-Sv3"/>
                 <outlet property="titleLabel" destination="h71-gs-O7K" id="ZHv-o0-e7j"/>
             </connections>
             <point key="canvasLocation" x="234.78260869565219" y="108.81696428571428"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="star_filled" width="43" height="41"/>
+    </resources>
 </document>

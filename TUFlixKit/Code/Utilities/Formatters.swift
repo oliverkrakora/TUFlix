@@ -19,6 +19,7 @@ public struct Formatters {
     
     public static let timeFormatter: DateComponentsFormatter = {
        let formatter = DateComponentsFormatter()
+        formatter.zeroFormattingBehavior = .pad
         formatter.allowedUnits = [.hour, .minute, .second]
         return formatter
     }()

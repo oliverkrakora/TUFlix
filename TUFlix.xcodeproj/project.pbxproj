@@ -21,6 +21,8 @@
 		4EFC4BF6881C627E1872FA54DFDCBCF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75C5D4C607F5120EACF7FC969E24FADA /* LaunchScreen.storyboard */; };
 		5AF789D7875CDB0EB2651C359F837485 /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AF6B1E473045787AAF65EBA951C0FA /* NavigationCoordinator.swift */; };
 		5C1A10F922B623D400A3CDDF /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1A10F822B623D400A3CDDF /* KeyboardObserver.swift */; };
+		5C1A10FC22B62EB300A3CDDF /* EpisodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1A10FB22B62EB300A3CDDF /* EpisodeManager.swift */; };
+		5C1A10FE22B6383300A3CDDF /* TriangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1A10FD22B6383300A3CDDF /* TriangleView.swift */; };
 		5C2A3F74226B164500B5D178 /* SeriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2A3F73226B164500B5D178 /* SeriesCell.swift */; };
 		5C2A3F76226B165900B5D178 /* SeriesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C2A3F75226B165900B5D178 /* SeriesCell.xib */; };
 		5C2A3F78226B17EA00B5D178 /* Series.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2A3F77226B17EA00B5D178 /* Series.swift */; };
@@ -116,6 +118,8 @@
 		581ED2E8578C13EE564B42241339DB4F /* Resource+Reactive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Resource+Reactive.swift"; sourceTree = "<group>"; };
 		5B0B3F1238E58A2FB771F5AF9E43B36C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C1A10F822B623D400A3CDDF /* KeyboardObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserver.swift; sourceTree = "<group>"; };
+		5C1A10FB22B62EB300A3CDDF /* EpisodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeManager.swift; sourceTree = "<group>"; };
+		5C1A10FD22B6383300A3CDDF /* TriangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriangleView.swift; sourceTree = "<group>"; };
 		5C2A3F73226B164500B5D178 /* SeriesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesCell.swift; sourceTree = "<group>"; };
 		5C2A3F75226B165900B5D178 /* SeriesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeriesCell.xib; sourceTree = "<group>"; };
 		5C2A3F77226B17EA00B5D178 /* Series.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Series.swift; sourceTree = "<group>"; };
@@ -291,6 +295,14 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
+		5C1A10FA22B62EA700A3CDDF /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5C1A10FB22B62EB300A3CDDF /* EpisodeManager.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		5C55D97522B54FDB002B4897 /* Generic */ = {
 			isa = PBXGroup;
 			children = (
@@ -360,6 +372,7 @@
 				5CF278DD226A73A10057C609 /* EpisodeCell.xib */,
 				5C2A3F73226B164500B5D178 /* SeriesCell.swift */,
 				5C2A3F75226B165900B5D178 /* SeriesCell.xib */,
+				5C1A10FD22B6383300A3CDDF /* TriangleView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -384,6 +397,7 @@
 				5DD015FCC671E75EEDD05CA47698965F /* AppCoordinator.swift */,
 				F1CB6466B7445467046772B7C84CAB5C /* AppDelegate.swift */,
 				99B0E472A52F70362212C2B0355192FB /* Appearance.swift */,
+				5C1A10FA22B62EA700A3CDDF /* Controllers */,
 				5CB4791C2275022300116ADE /* Utilities */,
 				DC245541D18314EF2DF3E92E8D7E0017 /* Coordinators */,
 				551BCEF2D132A760368F16793AE6C4C6 /* Extensions */,
@@ -674,12 +688,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CB4792C2275B57400116ADE /* EmptyStateView.swift in Sources */,
+				5C1A10FE22B6383300A3CDDF /* TriangleView.swift in Sources */,
 				765B657B0FA46A02854F40E5261A6246 /* AppCoordinator.swift in Sources */,
 				5CB4792E2275B6A300116ADE /* LoadingStateView.swift in Sources */,
 				5CB479362275B9F200116ADE /* Nibable.swift in Sources */,
 				D51A245877C12FF7791CCEB4D18B055E /* AppDelegate.swift in Sources */,
 				1EAB36C8CC0DBD7E8117E80CF93DFCA7 /* Appearance.swift in Sources */,
 				FD4670FF755136787AADDCA49B4C2A9C /* Coordinator.swift in Sources */,
+				5C1A10FC22B62EB300A3CDDF /* EpisodeManager.swift in Sources */,
 				5C55D97A22B571AC002B4897 /* EpisodeListViewController.swift in Sources */,
 				5C55D98422B57E8B002B4897 /* Assets.swift in Sources */,
 				9E981D660AD773A5D4B6E806579AC616 /* MainCoordinator.swift in Sources */,

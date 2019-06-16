@@ -12,11 +12,15 @@ import DataSource
 
 struct EpisodeViewModel {
     let model: Episode
-    
+        
     var durationInSeconds: TimeInterval? {
         guard let duration = model.mediaPackage?.durationInMs else { return nil }
         guard let number = Int(duration) else { return nil }
         return TimeInterval(number / 1000)
+    }
+    
+    var isFavorite: Bool {
+        return EpisodeManager.shared.isInFavorites(episode: model.id)
     }
     
     var formattedTitle: String? {
@@ -47,6 +51,14 @@ struct EpisodeViewModel {
     
     init(model: Episode) {
         self.model = model
+    }
+    
+    func likeEpisode() {
+        EpisodeManager.shared.addToFavorites(episode: model.id)
+    }
+    
+    func unlikeEpisode() {
+        EpisodeManager.shared.removeFromFavorites(episode: model.id)
     }
 }
 

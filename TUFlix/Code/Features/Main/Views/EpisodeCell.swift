@@ -21,7 +21,12 @@ class EpisodeCell: UITableViewCell {
     
     @IBOutlet private var footerStackView: UIStackView!
     
+    @IBOutlet private var isFavoriteIndicatorView: TriangleView!
+    
+    private var viewModel: EpisodeViewModel!
+    
     func configure(with episode: EpisodeViewModel, isPartOfSeries: Bool = false) {
+        self.viewModel = episode
         titleLabel.text = {
             if isPartOfSeries {
                 return episode.formattedCreationDate
@@ -29,6 +34,7 @@ class EpisodeCell: UITableViewCell {
             return episode.formattedTitle
         }()
         
+        isFavoriteIndicatorView.isHidden = !episode.isFavorite
         creatorTitleLabel.text = episode.formattedCreatorName
         creatorTitleLabel.isHidden = episode.formattedCreatorName?.isEmpty ?? true
         creationDateLabel.text = episode.formattedCreationDate

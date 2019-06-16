@@ -27,7 +27,30 @@ class EpisodeListViewController: ListViewController<Episode, EpisodeViewModel> {
                 .didSelect { (viewModel, _) in
                     self.selectEpisodeClosure(viewModel)
                     return .keepSelected
-            }
+                }.canEdit { true }
+                .trailingSwipeAction { (row, _) -> UISwipeActionsConfiguration? in
+                    guard let viewModel = row.item as? EpisodeViewModel else {
+                        return nil
+                    }
+                    
+                    let action: UIContextualAction = {
+                        let title = viewModel.isFavorite ? L10n.Episode.removeLikeTitle : L10n.Episode.addLikeTitle
+                        let action = UIContextualAction(style: .normal, title: title, handler: { (_, _, completion) in
+                            if viewModel.isFavorite {
+                                viewModel.unlikeEpisode()
+                            } else {
+                                viewModel.likeEpisode()
+                            }
+                            completion(true)
+                        })
+                        action.backgroundColor = viewModel.isFavorite ? Asset.unlikeColor.color : Asset.likeColor.color
+                        return action
+                    }()
+                    
+                    return UISwipeActionsConfiguration(actions: [
+                        action
+                    ])
+                }
         ]
     }
     

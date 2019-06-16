@@ -11,6 +11,8 @@ import Fetch
 
 public struct Episode: Hashable, Codable {
     
+    public typealias Id = String
+    
     public struct MediaPackage: Hashable, Codable {
         
         private enum CodingKeys: String, CodingKey {
@@ -85,7 +87,7 @@ public struct Episode: Hashable, Codable {
         case mediaPackage = "mediapackage"
     }
     
-    public let id: String
+    public let id: Id
     public let title: String?
     public let created: Date?
     public let mediaPackage: MediaPackage?
