@@ -49,6 +49,8 @@
 		5CB479342275B7CE00116ADE /* ErrorStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB479332275B7CE00116ADE /* ErrorStateView.swift */; };
 		5CB479362275B9F200116ADE /* Nibable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB479352275B9F200116ADE /* Nibable.swift */; };
 		5CB479382275BB8600116ADE /* StatefulViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB479372275BB8600116ADE /* StatefulViewController.framework */; };
+		5CCE13ED22B81555007C9048 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE13EC22B81555007C9048 /* UserDefaults+Extension.swift */; };
+		5CCE13EF22B818F6007C9048 /* Encoders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE13EE22B818F6007C9048 /* Encoders.swift */; };
 		5CF278D5226A679E0057C609 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF278D4226A679E0057C609 /* Episode.swift */; };
 		5CF278DC226A73990057C609 /* EpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF278DB226A73990057C609 /* EpisodeCell.swift */; };
 		5CF278DE226A73A10057C609 /* EpisodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CF278DD226A73A10057C609 /* EpisodeCell.xib */; };
@@ -146,6 +148,8 @@
 		5CB479332275B7CE00116ADE /* ErrorStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStateView.swift; sourceTree = "<group>"; };
 		5CB479352275B9F200116ADE /* Nibable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nibable.swift; sourceTree = "<group>"; };
 		5CB479372275BB8600116ADE /* StatefulViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = StatefulViewController.framework; sourceTree = "<group>"; };
+		5CCE13EC22B81555007C9048 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
+		5CCE13EE22B818F6007C9048 /* Encoders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoders.swift; sourceTree = "<group>"; };
 		5CF278CC226A61730057C609 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		5CF278D4226A679E0057C609 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		5CF278DB226A73990057C609 /* EpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCell.swift; sourceTree = "<group>"; };
@@ -243,6 +247,7 @@
 				B9BF8FD21424AAF851043947C905B062 /* Decoders.swift */,
 				0A9C2623715B622A4B4EE668BD7DBB05 /* Formatters.swift */,
 				2D438791F88858E36D68481427E5098A /* Weak.swift */,
+				5CCE13EE22B818F6007C9048 /* Encoders.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -494,6 +499,7 @@
 				7FB02F490B5AD9A13BCED1E755511750 /* ReactiveSwift+Extensions.swift */,
 				581ED2E8578C13EE564B42241339DB4F /* Resource+Reactive.swift */,
 				5C50A3B6228311DC00EDA1C0 /* Result+Error.swift */,
+				5CCE13EC22B81555007C9048 /* UserDefaults+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -727,11 +733,13 @@
 				9461CCC4A0CC8C3842F1139AD39CDDE9 /* Config.swift in Sources */,
 				9A8C4F346B4756C13B0134901C560BF7 /* Decoders.swift in Sources */,
 				5CF278D5226A679E0057C609 /* Episode.swift in Sources */,
+				5CCE13EF22B818F6007C9048 /* Encoders.swift in Sources */,
 				AE946414178274D3178F7ED0E2837521 /* Environment.swift in Sources */,
 				4BDDEEF140234E501C30F4C71A5F869A /* Formatters.swift in Sources */,
 				B28AECB81B6EE73ED5065B7261BD1290 /* ReactiveSwift+Extensions.swift in Sources */,
 				4E39C9083DFAB885E63C4845A60AB8A1 /* Resource+Reactive.swift in Sources */,
 				5C50A3B7228311DC00EDA1C0 /* Result+Error.swift in Sources */,
+				5CCE13ED22B81555007C9048 /* UserDefaults+Extension.swift in Sources */,
 				5C2A3F78226B17EA00B5D178 /* Series.swift in Sources */,
 				5CB4792522750AA300116ADE /* SearchResult.swift in Sources */,
 				EEA73599AD3DFE2D922E257E5EC11C09 /* Weak.swift in Sources */,

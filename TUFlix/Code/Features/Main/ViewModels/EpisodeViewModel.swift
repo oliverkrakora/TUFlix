@@ -10,8 +10,10 @@ import Foundation
 import TUFlixKit
 import DataSource
 
-struct EpisodeViewModel {
+class EpisodeViewModel {
     let model: Episode
+    
+    var didUpdateLikeState: (() -> Void)?
         
     var durationInSeconds: TimeInterval? {
         guard let duration = model.mediaPackage?.durationInMs else { return nil }

@@ -42,6 +42,7 @@ class EpisodeListViewController: ListViewController<Episode, EpisodeViewModel> {
                                 viewModel.likeEpisode()
                             }
                             completion(true)
+                            viewModel.didUpdateLikeState?()
                         })
                         action.backgroundColor = viewModel.isFavorite ? Asset.unlikeColor.color : Asset.likeColor.color
                         return action

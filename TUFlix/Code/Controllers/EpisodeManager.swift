@@ -11,11 +11,23 @@ import TUFlixKit
 
 class EpisodeManager {
     
+    private let defaultsKey = "favorite_episodes"
+    
     static let shared = EpisodeManager()
     
-    private var favoriteEpisodes = Set<Episode.Id>()
+    private var favoriteEpisodes: Set<Episode.Id> {
+        didSet {
+            persistFavorites()
+        }
+    }
     
-    private init() {}
+    private init() {
+        if let episodes: Set<Episode.Id> = UserDefaults.standard.decode(for: defaultsKey, decoder: Decoders.standardJSON) {
+            self.favoriteEpisodes = episodes
+        } else {
+            self.favoriteEpisodes = Set()
+        }
+    }
     
     func addToFavorites(episode: Episode.Id) {
         favoriteEpisodes.insert(episode)
@@ -27,5 +39,9 @@ class EpisodeManager {
     
     func isInFavorites(episode: Episode.Id) -> Bool {
         return favoriteEpisodes.contains(episode)
+    }
+    
+    private func persistFavorites() {
+        UserDefaults.standard.encode(favoriteEpisodes, key: defaultsKey, encoder: Encoders.standardJSON)
     }
 }

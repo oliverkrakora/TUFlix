@@ -25,6 +25,11 @@ class EpisodeCell: UITableViewCell {
     
     private var viewModel: EpisodeViewModel!
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        viewModel.didUpdateLikeState = nil
+    }
+    
     func configure(with episode: EpisodeViewModel, isPartOfSeries: Bool = false) {
         self.viewModel = episode
         titleLabel.text = {
@@ -33,6 +38,10 @@ class EpisodeCell: UITableViewCell {
             }
             return episode.formattedTitle
         }()
+        
+        viewModel.didUpdateLikeState = { [weak self] in
+            self?.isFavoriteIndicatorView.isHidden = !episode.isFavorite
+        }
         
         isFavoriteIndicatorView.isHidden = !episode.isFavorite
         creatorTitleLabel.text = episode.formattedCreatorName
