@@ -9,9 +9,18 @@
 import Foundation
 import Fetch
 
+public protocol PageProtocol: Decodable {
+    
+    associatedtype Item: Decodable
+    
+    var hasNext: Bool { get }
+    
+    var items: [Item] { get }
+}
+
 public typealias SearchResultItem = Codable & Equatable
 
-public struct SearchResult<Item: SearchResultItem>: Decodable {
+public struct SearchResult<Item: SearchResultItem>: Decodable, PageProtocol {
     
     private enum CodingKeys: String, CodingKey {
         case offset

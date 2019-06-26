@@ -14,7 +14,7 @@
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SeriesCell" rowHeight="83" id="Zfc-bB-qJZ" customClass="SeriesCell" customModule="TUFlix" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="83"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zfc-bB-qJZ" id="cJ6-Gs-v8q">
+            <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zfc-bB-qJZ" id="cJ6-Gs-v8q">
                 <rect key="frame" x="0.0" y="0.0" width="376" height="82.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -41,20 +41,49 @@
                             </label>
                         </subviews>
                     </stackView>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zho-e3-Gdz" customClass="TriangleView" customModule="TUFlix" customModuleProvider="target">
+                        <rect key="frame" x="379" y="0.0" width="35" height="35"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite_filled_icon" translatesAutoresizingMaskIntoConstraints="NO" id="w21-Iu-np0">
+                                <rect key="frame" x="16.5" y="2" width="17.5" height="17.5"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="w21-Iu-np0" secondAttribute="height" multiplier="1:1" id="ZXc-mr-LAh"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="w21-Iu-np0" firstAttribute="top" secondItem="zho-e3-Gdz" secondAttribute="top" constant="2" id="PT6-LU-OA9"/>
+                            <constraint firstAttribute="width" secondItem="zho-e3-Gdz" secondAttribute="height" multiplier="1:1" id="WWS-Rr-h9e"/>
+                            <constraint firstItem="w21-Iu-np0" firstAttribute="height" secondItem="zho-e3-Gdz" secondAttribute="height" multiplier="0.5" id="pnE-lq-Ku2"/>
+                            <constraint firstAttribute="trailing" secondItem="w21-Iu-np0" secondAttribute="trailing" constant="1" id="vqR-Tj-iyx"/>
+                            <constraint firstAttribute="height" constant="35" id="zKP-m9-0Ix"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="gaK-EB-Hwo" firstAttribute="leading" secondItem="cJ6-Gs-v8q" secondAttribute="leading" constant="16" id="29D-y8-IUZ"/>
+                    <constraint firstItem="zho-e3-Gdz" firstAttribute="width" secondItem="zho-e3-Gdz" secondAttribute="height" multiplier="1:1" id="a8B-lw-zoT"/>
+                    <constraint firstItem="zho-e3-Gdz" firstAttribute="top" secondItem="cJ6-Gs-v8q" secondAttribute="top" id="aig-DL-sWg"/>
                     <constraint firstItem="gaK-EB-Hwo" firstAttribute="top" secondItem="cJ6-Gs-v8q" secondAttribute="top" constant="8" id="hLX-OO-0tP"/>
                     <constraint firstAttribute="bottom" secondItem="gaK-EB-Hwo" secondAttribute="bottom" constant="8" id="nvF-j6-yVE"/>
                     <constraint firstAttribute="trailing" secondItem="gaK-EB-Hwo" secondAttribute="trailing" constant="16" id="tCE-VF-gb6"/>
                 </constraints>
             </tableViewCellContentView>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="zho-e3-Gdz" secondAttribute="trailing" id="saZ-qX-Lw6"/>
+            </constraints>
             <connections>
                 <outlet property="contributorLabel" destination="WXg-XF-fks" id="Ovq-OV-bcc"/>
                 <outlet property="creatorLabel" destination="HA9-6l-h3j" id="fmo-aa-aJI"/>
+                <outlet property="isFavoriteIndicator" destination="zho-e3-Gdz" id="Abi-2c-Te9"/>
                 <outlet property="titleLabel" destination="mhr-ZY-g8J" id="yZ7-wj-NVU"/>
             </connections>
             <point key="canvasLocation" x="234.78260869565219" y="108.81696428571428"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="favorite_filled_icon" width="48" height="46"/>
+    </resources>
 </document>

@@ -11,6 +11,9 @@ import UIKit
 @IBDesignable
 class TriangleView: UIView {
     
+    @IBInspectable
+    var fillColor: UIColor = Asset.primaryColor.color
+    
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
         
@@ -25,7 +28,7 @@ class TriangleView: UIView {
         path.addLine(to: CGPoint(x: rect.minX, y: rect.minY))
         path.close()
         
-        Asset.primaryColor.color.setFill()
+        fillColor.setFill()
         path.fill()
         path.stroke()
     }

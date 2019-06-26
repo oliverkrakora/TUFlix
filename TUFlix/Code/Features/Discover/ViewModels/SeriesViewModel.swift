@@ -12,9 +12,11 @@ import Fetch
 import ReactiveSwift
 import DataSource
 
-struct SeriesViewModel {
+class SeriesViewModel {
     
     let model: Series
+    
+    var didUpdateLikeState: (() -> Void)?
     
     var formattedTitle: String? {
         return model.title
@@ -26,6 +28,18 @@ struct SeriesViewModel {
     
     var formattedContributor: String? {
         return model.contributor
+    }
+    
+    var isFavorite: Bool {
+        return SeriesManager.shared.isInFavorites(series: model)
+    }
+    
+    func likeSeries() {
+        SeriesManager.shared.addToFavorites(series: model)
+    }
+    
+    func unlikeSeries() {
+        SeriesManager.shared.removeFromFavorites(series: model)
     }
     
     init(model: Series) {

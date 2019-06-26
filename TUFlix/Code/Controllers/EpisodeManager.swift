@@ -8,6 +8,8 @@
 
 import Foundation
 import TUFlixKit
+import ReactiveSwift
+import Result
 
 class EpisodeManager {
     
@@ -15,29 +17,36 @@ class EpisodeManager {
     
     static let shared = EpisodeManager()
     
-    private var favoriteEpisodes: Set<Episode.Id> {
+    private let didChangeObserver = Signal<(), NoError>.pipe()
+    
+    var didChangeSignal: Signal<(), NoError> {
+        return didChangeObserver.output
+    }
+    
+    private(set) var favoriteEpisodes: Set<Episode> {
         didSet {
             persistFavorites()
+            didChangeObserver.input.send(value: ())
         }
     }
     
     private init() {
-        if let episodes: Set<Episode.Id> = UserDefaults.standard.decode(for: defaultsKey, decoder: Decoders.standardJSON) {
+        if let episodes: Set<Episode> = UserDefaults.standard.decode(for: defaultsKey, decoder: Decoders.standardJSON) {
             self.favoriteEpisodes = episodes
         } else {
             self.favoriteEpisodes = Set()
         }
     }
     
-    func addToFavorites(episode: Episode.Id) {
+    func addToFavorites(episode: Episode) {
         favoriteEpisodes.insert(episode)
     }
     
-    func removeFromFavorites(episode: Episode.Id) {
+    func removeFromFavorites(episode: Episode) {
         favoriteEpisodes.remove(episode)
     }
     
-    func isInFavorites(episode: Episode.Id) -> Bool {
+    func isInFavorites(episode: Episode) -> Bool {
         return favoriteEpisodes.contains(episode)
     }
     

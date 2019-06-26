@@ -9,7 +9,7 @@
 import Foundation
 import Fetch
 
-public struct Episode: Hashable, Codable {
+public struct Episode: Equatable, Codable {
     
     public typealias Id = String
     
@@ -91,4 +91,10 @@ public struct Episode: Hashable, Codable {
     public let title: String?
     public let created: Date?
     public let mediaPackage: MediaPackage?
+}
+
+extension Episode: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }

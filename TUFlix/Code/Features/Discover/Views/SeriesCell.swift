@@ -15,13 +15,21 @@ class SeriesCell: UITableViewCell {
     
     @IBOutlet private var creatorLabel: UILabel!
     
-    @IBOutlet var contributorLabel: UILabel!
+    @IBOutlet private var contributorLabel: UILabel!
+    
+    @IBOutlet private var isFavoriteIndicator: TriangleView!
     
     func configure(with series: SeriesViewModel) {
         titleLabel.text = series.formattedTitle
         creatorLabel.text = series.formattedCreator
         contributorLabel.text = series.formattedContributor
+        isFavoriteIndicator.isHidden = !series.isFavorite
+        
+        series.didUpdateLikeState = { [unowned self] in
+            self.isFavoriteIndicator.isHidden = !series.isFavorite
+        }
     }
+    
 }
 extension SeriesCell {
     static var cellDescriptor: CellDescriptor<SeriesViewModel, SeriesCell> {

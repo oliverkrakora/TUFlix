@@ -1,11 +1,3 @@
-# iOS Project Template 📱
-
-## Setup
-
-* Run `carthage update --platform ios --no-use-binaries --cache-build` to install/update all needed dependencies
---------
-
-
 # TUFlix
 
 ---

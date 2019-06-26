@@ -12,6 +12,11 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name
 internal enum L10n {
 
+  internal enum Browse {
+    /// Browse
+    internal static let title = L10n.tr("Localizable", "browse.title")
+  }
+
   internal enum Episode {
     /// Like
     internal static let addLikeTitle = L10n.tr("Localizable", "episode.add_like_title")
@@ -65,6 +70,11 @@ internal enum L10n {
       /// Ok
       internal static let title = L10n.tr("Localizable", "global.ok.title")
     }
+  }
+
+  internal enum Library {
+    /// Library
+    internal static let title = L10n.tr("Localizable", "library.title")
   }
 
   internal enum Series {

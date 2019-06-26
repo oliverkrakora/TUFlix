@@ -20,7 +20,12 @@ public extension UserDefaults {
     
     func decode<T: Decodable>(for key: String, decoder: JSONDecoder = JSONDecoder()) -> T? {
         return data(forKey: key).flatMap {
-            return try? decoder.decode(T.self, from: $0)
+            do {
+                return try decoder.decode(T.self, from: $0)
+            } catch {
+                print("Failed to decode \(error)")
+                return nil
+            }
         }
     }
 }

@@ -11,11 +11,15 @@ import ReactiveSwift
 import TUFlixKit
 import Fetch
 
-class PagingViewModel<Item: SearchResultItem, MappedItem> {
+class PageListViewModel<Page: PageProtocol, MappedItem>: ListViewModelProtocol, PageableProtocol {
     
-    typealias ResourceProvider = ((API.PagingConfig) -> Resource<SearchResult<Item>>)
+    typealias ResourceProvider = ((API.PagingConfig) -> Resource<Page>)
     
-    typealias ItemMapper = ((Item) -> MappedItem)
+    typealias ItemMapper = ((Page.Item) -> MappedItem)
+    
+    private let resourceProvider: ResourceProvider
+    
+    private let mapper: ItemMapper
     
     private let _items = MutableProperty<[MappedItem]>([])
     
@@ -23,35 +27,33 @@ class PagingViewModel<Item: SearchResultItem, MappedItem> {
         return Property(_items)
     }()
     
-    private var lastResponse: SearchResult<Item>?
+    private var lastResponse: Page?
     
-    private var lastPageConfig: API.PagingConfig {
-        return lastResponse.flatMap { API.PagingConfig(limit: $0.limit, offset: $0.offset + $0.limit) } ?? .default
-    }
+    private var lastPageConfig: API.PagingConfig?
     
-    let resourceProvider: ResourceProvider
-    
-    let mapper: ItemMapper
-    
-    var hasMoreToLoad: Bool {
-        return lastResponse.flatMap { $0.offset < ($0.total ?? Int.max) } ?? true
-    }
+    lazy var loadDataAction: Action<(), [MappedItem], Error> = {
+        return Action { [unowned self] in
+            self.loadNextPageAction.apply(false)
+                .mapError { $0 as Error }
+        }
+    }()
     
     lazy var loadNextPageAction: Action<Bool, [MappedItem], Error> = {
         return Action { [unowned self] shouldReset in
             let mapper = self.mapper
-            return SignalProducer<SearchResult<Item>, Error> { [weak self] observer, lifetime in
+            return SignalProducer<Page, Error> { [weak self] observer, lifetime in
                 guard let self = self else {
                     #warning("Replace with error")
                     fatalError("Can't load episodes without viewModel")
                 }
                 
-                let config = shouldReset ? API.PagingConfig.default : self.lastPageConfig
+                let config: API.PagingConfig = (shouldReset ? .default : self.lastPageConfig) ?? .default
                 
                 let token = self.resourceProvider(config).request { result in
                     switch result {
                     case .success(let value):
                         self.lastResponse = value.model
+                        self.lastPageConfig = API.PagingConfig(limit: config.limit, offset: config.offset + value.model.items.count)
                         observer.send(value: value.model)
                         observer.sendCompleted()
                     case .failure(let error):
@@ -64,12 +66,11 @@ class PagingViewModel<Item: SearchResultItem, MappedItem> {
                 }
                 }.map {
                     $0.items.map { mapper($0) }
-                }
-                .on { [weak self] in
+                }.on { [weak self] items in
                     if shouldReset {
-                        self?._items.value = $0
+                        self?._items.value = items
                     } else {
-                        self?._items.value.append(contentsOf: $0)
+                        self?._items.value.append(contentsOf: items)
                     }
             }
         }
@@ -78,6 +79,31 @@ class PagingViewModel<Item: SearchResultItem, MappedItem> {
     init(provider: @escaping ResourceProvider, mapper: @escaping ItemMapper) {
         self.resourceProvider = provider
         self.mapper = mapper
+    }
+    
+    func hasContent() -> Bool {
+        return !items.value.isEmpty
+    }
+    
+    func hasMoreToLoad() -> Bool {
+        return lastResponse?.hasNext ?? true
+    }
+    
+    func isExecuting() -> Bool {
+        return loadNextPageAction.isExecuting.value
+    }
+    
+    func loadData() -> SignalProducer<[MappedItem], Error> {
+        return loadDataAction
+            .apply()
+            .mapError { $0 as Error }
+    }
+    
+    func loadData<T>(reset: Bool) -> SignalProducer<[T], Error> {
+        return loadNextPageAction
+            .apply(reset)
+            .map { $0 as! [T] }
+            .mapError { $0 as Error }
     }
     
     func resetPaging() -> Bool {

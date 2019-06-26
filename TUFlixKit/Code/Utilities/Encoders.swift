@@ -9,5 +9,10 @@
 import Foundation
 
 public struct Encoders {
-    public static let standardJSON = JSONEncoder()
+    
+    public static let standardJSON: JSONEncoder = {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        return encoder
+    }()
 }

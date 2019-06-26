@@ -22,7 +22,7 @@ class EpisodeViewModel {
     }
     
     var isFavorite: Bool {
-        return EpisodeManager.shared.isInFavorites(episode: model.id)
+        return EpisodeManager.shared.isInFavorites(episode: model)
     }
     
     var formattedTitle: String? {
@@ -33,10 +33,6 @@ class EpisodeViewModel {
         return model.mediaPackage?.media?.tracks?.first(where: { $0.mimeType == .mp4 })?.url
     }
     
-    var streamableAudioURL: URL? {
-        return model.mediaPackage?.media?.tracks?.first(where: { $0.mimeType == .mpeg })?.url
-    }
-
     var formattedCreatorName: String? {
         return model.mediaPackage?.creator?.creator
     }
@@ -56,11 +52,11 @@ class EpisodeViewModel {
     }
     
     func likeEpisode() {
-        EpisodeManager.shared.addToFavorites(episode: model.id)
+        EpisodeManager.shared.addToFavorites(episode: model)
     }
     
     func unlikeEpisode() {
-        EpisodeManager.shared.removeFromFavorites(episode: model.id)
+        EpisodeManager.shared.removeFromFavorites(episode: model)
     }
 }
 
@@ -72,6 +68,6 @@ extension EpisodeViewModel: Diffable {
     
     func isEqualToDiffable(_ other: Diffable?) -> Bool {
         guard let other = other as? EpisodeViewModel else { return false }
-        return diffIdentifier == other.diffIdentifier
+        return model == other.model && isFavorite == other.isFavorite
     }
 }

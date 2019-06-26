@@ -9,20 +9,36 @@
 import UIKit
 import DataSource
 import TUFlixKit
+import ReactiveSwift
 
-class EpisodeListViewController: ListViewController<Episode, EpisodeViewModel> {
+class EpisodeListViewController<T: ListViewModelProtocol>: ListViewController<T> {
     
     typealias SelectEpisodeCallback = ((EpisodeViewModel) -> Void)
     
-    private let isPartOfSeries: Bool
+    var showEpisodeNames: Bool {
+        didSet {
+            setupDataSource(with: viewModel.items.value)
+        }
+    }
+    
+    private var disposable: Disposable?
     
     var selectEpisodeClosure: SelectEpisodeCallback!
+    
+    init(title: String?, viewModel: T, displayEpisodeNames: Bool = false) {
+        self.showEpisodeNames = displayEpisodeNames
+        super.init(title: title, viewModel: viewModel)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func cellDescriptors() -> [CellDescriptorType] {
         return [
             EpisodeCell.cellDescriptor
                 .configure { [unowned self] (viewModel, cell, _) in
-                    cell.configure(with: viewModel, isPartOfSeries: self.isPartOfSeries)
+                    cell.configure(with: viewModel, isPartOfSeries: self.showEpisodeNames)
                 }
                 .didSelect { (viewModel, _) in
                     self.selectEpisodeClosure(viewModel)
@@ -50,17 +66,8 @@ class EpisodeListViewController: ListViewController<Episode, EpisodeViewModel> {
                     
                     return UISwipeActionsConfiguration(actions: [
                         action
-                    ])
-                }
+                        ])
+            }
         ]
-    }
-    
-    init(title: String?, viewModel: ListViewModel<Episode, EpisodeViewModel>, isPartOfSeries: Bool = false) {
-        self.isPartOfSeries = isPartOfSeries
-        super.init(title: title, viewModel: viewModel)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

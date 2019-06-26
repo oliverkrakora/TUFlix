@@ -9,7 +9,9 @@
 import Foundation
 import Fetch
 
-public struct Series: Equatable, Cacheable {
+public struct Series: Hashable, Cacheable {
+    
+    public typealias Id = String
     
     private enum CodingKeys: String, CodingKey {
         case id
@@ -18,8 +20,12 @@ public struct Series: Equatable, Cacheable {
         case contributor = "dcContributor"
     }
     
-    public let id: String
+    public let id: Id
     public let title: String?
     public let creator: String?
     public let contributor: String?
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }

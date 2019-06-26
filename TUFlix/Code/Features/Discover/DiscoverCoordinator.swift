@@ -2,7 +2,7 @@ import UIKit
 import AVKit
 import TUFlixKit
 
-class MainCoordinator: Coordinator {
+class DiscoverCoordinator: Coordinator {
     
     private var splitViewController: UISplitViewController? {
         return rootViewController as? UISplitViewController
@@ -11,7 +11,7 @@ class MainCoordinator: Coordinator {
     private var navigationController: UINavigationController!
     
     init() {
-        let episodeViewModel = ListViewModel<Episode, EpisodeViewModel>(resourceProvider: { config in
+        let episodeViewModel = SearchablePageListViewModel<SearchResult<Episode>, EpisodeViewModel>(resourceProvider: { config in
             return API.Episode.page(with: config)
         }, searchResourceProvider: { (config, searchTerm) in
             return API.Episode.search(for: searchTerm, config: config)
@@ -20,7 +20,7 @@ class MainCoordinator: Coordinator {
         
         let episodeVC = EpisodeListViewController(title: L10n.Episodes.title, viewModel: episodeViewModel)
         
-        let seriesViewModel = ListViewModel<Series, SeriesViewModel>(resourceProvider: { config in
+        let seriesViewModel = SearchablePageListViewModel<SearchResult<Series>, SeriesViewModel>(resourceProvider: { config in
             return API.Series.page(with: config)
         }, searchResourceProvider: { (config, searchTerm) in
             return API.Series.search(for: searchTerm, config: config)
@@ -31,7 +31,6 @@ class MainCoordinator: Coordinator {
         
         let vc = PageViewController.create(with: [episodeVC, seriesVC])
         navigationController = UINavigationController(rootViewController: vc)
-        navigationController.view.backgroundColor = Asset.primaryColor.color
         var rootViewController: UIViewController = navigationController
         
         if UIDevice.current.userInterfaceIdiom == .pad {
@@ -40,6 +39,8 @@ class MainCoordinator: Coordinator {
             splitViewController.preferredDisplayMode = .automatic
             rootViewController = splitViewController
         }
+        
+        rootViewController.tabBarItem.title = L10n.Browse.title
         
         super.init(rootViewController: rootViewController)
         
@@ -53,13 +54,13 @@ class MainCoordinator: Coordinator {
     }
     
     func showSeriesDetails(with series: SeriesViewModel) {
-        let viewModel = ListViewModel<Episode, EpisodeViewModel>(resourceProvider: { config in
+        let viewModel = SearchablePageListViewModel<SearchResult<Episode>, EpisodeViewModel>(resourceProvider: { config in
             return API.Series.pageEpisodes(for: series.model.id, config: config)
         }, searchResourceProvider: { (config, _) in
             return API.Series.pageEpisodes(for: series.model.id, config: config)
         }, mapping: EpisodeViewModel.init)
         
-        let vc = EpisodeListViewController(title: series.model.title, viewModel: viewModel, isPartOfSeries: true)
+        let vc = EpisodeListViewController(title: series.model.title, viewModel: viewModel, displayEpisodeNames: true)
         vc.selectEpisodeClosure = { [unowned self] viewModel in
             self.playEpisode(viewModel)
         }
@@ -68,31 +69,13 @@ class MainCoordinator: Coordinator {
     }
     
     func playEpisode(_ episode: EpisodeViewModel) {
-        
-        // Video and audio content available
-        if let audio = episode.streamableAudioURL, let video = episode.streamableVideoURL {
-            let alert = UIAlertController(title: L10n.Episodes.SelectPlaySource.title, message: nil, preferredStyle: .actionSheet)
-            alert.addAction(UIAlertAction(title: L10n.Episodes.SelectPlayVideo.title, style: .default, handler: { [unowned self] _ in
-                self.displayPlayerController(with: video)
-
-            }))
-            
-            alert.addAction(UIAlertAction(title: L10n.Episodes.SelectPlayAudio.title, style: .default, handler: { [unowned self] _ in
-                self.displayPlayerController(with: audio)
-            }))
-            alert.addAction(UIAlertAction(title: L10n.Global.Cancel.title, style: .cancel, handler: nil))
-            displayAlert(alert)
-        }
-        // Only video content available
-        else if let single = episode.streamableVideoURL ?? episode.streamableVideoURL {
-            displayPlayerController(with: single)
-        }
-        // No content available
-        else {
+        guard let videoURL = episode.streamableVideoURL else {
             let alert = UIAlertController(title: L10n.Episodes.PlayUnavailable.title, message: nil, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: L10n.Global.Ok.title, style: .cancel, handler: nil))
             displayAlert(alert)
+            return
         }
+        displayPlayerController(with: videoURL)
     }
     
     private func displayAlert(_ alert: UIAlertController) {

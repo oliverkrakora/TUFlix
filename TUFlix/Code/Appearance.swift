@@ -5,11 +5,22 @@ struct Appearance {
     /// Sets the global appearance for the application.
     /// Call this method early in the applicaiton's setup, i.e. in `applicationDidFinishLaunching:`
     static func setup() {
+        
+        // NavigationBar
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().barTintColor = Asset.primaryColor.color
         UINavigationBar.appearance().tintColor = Asset.primaryTextColor.color
-        UISearchBar.appearance().tintColor = .white
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: Asset.primaryTextColor.color]
+        
+        // SegmentedControl
         UISegmentedControl.appearance().tintColor = Asset.primaryTextColor.color
+        
+        //SearchBar
+        UISearchBar.appearance().tintColor = .white
+        
+        //TabBar
+        UITabBar.appearance().tintColor = .white
+        UITabBar.appearance().barTintColor = Asset.primaryColor.color
+        UITabBar.appearance().isTranslucent = false
     }
 }

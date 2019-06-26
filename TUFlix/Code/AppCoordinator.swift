@@ -13,6 +13,7 @@ class AppCoordinator: Coordinator {
         self.window = window
         
         addChild(mainCoordinator)
+        mainCoordinator.start()
        
         window.rootViewController = mainCoordinator.rootViewController
         window.makeKeyAndVisible()

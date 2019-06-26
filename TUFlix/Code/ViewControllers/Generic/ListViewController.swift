@@ -12,7 +12,7 @@ import TUFlixKit
 import DataSource
 import StatefulViewController
 
-class ListViewController<Item: SearchResultItem, MappedItem>: UIViewController, UITableViewDelegate, UISearchBarDelegate {
+class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableViewDelegate, UISearchBarDelegate {
     
     // MARK: Outlets
     
@@ -26,7 +26,7 @@ class ListViewController<Item: SearchResultItem, MappedItem>: UIViewController, 
         return DataSource(cellDescriptors: cellDescriptors())
     }()
     
-    private var viewModel: ListViewModel<Item, MappedItem>!
+    private(set) var viewModel: T!
     
     private lazy var pagingHelper: ScrollViewPagingHandler = {
         return ScrollViewPagingHandler(threshold: 0.9,
@@ -45,9 +45,10 @@ class ListViewController<Item: SearchResultItem, MappedItem>: UIViewController, 
         view = UITableView()
     }
     
-    init(title: String?, viewModel: ListViewModel<Item, MappedItem>) {
+    init(title: String?, viewModel: T) {
         super.init(nibName: nil, bundle: nil)
         self.navigationItem.title = title
+        self.tabBarItem.title = title
         self.viewModel = viewModel
     }
     
@@ -99,11 +100,27 @@ class ListViewController<Item: SearchResultItem, MappedItem>: UIViewController, 
     // MARK: Networking
     /// - Parameter reset: Removes all loaded items, resets the offset to zero and interrupts the current request if existing
     private func loadNextPage(reset: Bool = false) {
-        guard (!viewModel.loadNextPageAction.isExecuting.value && viewModel.hasMoreToLoad) || reset else { return }
+        
+        let signalProducer: SignalProducer<[T.Item], Error> = {
+            if let viewModel = viewModel as? PageableProtocol {
+                return viewModel.loadData(reset: reset)
+            } else {
+                return viewModel.loadData()
+            }
+        }()
+        
+        let hasMoreToLoad: Bool = {
+            if let viewModel = viewModel as? PageableProtocol {
+                return viewModel.hasMoreToLoad()
+            }
+            return true
+        }()
+        
+        guard (!viewModel.isExecuting() && hasMoreToLoad) || reset else { return }
         
         startLoading()
         requestDisposable?.dispose()
-        requestDisposable = viewModel.loadNextPageAction.apply(reset).startWithResult { [weak self] result in
+        requestDisposable = signalProducer.startWithResult { [weak self] result in
             self?.endLoading(animated: true, error: result.error, completion: nil)
             self?.tableView.refreshControl?.endRefreshing()
             switch result {
@@ -131,7 +148,7 @@ class ListViewController<Item: SearchResultItem, MappedItem>: UIViewController, 
     }
     
     // MARK: DataSource
-    private func setupDataSource(with episodes: [MappedItem]) {
+    func setupDataSource(with episodes: [T.Item]) {
         dataSource.sections = [Section(items: episodes)]
         dataSource.reloadData(tableView, animated: true)
     }
@@ -145,17 +162,23 @@ class ListViewController<Item: SearchResultItem, MappedItem>: UIViewController, 
     // MARK: UITableViewDelegate
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard viewModel is PageableProtocol else { return }
+        
         pagingHelper.scrollViewDidScroll(scrollView)
     }
     
     // MARK: UISearchBarDelegate
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard let viewModel = viewModel as? SearchableProtocol else { return }
+        
         viewModel.searchTerm.value = searchText
         loadNextPage(reset: true)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        guard let viewModel = viewModel as? SearchableProtocol else { return }
+
         requestDisposable?.dispose()
         viewModel.searchTerm.value = ""
         endLoading()
@@ -165,7 +188,7 @@ class ListViewController<Item: SearchResultItem, MappedItem>: UIViewController, 
 extension ListViewController: StatefulViewController {
     
     func hasContent() -> Bool {
-        return viewModel.hasContent
+        return viewModel.hasContent()
     }
     
     private func setupStatefulViews() {
