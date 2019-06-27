@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TUFlixKit
 
 class LibraryCoordinator: NavigationCoordinator {
     
@@ -26,13 +27,27 @@ class LibraryCoordinator: NavigationCoordinator {
     
     private func showFavoriteEpisodes() {
         let viewModel = LibraryEpisodeListViewModel()
+        
         let vc = EpisodeListViewController(title: L10n.Episodes.title, viewModel: viewModel)
+        vc.selectEpisodeClosure = { [unowned self] episode in
+            PlaybackCoordinator.playModally(on: self.rootViewController, url: episode.streamableVideoURL)
+        }
         push(vc, animated: true)
     }
     
     private func showFavoriteSeries() {
         let viewModel = LibrarySeriesListViewModel()
         let vc = SeriesListViewController(title: L10n.Series.title, viewModel: viewModel)
+        vc.selectSeriesClosure = { [unowned self] series in
+            let viewModel = SearchablePageListViewModel<SearchResult<Episode>, EpisodeViewModel>(resourceProvider: { config in
+                return API.Series.pageEpisodes(for: series.model.id, config: config)
+            }, searchResourceProvider: { (config, _) in
+                return API.Series.pageEpisodes(for: series.model.id, config: config)
+            }, mapping: EpisodeViewModel.init)
+            
+            let vc = EpisodeListViewController(title: series.model.title, viewModel: viewModel, displayEpisodeNames: false)
+            self.push(vc, animated: true)
+        }
         push(vc, animated: true)
     }
 }

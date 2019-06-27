@@ -12,6 +12,7 @@ class MainCoordinator: TabBarCoordinator {
     
     func start() {
         let discover = DiscoverCoordinator()
+        discover.start()
         let library = LibraryCoordinator()
         library.start()
         addChild(discover)

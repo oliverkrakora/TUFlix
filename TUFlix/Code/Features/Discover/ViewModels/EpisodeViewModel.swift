@@ -9,16 +9,21 @@
 import Foundation
 import TUFlixKit
 import DataSource
+import ReactiveSwift
+import Result
 
 class EpisodeViewModel {
+    
     let model: Episode
     
-    var didUpdateLikeState: (() -> Void)?
-        
     var durationInSeconds: TimeInterval? {
         guard let duration = model.mediaPackage?.durationInMs else { return nil }
         guard let number = Int(duration) else { return nil }
         return TimeInterval(number / 1000)
+    }
+    
+    var favoriteStatusDidChange: Signal<(), NoError> {
+        return EpisodeManager.shared.didChangeSignal
     }
     
     var isFavorite: Bool {
@@ -68,6 +73,6 @@ extension EpisodeViewModel: Diffable {
     
     func isEqualToDiffable(_ other: Diffable?) -> Bool {
         guard let other = other as? EpisodeViewModel else { return false }
-        return model == other.model && isFavorite == other.isFavorite
+        return model == other.model
     }
 }

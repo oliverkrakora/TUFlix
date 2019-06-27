@@ -11,12 +11,15 @@ import TUFlixKit
 import Fetch
 import ReactiveSwift
 import DataSource
+import Result
 
 class SeriesViewModel {
     
     let model: Series
     
-    var didUpdateLikeState: (() -> Void)?
+    var favoriteStatusDidChange: Signal<(), NoError> {
+        return SeriesManager.shared.didChangeSignal
+    }
     
     var formattedTitle: String? {
         return model.title

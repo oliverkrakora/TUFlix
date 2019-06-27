@@ -15,17 +15,13 @@ class EpisodeListViewController<T: ListViewModelProtocol>: ListViewController<T>
     
     typealias SelectEpisodeCallback = ((EpisodeViewModel) -> Void)
     
-    var showEpisodeNames: Bool {
-        didSet {
-            setupDataSource(with: viewModel.items.value)
-        }
-    }
+    var showEpisodeNames: Bool
     
     private var disposable: Disposable?
     
     var selectEpisodeClosure: SelectEpisodeCallback!
     
-    init(title: String?, viewModel: T, displayEpisodeNames: Bool = false) {
+    init(title: String?, viewModel: T, displayEpisodeNames: Bool = true) {
         self.showEpisodeNames = displayEpisodeNames
         super.init(title: title, viewModel: viewModel)
     }
@@ -38,7 +34,7 @@ class EpisodeListViewController<T: ListViewModelProtocol>: ListViewController<T>
         return [
             EpisodeCell.cellDescriptor
                 .configure { [unowned self] (viewModel, cell, _) in
-                    cell.configure(with: viewModel, isPartOfSeries: self.showEpisodeNames)
+                    cell.configure(with: viewModel, isPartOfSeries: !self.showEpisodeNames)
                 }
                 .didSelect { (viewModel, _) in
                     self.selectEpisodeClosure(viewModel)
@@ -58,7 +54,6 @@ class EpisodeListViewController<T: ListViewModelProtocol>: ListViewController<T>
                                 viewModel.likeEpisode()
                             }
                             completion(true)
-                            viewModel.didUpdateLikeState?()
                         })
                         action.backgroundColor = viewModel.isFavorite ? Asset.unlikeColor.color : Asset.likeColor.color
                         return action

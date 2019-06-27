@@ -43,6 +43,16 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
     
     override func loadView() {
         view = UITableView()
+        dataSource.fallbackDelegate = self
+        tableView.dataSource = dataSource
+        tableView.delegate = dataSource
+        tableView.showsVerticalScrollIndicator = false
+        tableView.refreshControl = {
+            let control = UIRefreshControl()
+            control.addTarget(self, action: #selector(didTriggerRefreshControl), for: .valueChanged)
+            return control
+        }()
+        tableView.tableFooterView = UIView()
     }
     
     init(title: String?, viewModel: T) {
@@ -59,7 +69,6 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         setupStatefulViews()
-        setupTableView()
         setupBindings()
         loadNextPage()
     }
@@ -78,19 +87,6 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
     
     deinit {
         disposable.dispose()
-    }
-    
-    private func setupTableView() {
-        dataSource.fallbackDelegate = self
-        tableView.dataSource = dataSource
-        tableView.delegate = dataSource
-        tableView.showsVerticalScrollIndicator = false
-        tableView.refreshControl = {
-            let control = UIRefreshControl()
-            control.addTarget(self, action: #selector(didTriggerRefreshControl), for: .valueChanged)
-            return control
-        }()
-        tableView.tableFooterView = UIView()
     }
     
     func cellDescriptors() -> [CellDescriptorType] {
@@ -134,8 +130,8 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
     
     // MARK: Bindings
     private func setupBindings() {
-        disposable += viewModel.items.producer.startWithValues { [weak self] episodes in
-            self?.setupDataSource(with: episodes)
+        disposable += viewModel.items.producer.startWithValues { [weak self] _ in
+            self?.setupDataSource()
         }
         
         disposable += KeyboardObserver.observeKeyboardChanges().observeValues { [weak self] notification in
@@ -148,8 +144,9 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
     }
     
     // MARK: DataSource
-    func setupDataSource(with episodes: [T.Item]) {
-        dataSource.sections = [Section(items: episodes)]
+    func setupDataSource() {
+        
+        dataSource.sections = [Section(items: viewModel.items.value)]
         dataSource.reloadData(tableView, animated: true)
     }
     

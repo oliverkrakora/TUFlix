@@ -37,7 +37,6 @@ class SeriesListViewController<ListViewModel: ListViewModelProtocol>: ListViewCo
                                 viewModel.likeSeries()
                             }
                             completion(true)
-                            viewModel.didUpdateLikeState?()
                         })
                         action.backgroundColor = viewModel.isFavorite ? Asset.unlikeColor.color : Asset.likeColor.color
                         return action

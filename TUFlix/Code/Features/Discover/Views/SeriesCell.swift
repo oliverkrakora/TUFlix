@@ -8,6 +8,7 @@
 
 import UIKit
 import DataSource
+import ReactiveSwift
 
 class SeriesCell: UITableViewCell {
     
@@ -19,14 +20,20 @@ class SeriesCell: UITableViewCell {
     
     @IBOutlet private var isFavoriteIndicator: TriangleView!
     
+    private var viewModel: SeriesViewModel!
+    
+    private var favoriteDisposable: Disposable?
+    
     func configure(with series: SeriesViewModel) {
+        self.viewModel = series
         titleLabel.text = series.formattedTitle
         creatorLabel.text = series.formattedCreator
         contributorLabel.text = series.formattedContributor
         isFavoriteIndicator.isHidden = !series.isFavorite
         
-        series.didUpdateLikeState = { [unowned self] in
-            self.isFavoriteIndicator.isHidden = !series.isFavorite
+        favoriteDisposable?.dispose()
+        favoriteDisposable = series.favoriteStatusDidChange.observeValues { [weak self] _ in
+            self?.isFavoriteIndicator.isHidden = !series.isFavorite
         }
     }
     

@@ -8,6 +8,7 @@
 
 import UIKit
 import DataSource
+import ReactiveSwift
 
 class EpisodeCell: UITableViewCell {
     
@@ -25,10 +26,7 @@ class EpisodeCell: UITableViewCell {
     
     private var viewModel: EpisodeViewModel!
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        viewModel.didUpdateLikeState = nil
-    }
+    private var favoriteDisposable: Disposable?
     
     func configure(with episode: EpisodeViewModel, isPartOfSeries: Bool = false) {
         self.viewModel = episode
@@ -39,7 +37,8 @@ class EpisodeCell: UITableViewCell {
             return episode.formattedTitle
         }()
         
-        viewModel.didUpdateLikeState = { [weak self] in
+        favoriteDisposable?.dispose()
+        favoriteDisposable = episode.favoriteStatusDidChange.observeValues { [weak self] _ in
             self?.isFavoriteIndicatorView.isHidden = !episode.isFavorite
         }
         
