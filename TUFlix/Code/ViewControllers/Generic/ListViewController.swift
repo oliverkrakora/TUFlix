@@ -14,47 +14,29 @@ import StatefulViewController
 
 class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableViewDelegate, UISearchBarDelegate {
     
-    // MARK: Outlets
-    
-    var tableView: UITableView {
-        return view as! UITableView
-    }
-    
     // MARK: Properties
+    
+    private(set) var tableView: UITableView!
     
     private lazy var dataSource: DataSource = {
         return DataSource(cellDescriptors: cellDescriptors())
     }()
     
-    private(set) var viewModel: T!
-    
     private lazy var pagingHelper: ScrollViewPagingHandler = {
         return ScrollViewPagingHandler(threshold: 0.9,
                                        loadClosure: {
-                                        self.loadNextPage()
+                                        self.loadData()
         })
     }()
     
-    private var disposable = CompositeDisposable()
+    private(set) var viewModel: T!
     
     private var requestDisposable: Disposable?
     
+    private var bindingsDisposable = CompositeDisposable()
+    
     // MARK: Lifecycle
-    
-    override func loadView() {
-        view = UITableView()
-        dataSource.fallbackDelegate = self
-        tableView.dataSource = dataSource
-        tableView.delegate = dataSource
-        tableView.showsVerticalScrollIndicator = false
-        tableView.refreshControl = {
-            let control = UIRefreshControl()
-            control.addTarget(self, action: #selector(didTriggerRefreshControl), for: .valueChanged)
-            return control
-        }()
-        tableView.tableFooterView = UIView()
-    }
-    
+
     init(title: String?, viewModel: T) {
         super.init(nibName: nil, bundle: nil)
         self.navigationItem.title = title
@@ -66,11 +48,43 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        bindingsDisposable.dispose()
+    }
+    
+    override func loadView() {
+        view = UIView()
+        tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tableView)
+        
+        dataSource.fallbackDelegate = self
+        tableView.dataSource = dataSource
+        tableView.delegate = dataSource
+        tableView.showsVerticalScrollIndicator = false
+        
+        tableView.refreshControl = {
+            let control = UIRefreshControl()
+            control.addTarget(self, action: #selector(didTriggerRefreshControl), for: .valueChanged)
+            return control
+        }()
+        
+        tableView.tableFooterView = UIView()
+        
+        NSLayoutConstraint.activate([
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupStatefulViews()
         setupBindings()
-        loadNextPage()
+        loadData()
+        setupSearchController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,38 +99,35 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
         }
     }
     
-    deinit {
-        disposable.dispose()
-    }
-    
     func cellDescriptors() -> [CellDescriptorType] {
         return []
     }
     
+    private func setupSearchController() {
+        guard viewModel is SearchableProtocol else {
+            navigationItem.searchController = nil
+            return
+        }
+        
+        let controller = UISearchController(searchResultsController: nil)
+        controller.dimsBackgroundDuringPresentation = false
+        controller.hidesNavigationBarDuringPresentation = true
+        controller.obscuresBackgroundDuringPresentation = false
+        controller.searchBar.barStyle = .black
+        controller.searchBar.delegate = self
+        navigationItem.searchController = controller
+        navigationItem.hidesSearchBarWhenScrolling = false
+    }
+    
     // MARK: Networking
+    
     /// - Parameter reset: Removes all loaded items, resets the offset to zero and interrupts the current request if existing
-    private func loadNextPage(reset: Bool = false) {
-        
-        let signalProducer: SignalProducer<[T.Item], Error> = {
-            if let viewModel = viewModel as? PageableProtocol {
-                return viewModel.loadData(reset: reset)
-            } else {
-                return viewModel.loadData()
-            }
-        }()
-        
-        let hasMoreToLoad: Bool = {
-            if let viewModel = viewModel as? PageableProtocol {
-                return viewModel.hasMoreToLoad()
-            }
-            return true
-        }()
-        
-        guard (!viewModel.isExecuting() && hasMoreToLoad) || reset else { return }
+    private func loadData(reset: Bool = false) {
+        guard !viewModel.isLoadingData() || reset else { return }
         
         startLoading()
         requestDisposable?.dispose()
-        requestDisposable = signalProducer.startWithResult { [weak self] result in
+        requestDisposable = viewModel.loadData(reset: reset).startWithResult { [weak self] result in
             self?.endLoading(animated: true, error: result.error, completion: nil)
             self?.tableView.refreshControl?.endRefreshing()
             switch result {
@@ -130,11 +141,11 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
     
     // MARK: Bindings
     private func setupBindings() {
-        disposable += viewModel.items.producer.startWithValues { [weak self] _ in
+        bindingsDisposable += viewModel.items.producer.startWithValues { [weak self] _ in
             self?.setupDataSource()
         }
         
-        disposable += KeyboardObserver.observeKeyboardChanges().observeValues { [weak self] notification in
+        bindingsDisposable += KeyboardObserver.observeKeyboardChanges().observeValues { [weak self] notification in
             if notification.willShow {
                 self?.tableView.contentInset.bottom = notification.keyboardHeight
             } else {
@@ -145,7 +156,6 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
     
     // MARK: DataSource
     func setupDataSource() {
-        
         dataSource.sections = [Section(items: viewModel.items.value)]
         dataSource.reloadData(tableView, animated: true)
     }
@@ -153,13 +163,13 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
     // MARK: Actions
     
     @objc private func didTriggerRefreshControl() {
-        loadNextPage(reset: true)
+        loadData(reset: true)
     }
     
     // MARK: UITableViewDelegate
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard viewModel is PageableProtocol else { return }
+        guard viewModel.hasContent() && viewModel.hasAdditionalDataToLoad() else { return }
         
         pagingHelper.scrollViewDidScroll(scrollView)
     }
@@ -170,7 +180,7 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
         guard let viewModel = viewModel as? SearchableProtocol else { return }
         
         viewModel.searchTerm.value = searchText
-        loadNextPage(reset: true)
+        loadData(reset: true)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -190,13 +200,13 @@ extension ListViewController: StatefulViewController {
     
     private func setupStatefulViews() {
         emptyView = EmptyStateView.load()?.prepare(with: L10n.Global.EmptyState.title, subtitle: L10n.Global.retryTapTitle, insets: .zero) { [weak self] in
-            self?.loadNextPage(reset: true)
+            self?.loadData(reset: true)
         }
         
         loadingView = LoadingStateView.load()?.prepare(with: L10n.Global.LoadingState.title)
         
         errorView = ErrorStateView.load()?.prepare(with: L10n.Global.ErrorState.title, subtitle: L10n.Global.retryTapTitle, insets: .zero, retryClosure: { [weak self] in
-            self?.loadNextPage()
+            self?.loadData()
         })
     }
 }

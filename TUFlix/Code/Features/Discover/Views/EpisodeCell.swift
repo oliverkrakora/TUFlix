@@ -28,13 +28,13 @@ class EpisodeCell: UITableViewCell {
     
     private var favoriteDisposable: Disposable?
     
-    func configure(with episode: EpisodeViewModel, isPartOfSeries: Bool = false) {
+    func configure(with episode: EpisodeViewModel, showEpisodeNames: Bool = true) {
         self.viewModel = episode
         titleLabel.text = {
-            if isPartOfSeries {
-                return episode.formattedCreationDate
+            if showEpisodeNames {
+                return episode.formattedTitle
             }
-            return episode.formattedTitle
+            return episode.formattedCreationDate
         }()
         
         favoriteDisposable?.dispose()
@@ -46,7 +46,7 @@ class EpisodeCell: UITableViewCell {
         creatorTitleLabel.text = episode.formattedCreatorName
         creatorTitleLabel.isHidden = episode.formattedCreatorName?.isEmpty ?? true
         creationDateLabel.text = episode.formattedCreationDate
-        creationDateLabel.isHidden = isPartOfSeries
+        creationDateLabel.isHidden = !showEpisodeNames
         durationLabel.text = episode.formattedDuration
     }
 }

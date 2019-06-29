@@ -16,22 +16,24 @@ protocol ListViewModelProtocol {
     
     var items: Property<[Item]> { get }
     
+    /// Tells if the viewModel has data in the items array
     func hasContent() -> Bool
     
-    func isExecuting() -> Bool
+    /// Returns true if the viewModel is currently loading data
+    func isLoadingData() -> Bool
     
-    func loadData() -> SignalProducer<[Item], Error>
+    /// Returns true if there is data that can be loaded
+    func hasAdditionalDataToLoad() -> Bool
+    
+    func loadData(reset: Bool) -> SignalProducer<[Item], Error>
+}
+
+extension ListViewModelProtocol {
+    func hasAdditionalDataToLoad() -> Bool {
+        return false
+    }
 }
 
 protocol SearchableProtocol {
     var searchTerm: MutableProperty<String?> { get }
 }
-
-protocol PageableProtocol {
-    
-    func loadData<T>(reset: Bool) -> SignalProducer<[T], Error>
-    
-    func hasMoreToLoad() -> Bool
-}
-
-protocol PageableListViewModelProtocol: ListViewModelProtocol, PageableProtocol { }

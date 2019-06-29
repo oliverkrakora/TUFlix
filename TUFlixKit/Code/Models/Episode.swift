@@ -83,11 +83,13 @@ public struct Episode: Equatable, Codable {
     private enum CodingKeys: String, CodingKey {
         case id
         case title = "dcTitle"
+        case seriesId = "dcIsPartOf"
         case created = "dcCreated"
         case mediaPackage = "mediapackage"
     }
     
     public let id: Id
+    public let seriesId: Series.Id?
     public let title: String?
     public let created: Date?
     public let mediaPackage: MediaPackage?

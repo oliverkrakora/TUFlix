@@ -24,11 +24,11 @@ class LibraryItemListViewModel: ListViewModelProtocol {
         return true
     }
     
-    func isExecuting() -> Bool {
+    func isLoadingData() -> Bool {
         return false
     }
     
-    func loadData() -> SignalProducer<[LibraryItem], Error> {
+    func loadData(reset: Bool = false) -> SignalProducer<[LibraryItem], Error> {
         return SignalProducer(value: self.items.value)
     }
 }

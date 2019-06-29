@@ -22,6 +22,12 @@
 
 "episodes.title" = "Episodes";
 
+"episodes.toggle_title" = "Show episode names";
+
+"episodes.liked_title" = "Liked";
+
+"episodes.all_title" = "All";
+
 "episode.add_like_title" = "Like";
 
 "episode.remove_like_title" = "Unlike";
@@ -39,5 +45,3 @@
 "browse.title" = "Browse";
 
 "library.title" = "Library";
-
-

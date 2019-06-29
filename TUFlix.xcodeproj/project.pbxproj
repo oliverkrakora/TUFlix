@@ -41,6 +41,7 @@
 		5C55D98422B57E8B002B4897 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C55D98322B57E8B002B4897 /* Assets.swift */; };
 		5C55D98522B580E4002B4897 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C55D98122B57DFC002B4897 /* Strings.swift */; };
 		5C55D98622B582AF002B4897 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5C55D97F22B57D1A002B4897 /* Localizable.strings */; };
+		5C59960F22C6E57500B675F1 /* SortOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C59960E22C6E57400B675F1 /* SortOption.swift */; };
 		5C63FE8F22C542C1003A2CAA /* PlaybackCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C63FE8E22C542C1003A2CAA /* PlaybackCoordinator.swift */; };
 		5C9BAD2522B2D90400B62F6D /* ScrollViewPagingHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BAD2422B2D90400B62F6D /* ScrollViewPagingHandler.swift */; };
 		5C9BAD3A22B53E4D00B62F6D /* PageListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BAD3922B53E4D00B62F6D /* PageListViewModel.swift */; };
@@ -150,6 +151,7 @@
 		5C55D97F22B57D1A002B4897 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		5C55D98122B57DFC002B4897 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		5C55D98322B57E8B002B4897 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		5C59960E22C6E57400B675F1 /* SortOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOption.swift; sourceTree = "<group>"; };
 		5C63FE8E22C542C1003A2CAA /* PlaybackCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackCoordinator.swift; sourceTree = "<group>"; };
 		5C9BAD2422B2D90400B62F6D /* ScrollViewPagingHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewPagingHandler.swift; sourceTree = "<group>"; };
 		5C9BAD3322B3E77900B62F6D /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 				5CF278D4226A679E0057C609 /* Episode.swift */,
 				5C2A3F77226B17EA00B5D178 /* Series.swift */,
 				5CB4792422750AA300116ADE /* SearchResult.swift */,
+				5C59960E22C6E57400B675F1 /* SortOption.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -843,6 +846,7 @@
 				5CF278D5226A679E0057C609 /* Episode.swift in Sources */,
 				5CCE13EF22B818F6007C9048 /* Encoders.swift in Sources */,
 				AE946414178274D3178F7ED0E2837521 /* Environment.swift in Sources */,
+				5C59960F22C6E57500B675F1 /* SortOption.swift in Sources */,
 				4BDDEEF140234E501C30F4C71A5F869A /* Formatters.swift in Sources */,
 				B28AECB81B6EE73ED5065B7261BD1290 /* ReactiveSwift+Extensions.swift in Sources */,
 				4E39C9083DFAB885E63C4845A60AB8A1 /* Resource+Reactive.swift in Sources */,

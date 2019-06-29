@@ -23,6 +23,7 @@ class DiscoverCoordinator: NavigationCoordinator {
         let seriesVC = SeriesListViewController(title: L10n.Series.title, viewModel: seriesViewModel)
         
         rootViewController.tabBarItem.title = L10n.Browse.title
+        rootViewController.tabBarItem.image = Asset.discoverIcon.image
         
         episodeVC.selectEpisodeClosure = { [unowned self] viewModel in
             PlaybackCoordinator.playModally(on: self.rootViewController, url: viewModel.streamableVideoURL)
@@ -40,11 +41,12 @@ class DiscoverCoordinator: NavigationCoordinator {
     func showSeriesDetails(with series: SeriesViewModel) {
         let viewModel = SearchablePageListViewModel<SearchResult<Episode>, EpisodeViewModel>(resourceProvider: { config in
             return API.Series.pageEpisodes(for: series.model.id, config: config)
-        }, searchResourceProvider: { (config, _) in
-            return API.Series.pageEpisodes(for: series.model.id, config: config)
+        }, searchResourceProvider: { (config, term) in
+            return API.Episode.search(for: term, seriesId: series.model.id, config: config)
         }, mapping: EpisodeViewModel.init)
-        
-        let vc = EpisodeListViewController(title: series.model.title, viewModel: viewModel, displayEpisodeNames: true)
+    
+        let vc = EpisodeListViewController(title: series.model.title, viewModel: viewModel, displayEpisodeNames: false)
+        vc.toolbar.isHidden = false
         vc.selectEpisodeClosure = { [unowned self] viewModel in
             PlaybackCoordinator.playModally(on: self.rootViewController, url: viewModel.streamableVideoURL)
         }

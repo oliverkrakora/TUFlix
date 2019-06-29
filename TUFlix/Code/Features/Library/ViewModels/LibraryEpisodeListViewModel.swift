@@ -8,10 +8,13 @@
 
 import Foundation
 import ReactiveSwift
+import TUFlixKit
 
 class LibraryEpisodeListViewModel: ListViewModelProtocol {
-    
+
     typealias Item = EpisodeViewModel
+    
+    let seriesId: Series.Id?
     
     private let _items = MutableProperty<[EpisodeViewModel]>([])
     
@@ -21,7 +24,8 @@ class LibraryEpisodeListViewModel: ListViewModelProtocol {
         return Property(_items)
     }()
     
-    init() {
+    init(series: Series.Id? = nil) {
+        self.seriesId = series
         setupBindings()
     }
     
@@ -29,17 +33,24 @@ class LibraryEpisodeListViewModel: ListViewModelProtocol {
         disposable?.dispose()
     }
     
+    func hasAdditionalDataToLoad() -> Bool {
+        return false
+    }
+    
     func hasContent() -> Bool {
         return !items.value.isEmpty
     }
     
-    func isExecuting() -> Bool {
+    func isLoadingData() -> Bool {
         return false
     }
     
-    func loadData() -> SignalProducer<[EpisodeViewModel], Error> {
+    func loadData(reset: Bool = false) -> SignalProducer<[EpisodeViewModel], Error> {
+        let seriesId = self.seriesId
         return SignalProducer { observer, _ in
-            let episodes = EpisodeManager.shared.favoriteEpisodes.map(EpisodeViewModel.init)
+            let episodes = EpisodeManager.shared.favoriteEpisodes
+                .filter { seriesId == nil || $0.seriesId == seriesId }
+                .map(EpisodeViewModel.init)
             observer.send(value: episodes)
             observer.sendCompleted()
             }.on { [weak self] value in

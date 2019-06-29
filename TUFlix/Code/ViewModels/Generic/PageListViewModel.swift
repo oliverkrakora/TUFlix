@@ -11,7 +11,7 @@ import ReactiveSwift
 import TUFlixKit
 import Fetch
 
-class PageListViewModel<Page: PageProtocol, MappedItem>: ListViewModelProtocol, PageableProtocol {
+class PageListViewModel<Page: PageProtocol, MappedItem>: ListViewModelProtocol {
     
     typealias ResourceProvider = ((API.PagingConfig) -> Resource<Page>)
     
@@ -85,11 +85,11 @@ class PageListViewModel<Page: PageProtocol, MappedItem>: ListViewModelProtocol, 
         return !items.value.isEmpty
     }
     
-    func hasMoreToLoad() -> Bool {
+    func hasAdditionalDataToLoad() -> Bool {
         return lastResponse?.hasNext ?? true
     }
     
-    func isExecuting() -> Bool {
+    func isLoadingData() -> Bool {
         return loadNextPageAction.isExecuting.value
     }
     

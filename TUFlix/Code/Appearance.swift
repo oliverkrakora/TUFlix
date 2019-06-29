@@ -22,5 +22,10 @@ struct Appearance {
         UITabBar.appearance().tintColor = .white
         UITabBar.appearance().barTintColor = Asset.primaryColor.color
         UITabBar.appearance().isTranslucent = false
+        
+        //Toolbar
+        UIToolbar.appearance().tintColor = .white
+        UIToolbar.appearance().barTintColor = Asset.primaryColor.color
+        UIToolbar.appearance().isTranslucent = false
     }
 }

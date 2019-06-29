@@ -23,6 +23,7 @@ class LibraryCoordinator: NavigationCoordinator {
         
         navigationController.setViewControllers([libraryVC], animated: false)
         navigationController.tabBarItem.title = libraryVC.tabBarItem.title
+        navigationController.tabBarItem.image = Asset.libraryIcon.image
     }
     
     private func showFavoriteEpisodes() {
@@ -39,15 +40,37 @@ class LibraryCoordinator: NavigationCoordinator {
         let viewModel = LibrarySeriesListViewModel()
         let vc = SeriesListViewController(title: L10n.Series.title, viewModel: viewModel)
         vc.selectSeriesClosure = { [unowned self] series in
-            let viewModel = SearchablePageListViewModel<SearchResult<Episode>, EpisodeViewModel>(resourceProvider: { config in
-                return API.Series.pageEpisodes(for: series.model.id, config: config)
-            }, searchResourceProvider: { (config, _) in
-                return API.Series.pageEpisodes(for: series.model.id, config: config)
-            }, mapping: EpisodeViewModel.init)
-            
-            let vc = EpisodeListViewController(title: series.model.title, viewModel: viewModel, displayEpisodeNames: false)
-            self.push(vc, animated: true)
+            self.showSeries(series)
         }
         push(vc, animated: true)
+    }
+    
+    private func showSeries(_ series: SeriesViewModel) {
+        let viewModel = SearchablePageListViewModel<SearchResult<Episode>, EpisodeViewModel>(resourceProvider: { config in
+            return API.Series.pageEpisodes(for: series.model.id, config: config)
+        }, searchResourceProvider: { (config, term) in
+            return API.Episode.search(for: term, seriesId: series.model.id, config: config)
+        }, mapping: EpisodeViewModel.init)
+        
+        let allSeriesEpisodesVC = EpisodeListViewController(title: L10n.Episodes.allTitle, viewModel: viewModel, displayEpisodeNames: false)
+        
+        allSeriesEpisodesVC.selectEpisodeClosure = { [unowned self] episode in
+            PlaybackCoordinator.playModally(on: self.rootViewController, url: episode.streamableVideoURL)
+        }
+        
+        allSeriesEpisodesVC.toolbar.isHidden = false
+        
+        let likeEpisodesViewModel = LibraryEpisodeListViewModel(series: series.model.id)
+        
+        let likedSeriesEpisodeVC = EpisodeListViewController(title: L10n.Episodes.likedTitle, viewModel: likeEpisodesViewModel, displayEpisodeNames: false)
+        
+        likedSeriesEpisodeVC.selectEpisodeClosure = { [unowned self] episode in
+            PlaybackCoordinator.playModally(on: self.rootViewController, url: episode.streamableVideoURL)
+        }
+        
+        likedSeriesEpisodeVC.toolbar.isHidden = false
+
+        let pageVC = PageViewController.create(with: [likedSeriesEpisodeVC, allSeriesEpisodesVC])
+        push(pageVC, animated: true)
     }
 }

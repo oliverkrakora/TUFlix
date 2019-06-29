@@ -43,6 +43,14 @@ public class API {
                 rootKeys: ["search-results"]
             )
         }
+        
+        public static func search(for episodeName: String, seriesId: TUFlixKit.Series.Id, config: PagingConfig = .default) -> Resource<SearchResult<TUFlixKit.Episode>> {
+            return Resource(
+                path: "/search/episode.json",
+                urlParameters: ["limit": config.limit, "offset": config.offset, "q": episodeName, "sid": seriesId],
+                rootKeys: ["search-results"]
+            )
+        }
     }
     
     public struct Series {

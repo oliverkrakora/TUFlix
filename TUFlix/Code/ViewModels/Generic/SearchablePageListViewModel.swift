@@ -11,7 +11,7 @@ import ReactiveSwift
 import Fetch
 import TUFlixKit
 
-class SearchablePageListViewModel<Page: PageProtocol, MappedItem>: PageableListViewModelProtocol, SearchableProtocol {
+class SearchablePageListViewModel<Page: PageProtocol, MappedItem>: ListViewModelProtocol, SearchableProtocol {
     
     typealias SearchableResourceProvider = ((_ config: API.PagingConfig, _ searchTerm: String) -> Resource<Page>)
     
@@ -72,12 +72,12 @@ class SearchablePageListViewModel<Page: PageProtocol, MappedItem>: PageableListV
         return currentPagingViewModel.hasContent()
     }
     
-    func hasMoreToLoad() -> Bool {
-        return currentPagingViewModel.hasMoreToLoad()
+    func hasAdditionalDataToLoad() -> Bool {
+        return currentPagingViewModel.hasAdditionalDataToLoad()
     }
     
-    func isExecuting() -> Bool {
-        return currentPagingViewModel.isExecuting()
+    func isLoadingData() -> Bool {
+        return currentPagingViewModel.isLoadingData()
     }
     
     func loadData() -> SignalProducer<[MappedItem], Error> {

@@ -34,11 +34,11 @@ class LibrarySeriesListViewModel: ListViewModelProtocol {
         return !items.value.isEmpty
     }
     
-    func isExecuting() -> Bool {
+    func isLoadingData() -> Bool {
         return false
     }
     
-    func loadData() -> SignalProducer<[SeriesViewModel], Error> {
+    func loadData(reset: Bool = false) -> SignalProducer<[SeriesViewModel], Error> {
         return SignalProducer { observer, _ in
             let series = SeriesManager.shared.favoriteSeries.map(SeriesViewModel.init)
             observer.send(value: series)

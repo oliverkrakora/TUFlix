@@ -39,14 +39,9 @@ class PageViewController: UIViewController {
         return control
     }()
     
-    private lazy var searchController: UISearchController = {
-       let controller = UISearchController(searchResultsController: nil)
-        controller.dimsBackgroundDuringPresentation = false
-        controller.hidesNavigationBarDuringPresentation = true
-        controller.obscuresBackgroundDuringPresentation = false
-        controller.searchBar.barStyle = .black
-        return controller
-    }()
+    var searchController: UISearchController? {
+        return navigationItem.searchController
+    }
     
     static func create(with viewControllers: [UIViewController]) -> PageViewController {
         let vc = PageViewController()
@@ -63,7 +58,7 @@ class PageViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             pagingViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            pagingViewController.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            pagingViewController.view.topAnchor.constraint(equalTo: view.topAnchor),
             pagingViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             pagingViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
@@ -92,13 +87,11 @@ class PageViewController: UIViewController {
         guard !viewControllers.isEmpty else { return }
         
         let vc = viewControllers[segmentedControl.selectedSegmentIndex]
-        if let searchbarDelegate = vc as? UISearchBarDelegate {
-            searchController.searchBar.delegate = searchbarDelegate
-            searchController.searchBar.isHidden = false
-        } else {
-            searchController.searchBar.delegate = nil
-            navigationItem.searchController = nil
-            searchController.searchBar.isHidden = true
-        }
+                
+        navigationItem.searchController = vc.navigationItem.searchController
+        navigationItem.leftBarButtonItems = vc.navigationItem.leftBarButtonItems
+        navigationItem.rightBarButtonItems = vc.navigationItem.rightBarButtonItems
+        
+        navigationController?.view.setNeedsLayout()
     }
 }

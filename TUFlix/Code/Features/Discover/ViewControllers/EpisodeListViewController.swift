@@ -15,14 +15,24 @@ class EpisodeListViewController<T: ListViewModelProtocol>: ListViewController<T>
     
     typealias SelectEpisodeCallback = ((EpisodeViewModel) -> Void)
     
-    var showEpisodeNames: Bool
+    let toolbar: UIToolbar = {
+        let toolbar = UIToolbar()
+        toolbar.isHidden = true
+        return toolbar
+    }()
+    
+    let showEpisodeNamesToggle: UISwitch = {
+        let toggle = UISwitch()
+        toggle.addTarget(self, action: #selector(didToggleEpisodeNames), for: .valueChanged)
+        return toggle
+    }()
     
     private var disposable: Disposable?
     
     var selectEpisodeClosure: SelectEpisodeCallback!
     
     init(title: String?, viewModel: T, displayEpisodeNames: Bool = true) {
-        self.showEpisodeNames = displayEpisodeNames
+        self.showEpisodeNamesToggle.isOn = displayEpisodeNames
         super.init(title: title, viewModel: viewModel)
     }
     
@@ -30,11 +40,53 @@ class EpisodeListViewController<T: ListViewModelProtocol>: ListViewController<T>
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func loadView() {
+        super.loadView()
+        
+        toolbar.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(toolbar)
+        
+        let toggleEpisodeView = UIStackView()
+        toggleEpisodeView.translatesAutoresizingMaskIntoConstraints = false
+        toggleEpisodeView.axis = .horizontal
+        toggleEpisodeView.alignment = .fill
+        toggleEpisodeView.distribution = .fillProportionally
+        
+        let toggleLabel = UILabel()
+        toggleLabel.text = L10n.Episodes.toggleTitle
+        toggleLabel.textColor = .white
+        
+        toggleEpisodeView.addArrangedSubview(toggleLabel)
+        
+        let toggleStackView = UIStackView()
+        toggleStackView.translatesAutoresizingMaskIntoConstraints = false
+        toggleStackView.axis = .vertical
+        toggleStackView.alignment = .trailing
+        
+        toggleStackView.addArrangedSubview(showEpisodeNamesToggle)
+        toggleEpisodeView.addArrangedSubview(toggleStackView)
+        
+        let toolbarItem = UIBarButtonItem(customView: toggleEpisodeView)
+        
+        toolbar.setItems([toolbarItem], animated: true)
+        
+        NSLayoutConstraint.activate([
+            toolbar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            toolbar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            toolbar.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.contentInset.bottom = toolbar.frame.height
+    }
+    
     override func cellDescriptors() -> [CellDescriptorType] {
         return [
             EpisodeCell.cellDescriptor
                 .configure { [unowned self] (viewModel, cell, _) in
-                    cell.configure(with: viewModel, isPartOfSeries: !self.showEpisodeNames)
+                    cell.configure(with: viewModel, showEpisodeNames: self.showEpisodeNamesToggle.isOn)
                 }
                 .didSelect { (viewModel, _) in
                     self.selectEpisodeClosure(viewModel)
@@ -64,5 +116,9 @@ class EpisodeListViewController<T: ListViewModelProtocol>: ListViewController<T>
                         ])
             }
         ]
+    }
+    
+    @objc private func didToggleEpisodeNames() {
+        tableView.reloadData()
     }
 }
