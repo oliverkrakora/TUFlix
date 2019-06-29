@@ -33,10 +33,13 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="o2g-MT-yRR" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" priority="250" constant="8" id="5ex-eN-PX0"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="o2g-MT-yRR" secondAttribute="trailing" constant="16" id="Ffk-cX-yWl"/>
                 <constraint firstItem="o2g-MT-yRR" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="N7U-IS-meb"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="o2g-MT-yRR" secondAttribute="bottom" priority="250" constant="8" id="ibT-7D-l0l"/>
                 <constraint firstItem="o2g-MT-yRR" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="xW2-GS-Yjf"/>
             </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="activityIndicator" destination="gnz-de-hqo" id="kCk-Lg-KZg"/>

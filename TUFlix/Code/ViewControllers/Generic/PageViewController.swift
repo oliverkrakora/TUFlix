@@ -26,6 +26,12 @@ class PageViewController: UIViewController {
         }
     }
     
+    var toolbar: UIToolbar? {
+        didSet {
+            setupToolbar()
+        }
+    }
+    
     private var currentSegmentedControlIndex = 0
     
     private lazy var pagingViewController: UIPageViewController = {
@@ -56,12 +62,17 @@ class PageViewController: UIViewController {
         view.addSubview(pagingViewController.view)
         pagingViewController.didMove(toParent: self)
         
+        let bottomConstraint = pagingViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        
+        bottomConstraint.priority = .defaultLow
+        
         NSLayoutConstraint.activate([
             pagingViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             pagingViewController.view.topAnchor.constraint(equalTo: view.topAnchor),
             pagingViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            pagingViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+            bottomConstraint
+            ])
+        setupToolbar()
     }
     
     override func viewDidLoad() {
@@ -70,6 +81,21 @@ class PageViewController: UIViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.searchController = searchController
         updateSearchController()
+    }
+    
+    private func setupToolbar() {
+        if let toolbar = toolbar {
+            toolbar.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(toolbar)
+            NSLayoutConstraint.activate([
+                toolbar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                toolbar.topAnchor.constraint(equalTo: pagingViewController.view.bottomAnchor),
+                toolbar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                toolbar.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+                ])
+        } else {
+            toolbar?.removeFromSuperview()
+        }
     }
     
     // MARK: Actions
@@ -87,7 +113,7 @@ class PageViewController: UIViewController {
         guard !viewControllers.isEmpty else { return }
         
         let vc = viewControllers[segmentedControl.selectedSegmentIndex]
-                
+        
         navigationItem.searchController = vc.navigationItem.searchController
         navigationItem.leftBarButtonItems = vc.navigationItem.leftBarButtonItems
         navigationItem.rightBarButtonItems = vc.navigationItem.rightBarButtonItems

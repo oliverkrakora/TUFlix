@@ -83,8 +83,8 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
         super.viewDidLoad()
         setupStatefulViews()
         setupBindings()
-        loadData()
         setupSearchController()
+        loadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -198,14 +198,14 @@ extension ListViewController: StatefulViewController {
         return viewModel.hasContent()
     }
     
-    private func setupStatefulViews() {
-        emptyView = EmptyStateView.load()?.prepare(with: L10n.Global.EmptyState.title, subtitle: L10n.Global.retryTapTitle, insets: .zero) { [weak self] in
+    func setupStatefulViews(insets: UIEdgeInsets = .zero) {
+        emptyView = EmptyStateView.load()?.prepare(with: L10n.Global.EmptyState.title, subtitle: L10n.Global.retryTapTitle, insets: insets) { [weak self] in
             self?.loadData(reset: true)
         }
         
-        loadingView = LoadingStateView.load()?.prepare(with: L10n.Global.LoadingState.title)
+        loadingView = LoadingStateView.load()?.prepare(with: L10n.Global.LoadingState.title, insets: insets)
         
-        errorView = ErrorStateView.load()?.prepare(with: L10n.Global.ErrorState.title, subtitle: L10n.Global.retryTapTitle, insets: .zero, retryClosure: { [weak self] in
+        errorView = ErrorStateView.load()?.prepare(with: L10n.Global.ErrorState.title, subtitle: L10n.Global.retryTapTitle, insets: insets, retryClosure: { [weak self] in
             self?.loadData()
         })
     }

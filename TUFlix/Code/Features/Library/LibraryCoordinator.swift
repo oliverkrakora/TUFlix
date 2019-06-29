@@ -58,8 +58,6 @@ class LibraryCoordinator: NavigationCoordinator {
             PlaybackCoordinator.playModally(on: self.rootViewController, url: episode.streamableVideoURL)
         }
         
-        allSeriesEpisodesVC.toolbar.isHidden = false
-        
         let likeEpisodesViewModel = LibraryEpisodeListViewModel(series: series.model.id)
         
         let likedSeriesEpisodeVC = EpisodeListViewController(title: L10n.Episodes.likedTitle, viewModel: likeEpisodesViewModel, displayEpisodeNames: false)
@@ -68,9 +66,14 @@ class LibraryCoordinator: NavigationCoordinator {
             PlaybackCoordinator.playModally(on: self.rootViewController, url: episode.streamableVideoURL)
         }
         
-        likedSeriesEpisodeVC.toolbar.isHidden = false
-
         let pageVC = PageViewController.create(with: [likedSeriesEpisodeVC, allSeriesEpisodesVC])
+        pageVC.toolbar = {
+            return ToggleToolbar(title: L10n.Episodes.toggleTitle, isOn: false) { isOn in
+                likedSeriesEpisodeVC.toggleEpisodeNames(showNames: isOn)
+                allSeriesEpisodesVC.toggleEpisodeNames(showNames: isOn)
+            }
+        }()
+        
         push(pageVC, animated: true)
     }
 }

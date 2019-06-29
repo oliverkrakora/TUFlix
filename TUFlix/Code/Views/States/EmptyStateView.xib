@@ -37,9 +37,12 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="c5a-gs-AOt" firstAttribute="trailing" secondItem="WD0-hI-UTi" secondAttribute="trailing" constant="16" id="6fy-8D-bfB"/>
+                <constraint firstItem="c5a-gs-AOt" firstAttribute="bottom" secondItem="WD0-hI-UTi" secondAttribute="bottom" priority="250" constant="8" id="GTH-rd-b4N"/>
                 <constraint firstItem="WD0-hI-UTi" firstAttribute="centerY" secondItem="JCi-1p-b66" secondAttribute="centerY" id="JXs-Ma-Clx"/>
                 <constraint firstItem="WD0-hI-UTi" firstAttribute="leading" secondItem="c5a-gs-AOt" secondAttribute="leading" constant="16" id="bpM-x0-TJ5"/>
+                <constraint firstItem="WD0-hI-UTi" firstAttribute="top" secondItem="c5a-gs-AOt" secondAttribute="top" priority="250" constant="8" id="pfc-Bj-YHW"/>
             </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="c5a-gs-AOt"/>
             <connections>
                 <outlet property="subtitleLabel" destination="yYh-7F-HIb" id="dpx-zJ-yd0"/>
