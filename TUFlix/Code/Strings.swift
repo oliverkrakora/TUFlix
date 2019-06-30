@@ -87,6 +87,17 @@ internal enum L10n {
     /// Series
     internal static let title = L10n.tr("Localizable", "series.title")
   }
+
+  internal enum Settings {
+    /// Settings
+    internal static let title = L10n.tr("Localizable", "settings.title")
+    internal enum Series {
+      /// Episodes listed inside series will be displayed with the publish date rather then the original title.
+      internal static let preferDateDescription = L10n.tr("Localizable", "settings.series.preferDateDescription")
+      /// Prefer date over title
+      internal static let preferDateTitle = L10n.tr("Localizable", "settings.series.preferDateTitle")
+    }
+  }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name

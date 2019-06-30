@@ -52,7 +52,9 @@ class LibraryCoordinator: NavigationCoordinator {
             return API.Episode.search(for: term, seriesId: series.model.id, config: config)
         }, mapping: EpisodeViewModel.init)
         
-        let allSeriesEpisodesVC = EpisodeListViewController(title: L10n.Episodes.allTitle, viewModel: viewModel, displayEpisodeNames: false)
+        let displayEpisodeNames = !Settings.shared.preferDateOverTitleInSeries
+        
+        let allSeriesEpisodesVC = EpisodeListViewController(title: L10n.Episodes.allTitle, viewModel: viewModel, displayEpisodeNames: displayEpisodeNames)
         
         allSeriesEpisodesVC.selectEpisodeClosure = { [unowned self] episode in
             PlaybackCoordinator.playModally(on: self.rootViewController, url: episode.streamableVideoURL)
@@ -60,7 +62,7 @@ class LibraryCoordinator: NavigationCoordinator {
         
         let likeEpisodesViewModel = LibraryEpisodeListViewModel(series: series.model.id)
         
-        let likedSeriesEpisodeVC = EpisodeListViewController(title: L10n.Episodes.likedTitle, viewModel: likeEpisodesViewModel, displayEpisodeNames: false)
+        let likedSeriesEpisodeVC = EpisodeListViewController(title: L10n.Episodes.likedTitle, viewModel: likeEpisodesViewModel, displayEpisodeNames: displayEpisodeNames)
         
         likedSeriesEpisodeVC.selectEpisodeClosure = { [unowned self] episode in
             PlaybackCoordinator.playModally(on: self.rootViewController, url: episode.streamableVideoURL)
@@ -68,7 +70,7 @@ class LibraryCoordinator: NavigationCoordinator {
         
         let pageVC = PageViewController.create(with: [likedSeriesEpisodeVC, allSeriesEpisodesVC])
         pageVC.toolbar = {
-            return ToggleToolbar(title: L10n.Episodes.toggleTitle, isOn: false) { isOn in
+            return ToggleToolbar(title: L10n.Episodes.toggleTitle, isOn: displayEpisodeNames) { isOn in
                 likedSeriesEpisodeVC.toggleEpisodeNames(showNames: isOn)
                 allSeriesEpisodesVC.toggleEpisodeNames(showNames: isOn)
             }

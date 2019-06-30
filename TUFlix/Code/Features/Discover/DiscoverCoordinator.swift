@@ -45,7 +45,7 @@ class DiscoverCoordinator: NavigationCoordinator {
             return API.Episode.search(for: term, seriesId: series.model.id, config: config)
         }, mapping: EpisodeViewModel.init)
     
-        let vc = EpisodeListViewController(title: series.model.title, viewModel: viewModel, displayEpisodeNames: false)
+        let vc = EpisodeListViewController(title: series.model.title, viewModel: viewModel, displayEpisodeNames: !Settings.shared.preferDateOverTitleInSeries)
         vc.toolbar.isHidden = false
         vc.selectEpisodeClosure = { [unowned self] viewModel in
             PlaybackCoordinator.playModally(on: self.rootViewController, url: viewModel.streamableVideoURL)

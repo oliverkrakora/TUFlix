@@ -42,6 +42,11 @@
 		5C55D98622B582AF002B4897 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5C55D97F22B57D1A002B4897 /* Localizable.strings */; };
 		5C59960F22C6E57500B675F1 /* SortOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C59960E22C6E57400B675F1 /* SortOption.swift */; };
 		5C59961122C76F6F00B675F1 /* ToggleToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C59961022C76F6F00B675F1 /* ToggleToolbar.swift */; };
+		5C59961422C8E50B00B675F1 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C59961322C8E50B00B675F1 /* SettingsCoordinator.swift */; };
+		5C59961722C8E54200B675F1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C59961622C8E54200B675F1 /* SettingsViewController.swift */; };
+		5C59961A22C8E78300B675F1 /* ToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C59961922C8E78300B675F1 /* ToggleCell.swift */; };
+		5C59961C22C8E79800B675F1 /* ToggleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C59961B22C8E79800B675F1 /* ToggleCell.xib */; };
+		5C59962322C8F5D500B675F1 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C59962222C8F5D500B675F1 /* Settings.swift */; };
 		5C63FE8F22C542C1003A2CAA /* PlaybackCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C63FE8E22C542C1003A2CAA /* PlaybackCoordinator.swift */; };
 		5C9BAD2522B2D90400B62F6D /* ScrollViewPagingHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BAD2422B2D90400B62F6D /* ScrollViewPagingHandler.swift */; };
 		5C9BAD3A22B53E4D00B62F6D /* PageListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BAD3922B53E4D00B62F6D /* PageListViewModel.swift */; };
@@ -152,6 +157,11 @@
 		5C55D98322B57E8B002B4897 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		5C59960E22C6E57400B675F1 /* SortOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOption.swift; sourceTree = "<group>"; };
 		5C59961022C76F6F00B675F1 /* ToggleToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleToolbar.swift; sourceTree = "<group>"; };
+		5C59961322C8E50B00B675F1 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
+		5C59961622C8E54200B675F1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		5C59961922C8E78300B675F1 /* ToggleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleCell.swift; sourceTree = "<group>"; };
+		5C59961B22C8E79800B675F1 /* ToggleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToggleCell.xib; sourceTree = "<group>"; };
+		5C59962222C8F5D500B675F1 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		5C63FE8E22C542C1003A2CAA /* PlaybackCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackCoordinator.swift; sourceTree = "<group>"; };
 		5C9BAD2422B2D90400B62F6D /* ScrollViewPagingHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewPagingHandler.swift; sourceTree = "<group>"; };
 		5C9BAD3322B3E77900B62F6D /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
@@ -373,19 +383,39 @@
 			path = Generic;
 			sourceTree = "<group>";
 		};
+		5C59961222C8E50100B675F1 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5C59961322C8E50B00B675F1 /* SettingsCoordinator.swift */,
+				5C59961522C8E52200B675F1 /* ViewControllers */,
+				5C59961822C8E76F00B675F1 /* Views */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		5C59961522C8E52200B675F1 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				5C59961622C8E54200B675F1 /* SettingsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		5C59961822C8E76F00B675F1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5C59961922C8E78300B675F1 /* ToggleCell.swift */,
+				5C59961B22C8E79800B675F1 /* ToggleCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		5C63FE8D22C542B7003A2CAA /* Playback */ = {
 			isa = PBXGroup;
 			children = (
 				5C63FE8E22C542C1003A2CAA /* PlaybackCoordinator.swift */,
 			);
 			path = Playback;
-			sourceTree = "<group>";
-		};
-		5C63FE9022C546DD003A2CAA /* Episode */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Episode;
 			sourceTree = "<group>";
 		};
 		5CAC31BC22BC02AC007DD8AD /* ViewControllers */ = {
@@ -428,6 +458,7 @@
 				5CB479352275B9F200116ADE /* Nibable.swift */,
 				5C9BAD2422B2D90400B62F6D /* ScrollViewPagingHandler.swift */,
 				5C1A10F822B623D400A3CDDF /* KeyboardObserver.swift */,
+				5C59962222C8F5D500B675F1 /* Settings.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -549,7 +580,7 @@
 		B34031BF82E45B568B96908DAE4C83BF /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				5C63FE9022C546DD003A2CAA /* Episode */,
+				5C59961222C8E50100B675F1 /* Settings */,
 				5C63FE8D22C542B7003A2CAA /* Playback */,
 				29CF74C64E56CE96031BAD8E15B287AF /* Discover */,
 				5C016D3822BBB8E400FC8CEC /* Library */,
@@ -729,6 +760,7 @@
 				5CB4792A2275B50D00116ADE /* EmptyStateView.xib in Resources */,
 				5C55D98622B582AF002B4897 /* Localizable.strings in Resources */,
 				4EFC4BF6881C627E1872FA54DFDCBCF6 /* LaunchScreen.storyboard in Resources */,
+				5C59961C22C8E79800B675F1 /* ToggleCell.xib in Resources */,
 				5CB479322275B7C500116ADE /* ErrorStateView.xib in Resources */,
 				5CB479302275B6AC00116ADE /* LoadingStateView.xib in Resources */,
 				5CAC31C722BC03FF007DD8AD /* LibraryItemCell.xib in Resources */,
@@ -804,17 +836,20 @@
 				D51A245877C12FF7791CCEB4D18B055E /* AppDelegate.swift in Sources */,
 				1EAB36C8CC0DBD7E8117E80CF93DFCA7 /* Appearance.swift in Sources */,
 				FD4670FF755136787AADDCA49B4C2A9C /* Coordinator.swift in Sources */,
+				5C59961A22C8E78300B675F1 /* ToggleCell.swift in Sources */,
 				5C1A10FC22B62EB300A3CDDF /* EpisodeManager.swift in Sources */,
 				5C55D97A22B571AC002B4897 /* EpisodeListViewController.swift in Sources */,
 				5CCFDE0722B9412500A25C1D /* ListViewModelProtocol.swift in Sources */,
 				5C55D98422B57E8B002B4897 /* Assets.swift in Sources */,
 				9E981D660AD773A5D4B6E806579AC616 /* DiscoverCoordinator.swift in Sources */,
+				5C59961422C8E50B00B675F1 /* SettingsCoordinator.swift in Sources */,
 				5CF278DC226A73990057C609 /* EpisodeCell.swift in Sources */,
 				5CB479342275B7CE00116ADE /* ErrorStateView.swift in Sources */,
 				5C2A3F74226B164500B5D178 /* SeriesCell.swift in Sources */,
 				5C63FE8F22C542C1003A2CAA /* PlaybackCoordinator.swift in Sources */,
 				5C1A10F922B623D400A3CDDF /* KeyboardObserver.swift in Sources */,
 				5CAC31CB22BC0D0D007DD8AD /* LibraryEpisodeListViewModel.swift in Sources */,
+				5C59961722C8E54200B675F1 /* SettingsViewController.swift in Sources */,
 				5C9BAD3A22B53E4D00B62F6D /* PageListViewModel.swift in Sources */,
 				5C9BAD3C22B5404A00B62F6D /* SearchablePageListViewModel.swift in Sources */,
 				5C55D97822B55070002B4897 /* PageViewController.swift in Sources */,
@@ -832,6 +867,7 @@
 				5C016D3A22BBB90500FC8CEC /* LibraryCoordinator.swift in Sources */,
 				5C2A3F7A226B188700B5D178 /* SeriesViewModel.swift in Sources */,
 				5C55D97422B5419F002B4897 /* ListViewController.swift in Sources */,
+				5C59962322C8F5D500B675F1 /* Settings.swift in Sources */,
 				5C55D97C22B5769E002B4897 /* SeriesListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

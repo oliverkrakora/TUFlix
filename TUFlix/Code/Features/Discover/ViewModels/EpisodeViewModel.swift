@@ -63,6 +63,14 @@ class EpisodeViewModel {
     func unlikeEpisode() {
         EpisodeManager.shared.removeFromFavorites(episode: model)
     }
+    
+    func matches(searchTerm: String?) -> Bool {
+        guard let searchTerm = searchTerm?.lowercased(), !searchTerm.isEmpty else { return true }
+        
+        return (model.title?.lowercased().contains(searchTerm) ?? false)
+            || (formattedCreatorName?.lowercased().contains(searchTerm) ?? false)
+            || (formattedCreationDate?.lowercased().contains(searchTerm) ?? false)
+    }
 }
 
 extension EpisodeViewModel: Diffable {

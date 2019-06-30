@@ -10,7 +10,7 @@ import Foundation
 import ReactiveSwift
 import TUFlixKit
 
-class LibraryEpisodeListViewModel: ListViewModelProtocol {
+class LibraryEpisodeListViewModel: ListViewModelProtocol, SearchableProtocol {
 
     typealias Item = EpisodeViewModel
     
@@ -18,7 +18,9 @@ class LibraryEpisodeListViewModel: ListViewModelProtocol {
     
     private let _items = MutableProperty<[EpisodeViewModel]>([])
     
-    private var disposable: Disposable?
+    let searchTerm = MutableProperty<String?>(nil)
+    
+    private let disposable = CompositeDisposable()
     
     lazy var items: Property<[EpisodeViewModel]> = {
         return Property(_items)
@@ -30,7 +32,7 @@ class LibraryEpisodeListViewModel: ListViewModelProtocol {
     }
     
     deinit {
-        disposable?.dispose()
+        disposable.dispose()
     }
     
     func hasAdditionalDataToLoad() -> Bool {
@@ -47,10 +49,12 @@ class LibraryEpisodeListViewModel: ListViewModelProtocol {
     
     func loadData(reset: Bool = false) -> SignalProducer<[EpisodeViewModel], Error> {
         let seriesId = self.seriesId
+        let searchTerm = self.searchTerm.value
         return SignalProducer { observer, _ in
             let episodes = EpisodeManager.shared.favoriteEpisodes
                 .filter { seriesId == nil || $0.seriesId == seriesId }
                 .map(EpisodeViewModel.init)
+                .filter { $0.matches(searchTerm: searchTerm) }
             observer.send(value: episodes)
             observer.sendCompleted()
             }.on { [weak self] value in
@@ -59,7 +63,11 @@ class LibraryEpisodeListViewModel: ListViewModelProtocol {
     }
     
     private func setupBindings() {
-        disposable = EpisodeManager.shared.didChangeSignal.observeValues { [weak self] _ in
+        disposable += EpisodeManager.shared.didChangeSignal.observeValues { [weak self] _ in
+            self?.loadData().start()
+        }
+        
+        disposable += searchTerm.signal.observeValues { [weak self] _ in
             self?.loadData().start()
         }
     }

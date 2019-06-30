@@ -68,7 +68,7 @@ class PageViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             pagingViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            pagingViewController.view.topAnchor.constraint(equalTo: view.topAnchor),
+            pagingViewController.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             pagingViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             bottomConstraint
             ])

@@ -10,13 +10,15 @@ import Foundation
 import TUFlixKit
 import ReactiveSwift
 
-class LibrarySeriesListViewModel: ListViewModelProtocol {
+class LibrarySeriesListViewModel: ListViewModelProtocol, SearchableProtocol {
     
     typealias Item = SeriesViewModel
     
+    let searchTerm = MutableProperty<String?>(nil)
+
     private let _items = MutableProperty<[SeriesViewModel]>([])
     
-    private var disposable: Disposable?
+    private let disposable = CompositeDisposable()
     
     lazy var items: Property<[SeriesViewModel]> = {
         return Property(_items)
@@ -27,7 +29,7 @@ class LibrarySeriesListViewModel: ListViewModelProtocol {
     }
     
     deinit {
-        disposable?.dispose()
+        disposable.dispose()
     }
     
     func hasContent() -> Bool {
@@ -39,8 +41,11 @@ class LibrarySeriesListViewModel: ListViewModelProtocol {
     }
     
     func loadData(reset: Bool = false) -> SignalProducer<[SeriesViewModel], Error> {
+        let searchTerm = self.searchTerm.value
         return SignalProducer { observer, _ in
-            let series = SeriesManager.shared.favoriteSeries.map(SeriesViewModel.init)
+            let series = SeriesManager.shared.favoriteSeries
+                .map(SeriesViewModel.init)
+                .filter { $0.matches(searchTerm: searchTerm) }
             observer.send(value: series)
             observer.sendCompleted()
             }.on { [weak self] value in
@@ -49,7 +54,11 @@ class LibrarySeriesListViewModel: ListViewModelProtocol {
     }
     
     private func setupBindings() {
-        disposable = SeriesManager.shared.didChangeSignal.observeValues { [weak self] _ in
+        disposable += SeriesManager.shared.didChangeSignal.observeValues { [weak self] _ in
+            self?.loadData().start()
+        }
+        
+        disposable += searchTerm.signal.observeValues { [weak self] _ in
             self?.loadData().start()
         }
     }

@@ -15,8 +15,11 @@ class MainCoordinator: TabBarCoordinator {
         discover.start()
         let library = LibraryCoordinator()
         library.start()
+        let settings = SettingsCoordinator()
+        settings.start()
         addChild(discover)
         addChild(library)
-        tabBarController.setViewControllers([discover.rootViewController, library.rootViewController], animated: false)
+        addChild(settings)
+        tabBarController.setViewControllers([discover.rootViewController, library.rootViewController, settings.rootViewController], animated: false)
     }
 }

@@ -45,3 +45,9 @@
 "browse.title" = "Browse";
 
 "library.title" = "Library";
+
+"settings.title" = "Settings";
+
+"settings.series.preferDateTitle" = "Prefer date over title";
+
+"settings.series.preferDateDescription" = "Episodes listed inside series will be displayed with the publish date rather then the original title.";

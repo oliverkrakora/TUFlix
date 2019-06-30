@@ -45,6 +45,14 @@ class SeriesViewModel {
         SeriesManager.shared.removeFromFavorites(series: model)
     }
     
+    func matches(searchTerm: String?) -> Bool {
+        guard let searchTerm = searchTerm?.lowercased(), !searchTerm.isEmpty else { return true }
+        
+        return (model.title?.lowercased().contains(searchTerm) ?? false)
+            || (formattedCreator?.lowercased().contains(searchTerm) ?? false)
+            || (formattedContributor?.lowercased().contains(searchTerm) ?? false)
+    }
+    
     init(model: Series) {
         self.model = model
     }
