@@ -92,9 +92,9 @@ internal enum L10n {
     /// Settings
     internal static let title = L10n.tr("Localizable", "settings.title")
     internal enum Series {
-      /// Episodes listed inside series will be displayed with the publish date rather then the original title.
+      /// Episodes listed inside series will be displayed with the creation date rather then the original title.
       internal static let preferDateDescription = L10n.tr("Localizable", "settings.series.preferDateDescription")
-      /// Prefer date over title
+      /// Prefer creation date over title
       internal static let preferDateTitle = L10n.tr("Localizable", "settings.series.preferDateTitle")
     }
   }

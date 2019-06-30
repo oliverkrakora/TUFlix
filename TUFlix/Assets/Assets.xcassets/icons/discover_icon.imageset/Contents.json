@@ -10,7 +10,7 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "icons8-search-more-90.png",
+      "filename" : "icons8-search.pdf",
       "scale" : "3x"
     }
   ],
@@ -19,6 +19,7 @@
     "author" : "xcode"
   },
   "properties" : {
-    "template-rendering-intent" : "template"
+    "template-rendering-intent" : "template",
+    "preserves-vector-representation" : true
   }
 }
