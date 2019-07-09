@@ -27,7 +27,27 @@ class LibraryViewController<T: ListViewModelProtocol>: ListViewController<T> {
                     break
                 }
                 return .keepSelected
+            },
+            EpisodeDownloadCell.cellDescriptor
+        ]
+    }
+    
+    override func sectionDescriptors() -> [SectionDescriptorType] {
+        return [
+            SectionDescriptor<String>().header { (title, _) -> HeaderFooter in
+                return .title(title)
             }
         ]
+    }
+    
+    override func setupDataSource() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            self.dataSource.sections = [
+                Section(items: self.viewModel.items.value)
+            ]
+            self.dataSource.reloadDataAnimated(self.tableView)
+        }
     }
 }

@@ -12,7 +12,7 @@ import TUFlixKit
 class LibraryCoordinator: NavigationCoordinator {
     
     func start() {
-        let libraryVC = LibraryViewController(title: L10n.Library.title, viewModel: LibraryItemListViewModel())
+        let libraryVC = LibraryViewController(title: L10n.Library.title, viewModel: LibraryListViewModel())
         libraryVC.showFavoriteEpisodes = { [unowned self] in
             self.showFavoriteEpisodes()
         }

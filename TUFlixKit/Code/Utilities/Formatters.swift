@@ -18,9 +18,15 @@ public struct Formatters {
     }()
     
     public static let timeFormatter: DateComponentsFormatter = {
-       let formatter = DateComponentsFormatter()
+        let formatter = DateComponentsFormatter()
         formatter.zeroFormattingBehavior = .pad
         formatter.allowedUnits = [.hour, .minute, .second]
+        return formatter
+    }()
+    
+    public static let percentFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .percent
         return formatter
     }()
 }

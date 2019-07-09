@@ -18,8 +18,8 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
     
     private(set) var tableView: UITableView!
     
-    private lazy var dataSource: DataSource = {
-        return DataSource(cellDescriptors: cellDescriptors())
+    private(set)lazy var dataSource: DataSource = {
+        return DataSource(cellDescriptors: cellDescriptors(), sectionDescriptors: sectionDescriptors())
     }()
     
     private lazy var pagingHelper: ScrollViewPagingHandler = {
@@ -100,6 +100,10 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
     }
     
     func cellDescriptors() -> [CellDescriptorType] {
+        return []
+    }
+    
+    func sectionDescriptors() -> [SectionDescriptorType] {
         return []
     }
     

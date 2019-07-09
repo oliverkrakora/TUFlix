@@ -26,6 +26,14 @@ class EpisodeViewModel {
         return EpisodeManager.shared.didChangeSignal
     }
     
+    var isAvailableOffline: Bool {
+        return EpisodeManager.shared.offlineVideoURL(for: model) != nil
+    }
+    
+    var isDownloading: Bool {
+        return EpisodeDownloader.shared.hasDownload(for: model.id)
+    }
+    
     var isFavorite: Bool {
         return EpisodeManager.shared.isInFavorites(episode: model)
     }
@@ -62,6 +70,21 @@ class EpisodeViewModel {
     
     func unlikeEpisode() {
         EpisodeManager.shared.removeFromFavorites(episode: model)
+    }
+    
+    func download() -> Bool {
+        guard let url = streamableVideoURL else { return false }
+        
+        EpisodeDownloader.shared.download(episode: model, url: url)
+        return true
+    }
+    
+    func cancelDownload() {
+        EpisodeDownloader.shared.cancelDownload(for: model.id)
+    }
+    
+    func delete() {
+        EpisodeManager.shared.removeOfflineEpisode(model)
     }
     
     func matches(searchTerm: String?) -> Bool {

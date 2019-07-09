@@ -70,7 +70,7 @@ class EpisodeListViewController<T: ListViewModelProtocol>: ListViewController<T>
                         return nil
                     }
                     
-                    let action: UIContextualAction = {
+                    let favoriteAction: UIContextualAction = {
                         let title = viewModel.isFavorite ? L10n.Episode.removeLikeTitle : L10n.Episode.addLikeTitle
                         let action = UIContextualAction(style: .normal, title: title, handler: { (_, _, completion) in
                             if viewModel.isFavorite {
@@ -84,8 +84,32 @@ class EpisodeListViewController<T: ListViewModelProtocol>: ListViewController<T>
                         return action
                     }()
                     
+                    let downloadAction: UIContextualAction = {
+                        let titleAndAction: (title: String, action: (() -> Bool)) = {
+                            if viewModel.isAvailableOffline {
+                                let action: (() -> Bool) = {
+                                    viewModel.delete()
+                                    return true
+                                }
+                                return ("{Delete}", action)
+                            } else if viewModel.isDownloading {
+                                let action: (() -> Bool) = {
+                                    viewModel.cancelDownload()
+                                    return true
+                                }
+                                return ("{Stop download}", action)
+                            } else {
+                                return ("{Download}", viewModel.download)
+                            }
+                        }()
+                        return UIContextualAction(style: .normal, title: titleAndAction.title, handler: { (_, _, completion) in
+                            completion(titleAndAction.action())
+                        })
+                    }()
+                    
                     return UISwipeActionsConfiguration(actions: [
-                        action
+                        favoriteAction,
+                        downloadAction
                         ])
             }
         ]
