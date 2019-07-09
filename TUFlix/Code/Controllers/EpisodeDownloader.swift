@@ -67,21 +67,25 @@ class EpisodeDownloader: NSObject {
        return Property(_runningDownloads)
     }()
     
-    func download(episode: Episode, url: URL) {
+    @discardableResult
+    func download(episode: Episode, url: URL) -> Download {
         let downloadTask = session.downloadTask(with: url)
         let download = Download(episode: episode, episodeURL: url, downloadTask: downloadTask)
         _runningDownloads.value.append(download)
         downloadTask.resume()
+        return download
     }
     
-    func cancelDownload(for episodeId: Episode.Id) {
-        guard let download = _runningDownloads.value.first(where: { $0.episode.id == episodeId }) else { return }
+    @discardableResult
+    func cancelDownload(for episodeId: Episode.Id) -> Download? {
+        guard let download = _runningDownloads.value.first(where: { $0.episode.id == episodeId }) else { return nil }
         download.downloadTask.cancel()
         _runningDownloads.value.removeDownload(for: episodeId)
+        return download
     }
     
-    func hasDownload(for episodeId: Episode.Id) -> Bool {
-        return _runningDownloads.value.getDownload(for: episodeId) != nil
+    func runningDownload(for episodeId: Episode.Id) -> Download? {
+        return _runningDownloads.value.getDownload(for: episodeId)
     }
 }
 

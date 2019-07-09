@@ -26,6 +26,8 @@ public struct Formatters {
     
     public static let percentFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = 1
+        formatter.maximumFractionDigits = 1
         formatter.numberStyle = .percent
         return formatter
     }()
