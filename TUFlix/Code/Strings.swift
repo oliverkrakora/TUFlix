@@ -17,6 +17,20 @@ internal enum L10n {
     internal static let title = L10n.tr("Localizable", "browse.title")
   }
 
+  internal enum Download {
+    /// Remove
+    internal static let deleteTitle = L10n.tr("Localizable", "download.delete_title")
+    /// Download
+    internal static let startTitle = L10n.tr("Localizable", "download.start_title")
+    /// Stop download
+    internal static let stopTitle = L10n.tr("Localizable", "download.stop_title")
+  }
+
+  internal enum Downloads {
+    /// Downloads
+    internal static let title = L10n.tr("Localizable", "downloads.title")
+  }
+
   internal enum Episode {
     /// Like
     internal static let addLikeTitle = L10n.tr("Localizable", "episode.add_like_title")

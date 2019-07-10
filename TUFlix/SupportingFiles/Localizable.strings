@@ -40,6 +40,14 @@
 
 "episodes.play_unavailable.title" = "The selected episode can not be streamed";
 
+"downloads.title" = "Downloads";
+
+"download.start_title" = "Download";
+
+"download.stop_title" = "Stop download";
+
+"download.delete_title" = "Remove";
+
 "series.title" = "Series";
 
 "browse.title" = "Browse";

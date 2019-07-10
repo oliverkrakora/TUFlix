@@ -8,45 +8,96 @@
 
 import UIKit
 import DataSource
+import ReactiveSwift
 
-class LibraryViewController<T: ListViewModelProtocol>: ListViewController<T> {
+class LibraryViewController: UIViewController {
+    
+    // MARK: Properties
+    
+    private let viewModel = LibraryListViewModel()
     
     var showFavoriteEpisodes: (() -> Void)!
     
     var showFavoriteSeries: (() -> Void)!
     
-    override func cellDescriptors() -> [CellDescriptorType] {
-        return [
-            LibraryItemCell.cellDescriptor.didSelect { [unowned self] (item, _) -> SelectionResult in
-                switch item.title {
-                case L10n.Episodes.title:
-                    self.showFavoriteEpisodes()
-                case L10n.Series.title:
-                    self.showFavoriteSeries()
-                default:
-                    break
-                }
-                return .keepSelected
+    private let disposable = CompositeDisposable()
+    
+    private var tableView: UITableView {
+        return view as! UITableView
+    }
+    
+    private lazy var dataSource: DataSource = {
+        return DataSource(cellDescriptors: [
+            LibraryItemCell.cellDescriptor
+                .didSelect { [unowned self] (item, _) -> SelectionResult in
+                    switch item.title {
+                    case L10n.Episodes.title:
+                        self.showFavoriteEpisodes()
+                    case L10n.Series.title:
+                        self.showFavoriteSeries()
+                    default: break
+                    }
+                    return .deselect
             },
             EpisodeDownloadCell.cellDescriptor
-        ]
+            ], sectionDescriptors: [
+                SectionDescriptor<String>().header { (title, _) in
+                    let label = UILabel()
+                    label.translatesAutoresizingMaskIntoConstraints = false
+                    label.font = UIFont.preferredFont(forTextStyle: .headline)
+                    label.text = title
+                    
+                    let view = UIView()
+                    view.backgroundColor = .white
+                    view.addSubview(label)
+                    NSLayoutConstraint.activate([
+                    label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                    label.topAnchor.constraint(equalTo: view.topAnchor, constant: 8),
+                    label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 16),
+                    view.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: 8)
+                    ])
+                    
+                    return .view(view)
+                }
+            ])
+    }()
+    
+    // MARK: Lifecycle
+    
+    override func loadView() {
+        view = UITableView(frame: .zero, style: .plain)
     }
     
-    override func sectionDescriptors() -> [SectionDescriptorType] {
-        return [
-            SectionDescriptor<String>().header { (title, _) -> HeaderFooter in
-                return .title(title)
-            }
-        ]
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.dataSource = dataSource
+        tableView.delegate = dataSource
+        tableView.tableFooterView = UIView()
+        setupBindings()
     }
     
-    override func setupDataSource() {
+    deinit {
+        disposable.dispose()
+    }
+    
+    // MARK: Bindings
+    
+    func setupBindings() {
+        disposable += viewModel.downloads.producer.startWithValues { [weak self] _ in
+            self?.setupDataSource()
+        }
+    }
+    
+    // MARK: DataSource
+    
+    private func setupDataSource() {
+        dataSource.sections = [
+            Section(items: viewModel.libraryItems),
+            Section(L10n.Downloads.title, items: viewModel.downloads.value)
+        ]
+        
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            
-            self.dataSource.sections = [
-                Section(items: self.viewModel.items.value)
-            ]
             self.dataSource.reloadDataAnimated(self.tableView)
         }
     }

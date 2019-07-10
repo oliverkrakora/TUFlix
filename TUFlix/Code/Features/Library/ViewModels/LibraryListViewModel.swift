@@ -9,28 +9,16 @@
 import Foundation
 import ReactiveSwift
 
-class LibraryListViewModel: ListViewModelProtocol {
+class LibraryListViewModel {
     
-    typealias Item = Any
-    
-    let items: Property<[Any]> = {
-        EpisodeDownloader.shared.runningDownloads.map { downloads in
-            return [
-                LibraryItem(title: L10n.Episodes.title, image: nil),
-                LibraryItem(title: L10n.Series.title, image: nil)
-            ] + downloads
-        }
+    let libraryItems: [LibraryItem] = {
+        return [
+            LibraryItem(title: L10n.Episodes.title, image: nil),
+            LibraryItem(title: L10n.Series.title, image: nil)
+        ]
     }()
     
-    func hasContent() -> Bool {
-        return true
-    }
-    
-    func isLoadingData() -> Bool {
-        return false
-    }
-    
-    func loadData(reset: Bool = false) -> SignalProducer<[Any], Error> {
-        return SignalProducer(value: self.items.value)
+    var downloads: Property<[EpisodeDownloader.Download]> {
+        return EpisodeDownloader.shared.downloads
     }
 }

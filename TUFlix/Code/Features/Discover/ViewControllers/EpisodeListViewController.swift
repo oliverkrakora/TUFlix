@@ -91,15 +91,15 @@ class EpisodeListViewController<T: ListViewModelProtocol>: ListViewController<T>
                                     viewModel.delete()
                                     return true
                                 }
-                                return ("{Delete}", action)
+                                return (L10n.Download.deleteTitle, action)
                             } else if viewModel.isDownloading {
                                 let action: (() -> Bool) = {
                                     viewModel.cancelDownload()
                                     return true
                                 }
-                                return ("{Stop download}", action)
+                                return (L10n.Download.stopTitle, action)
                             } else {
-                                return ("{Download}", viewModel.download)
+                                return (L10n.Download.startTitle, viewModel.download)
                             }
                         }()
                         return UIContextualAction(style: .normal, title: titleAndAction.title, handler: { (_, _, completion) in
@@ -108,8 +108,8 @@ class EpisodeListViewController<T: ListViewModelProtocol>: ListViewController<T>
                     }()
                     
                     return UISwipeActionsConfiguration(actions: [
-                        favoriteAction,
-                        downloadAction
+                        downloadAction,
+                        favoriteAction
                         ])
             }
         ]

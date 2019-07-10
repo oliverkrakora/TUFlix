@@ -22,25 +22,22 @@ class EpisodeDownloadCell: UITableViewCell {
     
     // MARK: Properties
     
-    private var disposable: Disposable?
+    private var disposable = CompositeDisposable()
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        disposable?.dispose()
+        disposable.dispose()
+        disposable = CompositeDisposable()
     }
     
     func configure(with download: EpisodeDownloader.Download) {
         let viewModel = EpisodeViewModel(model: download.episode)
         nameLabel.text = viewModel.formattedTitle
         
-        disposable = download.state.producer.skipRepeats().startWithValues { state in
+        disposable += download.progress.producer.skipRepeats().startWithValues { progress in
             DispatchQueue.main.async { [weak self] in
-                switch state {
-                case .progress(let progress):
-                    self?.progressView.progress = Float(progress)
-                default: break
-                }
-                self?.progressLabel.text = state.formattedProgress
+                self?.progressView.progress = Float(progress)
+                self?.progressLabel.text = download.formattedProgress
             }
         }
     }

@@ -31,7 +31,7 @@ class EpisodeViewModel {
     }
     
     var isDownloading: Bool {
-        return EpisodeDownloader.shared.runningDownload(for: model.id) != nil
+        return EpisodeDownloader.shared.download(for: model.id) != nil
     }
     
     var isFavorite: Bool {
