@@ -67,19 +67,24 @@ class EpisodeManager {
         
     func offlineVideoURL(for episode: Episode) -> URL? {
         let videoURL = episodesDiskLocation.appendingPathComponent(episode.id)
-        guard FileManager.default.fileExists(atPath: videoURL.absoluteString) else { return nil }
+        guard FileManager.default.fileExists(atPath: videoURL.path) else { return nil }
         
         return videoURL
     }
     
     func removeOfflineEpisode(_ episode: Episode) {
         let videoURL = episodesDiskLocation.appendingPathComponent(episode.id)
-        guard FileManager.default.fileExists(atPath: videoURL.absoluteString) else { return }
+        guard FileManager.default.fileExists(atPath: videoURL.path) else { return }
         
         try? FileManager.default.removeItem(at: videoURL)
+        offlineEpisodes.remove(episode)
     }
     
     func handleFinishedDownload(download: EpisodeDownloader.Download, currentLocation: URL, callback: ((Error?) -> Void)) {
+        if !FileManager.default.fileExists(atPath: episodesDiskLocation.absoluteString) {
+            try? FileManager.default.createDirectory(at: episodesDiskLocation, withIntermediateDirectories: true, attributes: nil)
+        }
+        
         let destinationURL = episodesDiskLocation.appendingPathComponent(download.episode.id)
         do {
             try FileManager.default.moveItem(at: currentLocation, to: destinationURL)

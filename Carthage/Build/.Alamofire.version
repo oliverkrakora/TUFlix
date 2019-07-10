@@ -3,7 +3,7 @@
   "iOS" : [
     {
       "name" : "Alamofire",
-      "hash" : "4214942cebb0f3b1c6caaccef9536cc324b0b648aed14d57c29970fbc26bce5c",
+      "hash" : "aefc287a72172d9dbb3e1a9b1c31959c8e20414d2db7e0129e40ec8ebb8bd225",
       "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
     }
   ]
