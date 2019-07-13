@@ -26,7 +26,7 @@ class DiscoverCoordinator: NavigationCoordinator {
         rootViewController.tabBarItem.image = Asset.discoverIcon.image
         
         episodeVC.selectEpisodeClosure = { [unowned self] viewModel in
-            PlaybackCoordinator.playModally(on: self.rootViewController, url: viewModel.streamableVideoURL)
+            PlaybackCoordinator.playModally(on: self.rootViewController, url: viewModel.playableVideoURL)
         }
         
         seriesVC.selectSeriesClosure = { [unowned self] viewModel in
@@ -48,7 +48,7 @@ class DiscoverCoordinator: NavigationCoordinator {
         let vc = EpisodeListViewController(title: series.model.title, viewModel: viewModel, displayEpisodeNames: !Settings.shared.preferDateOverTitleInSeries)
         vc.toolbar.isHidden = false
         vc.selectEpisodeClosure = { [unowned self] viewModel in
-            PlaybackCoordinator.playModally(on: self.rootViewController, url: viewModel.streamableVideoURL)
+            PlaybackCoordinator.playModally(on: self.rootViewController, url: viewModel.playableVideoURL)
         }
         
         navigationController.pushViewController(vc, animated: true)

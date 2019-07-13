@@ -10,7 +10,6 @@
 		046F12E9465EF8DF29D1A21DB5DE9878 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35ED2EC181CBE10879FC5651182ED054 /* Result.framework */; };
 		161AD4CED82A2D1A1235E9368241B6ED /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6A9EAA50F5937F0032B0CFC22C2A36D /* Alamofire.framework */; };
 		17F37B896A779DC076DAF31EF4289192 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACA0B9139FE94203DB5F1D765936E62 /* API.swift */; };
-		1A8F07E228CC0EA00B314C9CBCCC4FCF /* example.json in Resources */ = {isa = PBXBuildFile; fileRef = 299A67FF5356D3396D76B0E427EF923C /* example.json */; };
 		1B323682AEF4F3833E270976092A793D /* Fetch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76F40CC6383429F6B1541CCD0DC4A0AD /* Fetch.framework */; };
 		1EAB36C8CC0DBD7E8117E80CF93DFCA7 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B0E472A52F70362212C2B0355192FB /* Appearance.swift */; };
 		28D582C42216A45B484EA882CE6D177C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6A9EAA50F5937F0032B0CFC22C2A36D /* Alamofire.framework */; };
@@ -65,6 +64,7 @@
 		5CB479342275B7CE00116ADE /* ErrorStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB479332275B7CE00116ADE /* ErrorStateView.swift */; };
 		5CB479362275B9F200116ADE /* Nibable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB479352275B9F200116ADE /* Nibable.swift */; };
 		5CB479382275BB8600116ADE /* StatefulViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB479372275BB8600116ADE /* StatefulViewController.framework */; };
+		5CC61FB122DA026C0085B189 /* LibraryOfflineEpisodeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC61FB022DA026C0085B189 /* LibraryOfflineEpisodeListViewModel.swift */; };
 		5CCE13ED22B81555007C9048 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE13EC22B81555007C9048 /* UserDefaults+Extension.swift */; };
 		5CCE13EF22B818F6007C9048 /* Encoders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE13EE22B818F6007C9048 /* Encoders.swift */; };
 		5CCFDE0722B9412500A25C1D /* ListViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCFDE0622B9412500A25C1D /* ListViewModelProtocol.swift */; };
@@ -128,7 +128,6 @@
 		1341B66715E2BB7A24269DE226B97A92 /* TUFlixKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TUFlixKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		14EFCC307A501F925C94D08A799A25D2 /* TUFlixKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TUFlixKit.h; sourceTree = "<group>"; };
 		23AF6B1E473045787AAF65EBA951C0FA /* NavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCoordinator.swift; sourceTree = "<group>"; };
-		299A67FF5356D3396D76B0E427EF923C /* example.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = example.json; sourceTree = "<group>"; };
 		2D438791F88858E36D68481427E5098A /* Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
 		35ED2EC181CBE10879FC5651182ED054 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Result.framework; sourceTree = "<group>"; };
 		36A8B2E1ACF0C5EE0244188FDAD09384 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
@@ -184,6 +183,7 @@
 		5CB479332275B7CE00116ADE /* ErrorStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStateView.swift; sourceTree = "<group>"; };
 		5CB479352275B9F200116ADE /* Nibable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nibable.swift; sourceTree = "<group>"; };
 		5CB479372275BB8600116ADE /* StatefulViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = StatefulViewController.framework; sourceTree = "<group>"; };
+		5CC61FB022DA026C0085B189 /* LibraryOfflineEpisodeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryOfflineEpisodeListViewModel.swift; sourceTree = "<group>"; };
 		5CCE13EC22B81555007C9048 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		5CCE13EE22B818F6007C9048 /* Encoders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoders.swift; sourceTree = "<group>"; };
 		5CCFDE0622B9412500A25C1D /* ListViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -357,6 +357,7 @@
 				5CAC31C822BC04DC007DD8AD /* LibraryListViewModel.swift */,
 				5CAC31CA22BC0D0D007DD8AD /* LibraryEpisodeListViewModel.swift */,
 				5C4364CD22C138EA0020A37E /* LibrarySeriesListViewModel.swift */,
+				5CC61FB022DA026C0085B189 /* LibraryOfflineEpisodeListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -647,7 +648,6 @@
 		F9B80944717A69517C8B1CF43666A4B6 /* Stubs */ = {
 			isa = PBXGroup;
 			children = (
-				299A67FF5356D3396D76B0E427EF923C /* example.json */,
 			);
 			path = Stubs;
 			sourceTree = "<group>";
@@ -725,6 +725,11 @@
 				TargetAttributes = {
 					654CDFE0991F1B8F16618DB4D4C9A282 = {
 						DevelopmentTeam = 4KWS28V9EP;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
 					};
 					873E56AF69619FA154452598BCA1A3A6 = {
 						DevelopmentTeam = 4KWS28V9EP;
@@ -754,7 +759,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A8F07E228CC0EA00B314C9CBCCC4FCF /* example.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -842,6 +846,7 @@
 				5C1A10FE22B6383300A3CDDF /* TriangleView.swift in Sources */,
 				765B657B0FA46A02854F40E5261A6246 /* AppCoordinator.swift in Sources */,
 				5CB4792E2275B6A300116ADE /* LoadingStateView.swift in Sources */,
+				5CC61FB122DA026C0085B189 /* LibraryOfflineEpisodeListViewModel.swift in Sources */,
 				5CB479362275B9F200116ADE /* Nibable.swift in Sources */,
 				D51A245877C12FF7791CCEB4D18B055E /* AppDelegate.swift in Sources */,
 				1EAB36C8CC0DBD7E8117E80CF93DFCA7 /* Appearance.swift in Sources */,

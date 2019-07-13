@@ -100,6 +100,12 @@ class PageViewController: UIViewController {
     
     // MARK: Actions
     
+    func selectSegment(at index: Int) {
+        guard index >= viewControllers.startIndex && index < viewControllers.endIndex else { return }
+        segmentedControl.selectedSegmentIndex = index
+        segmentedControlIndexDidChange()
+    }
+    
     @objc private func segmentedControlIndexDidChange() {
         let vc = viewControllers[segmentedControl.selectedSegmentIndex]
         let navigationDirection: UIPageViewController.NavigationDirection = segmentedControl.selectedSegmentIndex > currentSegmentedControlIndex ? .forward : .reverse

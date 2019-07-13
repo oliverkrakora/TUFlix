@@ -10,7 +10,7 @@ import UIKit
 import DataSource
 import TUFlixKit
 
-class SeriesListViewController<ListViewModel: ListViewModelProtocol>: ListViewController<ListViewModel> {
+class SeriesListViewController<T: ListViewModelProtocol>: ListViewController<T> where T.Item == SeriesViewModel {
     
     typealias SelectSeriesCallback = ((SeriesViewModel) -> Void)
     

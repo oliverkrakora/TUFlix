@@ -18,7 +18,7 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
     
     private(set) var tableView: UITableView!
     
-    private(set)lazy var dataSource: DataSource = {
+    private lazy var dataSource: DataSource = {
         return DataSource(cellDescriptors: cellDescriptors(), sectionDescriptors: sectionDescriptors())
     }()
     

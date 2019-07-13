@@ -47,6 +47,6 @@ extension EpisodeDownloadCell {
     static var cellDescriptor: CellDescriptor<EpisodeDownloader.Download, EpisodeDownloadCell> {
         return CellDescriptor().configure { (download, cell, _) in
             cell.configure(with: download)
-        }
+            }.canEdit { true }
     }
 }

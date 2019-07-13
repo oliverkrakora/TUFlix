@@ -38,6 +38,8 @@
 
 "episodes.select_play_audio.title" = "Audio";
 
+"episodes.available_offline.title" = "Offline";
+
 "episodes.play_unavailable.title" = "The selected episode can not be streamed";
 
 "downloads.title" = "Downloads";

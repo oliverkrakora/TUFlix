@@ -1,11 +1,3 @@
-//
-//  ReactiveFetch.swift
-//  Example
-//
-//  Created by Michael Heinzl on 09.04.19.
-//  Copyright © 2019 aaa - all about apps GmbH. All rights reserved.
-//
-
 import ReactiveSwift
 import Fetch
 

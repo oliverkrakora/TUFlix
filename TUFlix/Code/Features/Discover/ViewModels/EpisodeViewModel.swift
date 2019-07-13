@@ -42,8 +42,16 @@ class EpisodeViewModel {
         return model.title
     }
     
+    var playableVideoURL: URL? {
+        return offlineVideoURL ?? streamableVideoURL
+    }
+    
     var streamableVideoURL: URL? {
         return model.mediaPackage?.media?.tracks?.first(where: { $0.mimeType == .mp4 })?.url
+    }
+    
+    var offlineVideoURL: URL? {
+        return EpisodeManager.shared.offlineVideoURL(for: model)
     }
     
     var formattedCreatorName: String? {

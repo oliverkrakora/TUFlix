@@ -48,6 +48,7 @@
                 <outlet property="subtitleLabel" destination="upz-Ny-0tn" id="dAk-OR-hoq"/>
                 <outlet property="titleLabel" destination="eVh-lK-cZ9" id="oe9-dm-IL7"/>
             </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="153.34821428571428"/>
         </view>
     </objects>
 </document>

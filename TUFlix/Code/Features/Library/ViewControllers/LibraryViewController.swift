@@ -39,7 +39,14 @@ class LibraryViewController: UIViewController {
                     }
                     return .deselect
             },
-            EpisodeDownloadCell.cellDescriptor
+            EpisodeDownloadCell.cellDescriptor.trailingSwipeAction { (row, _) in
+                guard let download = row.item as? EpisodeDownloader.Download else { return nil }
+                let action = UIContextualAction(style: .normal, title: L10n.Download.stopTitle, handler: { (_, _, completion) in
+                    EpisodeDownloader.shared.cancelDownload(for: download.episode.id)
+                    completion(true)
+                })
+                return UISwipeActionsConfiguration(actions: [action])
+            }
             ], sectionDescriptors: [
                 SectionDescriptor<String>().header { (title, _) in
                     let label = UILabel()

@@ -7,7 +7,7 @@ import TUFlixKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-
+    
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         Appearance.setup()
@@ -19,18 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func applicationWillResignActive(_: UIApplication) {
-    }
-
-    func applicationDidEnterBackground(_: UIApplication) {
-    }
-
-    func applicationWillEnterForeground(_: UIApplication) {
-    }
-
-    func applicationDidBecomeActive(_: UIApplication) {
-    }
-
-    func applicationWillTerminate(_: UIApplication) {
+    func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
+         EpisodeDownloader.shared.backgroundCompletionHandler = completionHandler
     }
 }

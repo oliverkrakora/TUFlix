@@ -14,6 +14,8 @@ class EpisodeDownloader: NSObject {
     
     private static let userDefaultsKey = "running_downloads"
     
+    static let shared = EpisodeDownloader()
+    
     class Download: Codable {
         
         private enum CodingKeys: String, CodingKey {
@@ -73,8 +75,8 @@ class EpisodeDownloader: NSObject {
         }
     }
     
-    static let shared = EpisodeDownloader()
-        
+    var backgroundCompletionHandler: (() -> Void)?
+    
     private lazy var session: URLSession = {
         let config = URLSessionConfiguration.background(withIdentifier: "tuflix")
         let session = URLSession(configuration: config, delegate: self, delegateQueue: nil)
@@ -85,7 +87,6 @@ class EpisodeDownloader: NSObject {
     
     private let _downloads = MutableProperty<[Download]>([])
     
-    /// Active downloads
     lazy var downloads: Property<[Download]> = {
        return Property(_downloads)
     }()
@@ -105,6 +106,22 @@ class EpisodeDownloader: NSObject {
     deinit {
         disposable?.dispose()
     }
+    
+    // MARK: Bindings
+    private func setupBindings() {
+        disposable = _downloads.signal.observeValues { [weak self] _ in
+            self?.persistDownloads()
+        }
+    }
+    
+    // MARK: Persistance
+    private func persistDownloads() {
+        UserDefaults.standard.encode(_downloads.value, key: EpisodeDownloader.userDefaultsKey, encoder: Encoders.standardJSON)
+    }
+}
+
+// MARK: Starting and manipulating downloads
+extension EpisodeDownloader {
     
     @discardableResult
     func download(episode: Episode, url: URL) -> Download {
@@ -128,18 +145,9 @@ class EpisodeDownloader: NSObject {
     func download(for episodeId: Episode.Id) -> Download? {
         return _downloads.value.getDownload(for: episodeId)
     }
-    
-    private func setupBindings() {
-        disposable = _downloads.signal.observeValues { [weak self] _ in
-            self?.persistDownloads()
-        }
-    }
-    
-    private func persistDownloads() {
-        UserDefaults.standard.encode(_downloads.value, key: EpisodeDownloader.userDefaultsKey, encoder: Encoders.standardJSON)
-    }
 }
 
+// MARK: URLSessionDownloadDelegate
 extension EpisodeDownloader: URLSessionDownloadDelegate {
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
@@ -172,8 +180,13 @@ extension EpisodeDownloader: URLSessionDownloadDelegate {
         
         download._progress.value = progress
     }
+    
+    func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
+        backgroundCompletionHandler?()
+    }
 }
 
+// MARK: Helper extension
 fileprivate extension Array where Element == EpisodeDownloader.Download {
     
     mutating func removeDownload(for episodeId: Episode.Id) {

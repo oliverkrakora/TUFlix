@@ -31,11 +31,18 @@ class LibraryCoordinator: NavigationCoordinator {
     private func showFavoriteEpisodes() {
         let viewModel = LibraryEpisodeListViewModel()
         
-        let vc = EpisodeListViewController(title: L10n.Episodes.title, viewModel: viewModel)
+        let vc = EpisodeListViewController(title: L10n.Episodes.likedTitle, viewModel: viewModel)
         vc.selectEpisodeClosure = { [unowned self] episode in
-            PlaybackCoordinator.playModally(on: self.rootViewController, url: episode.streamableVideoURL)
+            PlaybackCoordinator.playModally(on: self.rootViewController, url: episode.playableVideoURL)
         }
-        push(vc, animated: true)
+        
+        let offlineViewModel = LibraryOfflineEpisodeListViewModel(series: nil)
+        let offlineVC = EpisodeListViewController(title: L10n.Episodes.AvailableOffline.title, viewModel: offlineViewModel)
+        offlineVC.selectEpisodeClosure = { [unowned self] episode in
+            PlaybackCoordinator.playModally(on: self.rootViewController, url: episode.playableVideoURL)
+        }
+        let pageVC = PageViewController.create(with: [vc, offlineVC])
+        push(pageVC, animated: true)
     }
     
     private func showFavoriteSeries() {
@@ -59,7 +66,7 @@ class LibraryCoordinator: NavigationCoordinator {
         let allSeriesEpisodesVC = EpisodeListViewController(title: L10n.Episodes.allTitle, viewModel: viewModel, displayEpisodeNames: displayEpisodeNames)
         
         allSeriesEpisodesVC.selectEpisodeClosure = { [unowned self] episode in
-            PlaybackCoordinator.playModally(on: self.rootViewController, url: episode.streamableVideoURL)
+            PlaybackCoordinator.playModally(on: self.rootViewController, url: episode.playableVideoURL)
         }
         
         let likeEpisodesViewModel = LibraryEpisodeListViewModel(series: series.model.id)
@@ -67,14 +74,23 @@ class LibraryCoordinator: NavigationCoordinator {
         let likedSeriesEpisodeVC = EpisodeListViewController(title: L10n.Episodes.likedTitle, viewModel: likeEpisodesViewModel, displayEpisodeNames: displayEpisodeNames)
         
         likedSeriesEpisodeVC.selectEpisodeClosure = { [unowned self] episode in
-            PlaybackCoordinator.playModally(on: self.rootViewController, url: episode.streamableVideoURL)
+            PlaybackCoordinator.playModally(on: self.rootViewController, url: episode.playableVideoURL)
         }
         
-        let pageVC = PageViewController.create(with: [likedSeriesEpisodeVC, allSeriesEpisodesVC])
+        let offlineViewModel = LibraryOfflineEpisodeListViewModel(series: series.model.id)
+        
+        let offlineVC = EpisodeListViewController(title: L10n.Episodes.AvailableOffline.title, viewModel: offlineViewModel, displayEpisodeNames: displayEpisodeNames)
+        
+        offlineVC.selectEpisodeClosure = { [unowned self] episode in
+            PlaybackCoordinator.playModally(on: self.rootViewController, url: episode.playableVideoURL)
+        }
+        
+        let pageVC = PageViewController.create(with: [likedSeriesEpisodeVC, offlineVC, allSeriesEpisodesVC])
         pageVC.toolbar = {
             return ToggleToolbar(title: L10n.Episodes.toggleTitle, isOn: displayEpisodeNames) { isOn in
                 likedSeriesEpisodeVC.toggleEpisodeNames(showNames: isOn)
                 allSeriesEpisodesVC.toggleEpisodeNames(showNames: isOn)
+                offlineVC.toggleEpisodeNames(showNames: isOn)
             }
         }()
         

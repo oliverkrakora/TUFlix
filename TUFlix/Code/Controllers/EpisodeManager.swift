@@ -40,6 +40,7 @@ class EpisodeManager {
     private(set) var offlineEpisodes: Set<Episode> {
         didSet {
             persistOfflineEpisodes()
+            didChangeObserver.input.send(value: ())
         }
     }
     
@@ -64,16 +65,20 @@ class EpisodeManager {
     func isInFavorites(episode: Episode) -> Bool {
         return favoriteEpisodes.contains(episode)
     }
+    
+    private func constructOfflineURL(for episode: Episode) -> URL {
+        return episodesDiskLocation.appendingPathComponent("\(episode.id).mp4")
+    }
         
     func offlineVideoURL(for episode: Episode) -> URL? {
-        let videoURL = episodesDiskLocation.appendingPathComponent(episode.id)
+        let videoURL = constructOfflineURL(for: episode)
         guard FileManager.default.fileExists(atPath: videoURL.path) else { return nil }
         
         return videoURL
     }
     
     func removeOfflineEpisode(_ episode: Episode) {
-        let videoURL = episodesDiskLocation.appendingPathComponent(episode.id)
+        let videoURL = constructOfflineURL(for: episode)
         guard FileManager.default.fileExists(atPath: videoURL.path) else { return }
         
         try? FileManager.default.removeItem(at: videoURL)
@@ -85,7 +90,7 @@ class EpisodeManager {
             try? FileManager.default.createDirectory(at: episodesDiskLocation, withIntermediateDirectories: true, attributes: nil)
         }
         
-        let destinationURL = episodesDiskLocation.appendingPathComponent(download.episode.id)
+        let destinationURL = constructOfflineURL(for: download.episode)
         do {
             try FileManager.default.moveItem(at: currentLocation, to: destinationURL)
             offlineEpisodes.insert(download.episode)

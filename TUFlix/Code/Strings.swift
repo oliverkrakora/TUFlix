@@ -47,6 +47,10 @@ internal enum L10n {
     internal static let title = L10n.tr("Localizable", "episodes.title")
     /// Show episode names
     internal static let toggleTitle = L10n.tr("Localizable", "episodes.toggle_title")
+    internal enum AvailableOffline {
+      /// Offline
+      internal static let title = L10n.tr("Localizable", "episodes.available_offline.title")
+    }
     internal enum PlayUnavailable {
       /// The selected episode can not be streamed
       internal static let title = L10n.tr("Localizable", "episodes.play_unavailable.title")

@@ -11,7 +11,7 @@ import DataSource
 import TUFlixKit
 import ReactiveSwift
 
-class EpisodeListViewController<T: ListViewModelProtocol>: ListViewController<T> {
+class EpisodeListViewController<T: ListViewModelProtocol>: ListViewController<T> where T.Item == EpisodeViewModel {
     
     typealias SelectEpisodeCallback = ((EpisodeViewModel) -> Void)
     
