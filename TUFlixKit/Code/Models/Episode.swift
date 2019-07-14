@@ -16,13 +16,13 @@ public struct Episode: Equatable, Codable {
     public struct MediaPackage: Hashable, Codable {
         
         private enum CodingKeys: String, CodingKey {
-            case id
+            case identifier = "id"
             case durationInMs = "duration"
             case media
             case creator = "creators"
         }
         
-        public let id: String?
+        public let identifier: String?
         public let durationInMs: String?
         public let media: Media?
         public let creator: Creator?
@@ -38,7 +38,7 @@ public struct Episode: Equatable, Codable {
         
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
-            self.id = try? container.decodeIfPresent(String.self, forKey: .id)
+            self.identifier = try? container.decodeIfPresent(String.self, forKey: .identifier)
             self.durationInMs = try? container.decodeIfPresent(String.self, forKey: .durationInMs)
             self.media = try? container.decodeIfPresent(Media.self, forKey: .media)
             self.creator = try? container.decodeIfPresent(Creator.self, forKey: .creator)
@@ -81,14 +81,14 @@ public struct Episode: Equatable, Codable {
     }
     
     private enum CodingKeys: String, CodingKey {
-        case id
+        case identifier = "id"
         case title = "dcTitle"
         case seriesId = "dcIsPartOf"
         case created = "dcCreated"
         case mediaPackage = "mediapackage"
     }
     
-    public let id: Id
+    public let identifier: Id
     public let seriesId: Series.Id?
     public let title: String?
     public let created: Date?
@@ -97,6 +97,6 @@ public struct Episode: Equatable, Codable {
 
 extension Episode: Hashable {
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
+        hasher.combine(identifier)
     }
 }

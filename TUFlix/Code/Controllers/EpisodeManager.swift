@@ -59,7 +59,7 @@ class EpisodeManager {
     }
     
     func removeFromFavorites(episode: Episode) {
-        favoriteEpisodes.removeAll(where: { $0.id == episode.id })
+        favoriteEpisodes.removeAll(where: { $0.identifier == episode.identifier })
     }
     
     func isInFavorites(episode: Episode) -> Bool {
@@ -67,7 +67,7 @@ class EpisodeManager {
     }
     
     private func constructOfflineURL(for episode: Episode) -> URL {
-        return episodesDiskLocation.appendingPathExtension("\(episode.id).mp4")
+        return episodesDiskLocation.appendingPathExtension("\(episode.identifier).mp4")
     }
     
     func offlineVideoURL(for episode: Episode) -> URL? {
@@ -82,7 +82,7 @@ class EpisodeManager {
         guard FileManager.default.fileExists(atPath: videoURL.path) else { return }
         
         try? FileManager.default.removeItem(at: videoURL)
-        offlineEpisodes.removeAll(where: { $0.id == episode.id })
+        offlineEpisodes.removeAll(where: { $0.identifier == episode.identifier })
     }
     
     func handleFinishedDownload(download: EpisodeDownloader.Download, currentLocation: URL, callback: @escaping ((Error?) -> Void)) {

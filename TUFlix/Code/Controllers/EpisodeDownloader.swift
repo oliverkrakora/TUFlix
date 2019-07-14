@@ -79,7 +79,7 @@ class EpisodeDownloader: NSObject {
         }
         
         func hash(into hasher: inout Hasher) {
-            hasher.combine(episode.id)
+            hasher.combine(episode.identifier)
         }
     }
     
@@ -166,7 +166,7 @@ extension EpisodeDownloader: URLSessionDownloadDelegate {
                 download._state.value = .error
             }
             
-            self?._downloads.value.removeDownload(for: download.episode.id)
+            self?._downloads.value.removeDownload(for: download.episode.identifier)
         }
     }
     
@@ -179,7 +179,7 @@ extension EpisodeDownloader: URLSessionDownloadDelegate {
                     download._state.value = .error
                 } else {
                     download._state.value = .completed
-                    self?._downloads.value.removeDownload(for: download.episode.id)
+                    self?._downloads.value.removeDownload(for: download.episode.identifier)
                 }
             }
         }
@@ -204,7 +204,7 @@ extension EpisodeDownloader: URLSessionDownloadDelegate {
 fileprivate extension Array where Element == EpisodeDownloader.Download {
     
     mutating func removeDownload(for episodeId: Episode.Id) {
-        removeAll(where: { $0.episode.id == episodeId })
+        removeAll(where: { $0.episode.identifier == episodeId })
     }
     
     func getDownload(for taskIdentifier: Int) -> EpisodeDownloader.Download? {
@@ -212,6 +212,6 @@ fileprivate extension Array where Element == EpisodeDownloader.Download {
     }
     
     func getDownload(for episodeId: Episode.Id) -> EpisodeDownloader.Download? {
-        return first(where: { $0.episode.id == episodeId })
+        return first(where: { $0.episode.identifier == episodeId })
     }
 }

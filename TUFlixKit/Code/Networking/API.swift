@@ -14,6 +14,8 @@ public class API {
         }
         
         public static let `default` = PagingConfig(limit: 20, offset: 0)
+        
+        public static let header = PagingConfig(limit: 0, offset: 0)
     }
     
     public static func setup() {

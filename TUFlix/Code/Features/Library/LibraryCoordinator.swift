@@ -53,18 +53,18 @@ class LibraryCoordinator: NavigationCoordinator {
         let displayEpisodeNames = !Settings.shared.preferDateOverTitleInSeries
         
         let allVC = Builder.ViewController.episodeListViewController(title: L10n.Episodes.allTitle,
-                                                                     seriesId: series.model.id,
+                                                                     seriesId: series.model.identifier,
                                                                      showEpisodeNameToggle: false,
                                                                      showEpisodesNames: displayEpisodeNames)
         
-        let likedViewModel = LibraryEpisodeListViewModel(series: series.model.id)
+        let likedViewModel = LibraryEpisodeListViewModel(series: series.model.identifier)
         
         let likedVC = Builder.ViewController.episodeListViewController(title: L10n.Episodes.likedTitle,
                                                                        viewModel: likedViewModel,
                                                                        showEpisodeNameToggle: false,
                                                                        showEpisodesNames: displayEpisodeNames)
         
-        let offlineViewModel = LibraryOfflineEpisodeListViewModel(series: series.model.id)
+        let offlineViewModel = LibraryOfflineEpisodeListViewModel(series: series.model.identifier)
         
         let offlineVC = Builder.ViewController.episodeListViewController(title: L10n.Episodes.AvailableOffline.title,
                                                                          viewModel: offlineViewModel,

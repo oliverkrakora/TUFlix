@@ -13,7 +13,7 @@ import ReactiveSwift
 import DataSource
 import Result
 
-class SeriesViewModel {
+class SeriesViewModel: Matchable {
     
     let model: Series
     
@@ -60,7 +60,7 @@ class SeriesViewModel {
 
 extension SeriesViewModel: Diffable {
     var diffIdentifier: String {
-        return model.id
+        return model.identifier
     }
     
     func isEqualToDiffable(_ other: Diffable?) -> Bool {

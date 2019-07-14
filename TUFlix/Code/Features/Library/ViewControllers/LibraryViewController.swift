@@ -42,7 +42,7 @@ class LibraryViewController: UIViewController {
             EpisodeDownloadCell.cellDescriptor.trailingSwipeAction { (row, _) in
                 guard let download = row.item as? EpisodeDownloader.Download else { return nil }
                 let action = UIContextualAction(style: .normal, title: L10n.Download.stopTitle, handler: { (_, _, completion) in
-                    let success = EpisodeDownloader.shared.cancelDownload(for: download.episode.id) == nil
+                    let success = EpisodeDownloader.shared.cancelDownload(for: download.episode.identifier) == nil
                     completion(success)
                 })
                 return UISwipeActionsConfiguration(actions: [action])

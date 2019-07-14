@@ -18,7 +18,7 @@ class DiscoverCoordinator: NavigationCoordinator {
     }
     
     func showSeriesDetails(with series: SeriesViewModel) {
-        let vc = Builder.ViewController.episodeListViewController(title: series.model.title, seriesId: series.model.id, showEpisodeNameToggle: true, showEpisodesNames: !Settings.shared.preferDateOverTitleInSeries)
+        let vc = Builder.ViewController.episodeListViewController(title: series.model.title, seriesId: series.model.identifier, showEpisodeNameToggle: true, showEpisodesNames: !Settings.shared.preferDateOverTitleInSeries)
     
         navigationController.pushViewController(vc, animated: true)
     }

@@ -12,7 +12,7 @@ import DataSource
 import ReactiveSwift
 import Result
 
-class EpisodeViewModel {
+class EpisodeViewModel: Matchable {
     
     let model: Episode
     
@@ -31,7 +31,7 @@ class EpisodeViewModel {
     }
     
     var isDownloading: Bool {
-        return EpisodeDownloader.shared.download(for: model.id) != nil
+        return EpisodeDownloader.shared.download(for: model.identifier) != nil
     }
     
     var isFavorite: Bool {
@@ -88,7 +88,7 @@ class EpisodeViewModel {
     }
     
     func cancelDownload() {
-        EpisodeDownloader.shared.cancelDownload(for: model.id)
+        EpisodeDownloader.shared.cancelDownload(for: model.identifier)
     }
     
     func delete() {
@@ -107,7 +107,7 @@ class EpisodeViewModel {
 extension EpisodeViewModel: Diffable {
     
     var diffIdentifier: String {
-        return model.id
+        return model.identifier
     }
     
     func isEqualToDiffable(_ other: Diffable?) -> Bool {

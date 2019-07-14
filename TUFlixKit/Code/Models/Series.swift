@@ -14,18 +14,18 @@ public struct Series: Hashable, Cacheable {
     public typealias Id = String
     
     private enum CodingKeys: String, CodingKey {
-        case id
+        case identifier = "id"
         case title = "dcTitle"
         case creator = "dcCreator"
         case contributor = "dcContributor"
     }
     
-    public let id: Id
+    public let identifier: Id
     public let title: String?
     public let creator: String?
     public let contributor: String?
     
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
+        hasher.combine(identifier)
     }
 }
