@@ -13,7 +13,7 @@ import TUFlixKit
 
 class SearchablePageListViewModel<Page: PageProtocol, MappedItem>: ListViewModelProtocol, SearchableProtocol {
     
-    typealias SearchableResourceProvider = ((_ config: API.PagingConfig, _ searchTerm: String) -> Resource<Page>)
+    typealias SearchableResourceProvider = ((_ config: API.PagingConfig, _ searchTerm: String) -> SignalProducer<Page, Error>)
     
     private let pagingViewModel: PageListViewModel<Page, MappedItem>
     
@@ -47,7 +47,7 @@ class SearchablePageListViewModel<Page: PageProtocol, MappedItem>: ListViewModel
         return currentPagingViewModel.loadDataAction
     }
     
-    init(resourceProvider: @escaping PageListViewModel<Page, MappedItem>.ResourceProvider,
+    init(resourceProvider: @escaping PageListViewModel<Page, MappedItem>.PageProvider,
          searchResourceProvider: @escaping SearchableResourceProvider, mapping: @escaping PageListViewModel<Page, MappedItem>.ItemMapper) {
         pagingViewModel = PageListViewModel(provider: resourceProvider, mapper: mapping)
         searchPagingViewModel = PageListViewModel(provider: { config in
@@ -80,11 +80,7 @@ class SearchablePageListViewModel<Page: PageProtocol, MappedItem>: ListViewModel
         return currentPagingViewModel.isLoadingData()
     }
     
-    func loadData() -> SignalProducer<[MappedItem], Error> {
-        return currentPagingViewModel.loadData()
-    }
-    
-    func loadData<T>(reset: Bool) -> SignalProducer<[T], Error> {
+    func loadData(reset: Bool = false) -> SignalProducer<[MappedItem], Error> {
         return currentPagingViewModel.loadData(reset: reset)
     }
     

@@ -23,7 +23,7 @@ class SeriesManager {
         return didChangeObserver.output
     }
     
-    private(set) var favoriteSeries: Set<Series> {
+    private(set) var favoriteSeries: [Series] {
         didSet {
             persistFavorites()
             didChangeObserver.input.send(value: ())
@@ -31,19 +31,15 @@ class SeriesManager {
     }
     
     private init() {
-        if let episodes: Set<Series> = UserDefaults.standard.decode(for: defaultsKey, decoder: Decoders.standardJSON) {
-            self.favoriteSeries = episodes
-        } else {
-            self.favoriteSeries = Set()
-        }
+        self.favoriteSeries = UserDefaults.standard.decode(for: defaultsKey, decoder: Decoders.standardJSON) ?? []
     }
     
     func addToFavorites(series: Series) {
-        favoriteSeries.insert(series)
+        favoriteSeries.append(series)
     }
     
     func removeFromFavorites(series: Series) {
-        favoriteSeries.remove(series)
+        favoriteSeries.removeAll(where: { $0.id == series.id })
     }
     
     func isInFavorites(series: Series) -> Bool {

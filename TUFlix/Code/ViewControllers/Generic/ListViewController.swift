@@ -166,7 +166,7 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
     
     // MARK: Actions
     
-    @objc private func didTriggerRefreshControl() {
+    @objc func didTriggerRefreshControl() {
         loadData(reset: true)
     }
     

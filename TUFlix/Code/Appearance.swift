@@ -7,10 +7,10 @@ struct Appearance {
     static func setup() {
         
         // NavigationBar
-        UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().barTintColor = Asset.primaryColor.color
         UINavigationBar.appearance().tintColor = Asset.primaryTextColor.color
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: Asset.primaryTextColor.color]
+        UINavigationBar.appearance().isTranslucent = false
         
         // SegmentedControl
         UISegmentedControl.appearance().tintColor = Asset.primaryTextColor.color

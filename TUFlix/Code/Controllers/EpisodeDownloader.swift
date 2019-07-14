@@ -16,7 +16,7 @@ class EpisodeDownloader: NSObject {
     
     static let shared = EpisodeDownloader()
     
-    class Download: Codable {
+    class Download: Codable, Hashable {
         
         private enum CodingKeys: String, CodingKey {
             case episode
@@ -47,7 +47,7 @@ class EpisodeDownloader: NSObject {
         }
         
         lazy var state: Property<State> = {
-           return Property(_state)
+            return Property(_state)
         }()
         
         required init(from decoder: Decoder) throws {
@@ -73,6 +73,14 @@ class EpisodeDownloader: NSObject {
             try container.encode(_progress.value, forKey: ._progress)
             try container.encode(_state.value, forKey: ._state)
         }
+        
+        static func == (_ lhs: Download, _ rhs: Download) -> Bool {
+            return lhs.episode == rhs.episode
+        }
+        
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(episode.id)
+        }
     }
     
     var backgroundCompletionHandler: (() -> Void)?
@@ -88,7 +96,7 @@ class EpisodeDownloader: NSObject {
     private let _downloads = MutableProperty<[Download]>([])
     
     lazy var downloads: Property<[Download]> = {
-       return Property(_downloads)
+        return Property(_downloads)
     }()
     
     override init() {
@@ -153,22 +161,26 @@ extension EpisodeDownloader: URLSessionDownloadDelegate {
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         guard let download = _downloads.value.getDownload(for: task.taskIdentifier) else { return }
         
-        if error != nil {
-            download._state.value = .error
+        DispatchQueue.main.async { [weak self] in
+            if error != nil {
+                download._state.value = .error
+            }
+            
+            self?._downloads.value.removeDownload(for: download.episode.id)
         }
-        
-        _downloads.value.removeDownload(for: download.episode.id)
     }
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         guard let download = _downloads.value.getDownload(for: downloadTask.taskIdentifier) else { return }
         
         EpisodeManager.shared.handleFinishedDownload(download: download, currentLocation: location) { [weak self] error in
-            if error != nil {
-                download._state.value = .error
-            } else {
-                download._state.value = .completed
-                self?._downloads.value.removeDownload(for: download.episode.id)
+            DispatchQueue.main.async { [weak self] in
+                if error != nil {
+                    download._state.value = .error
+                } else {
+                    download._state.value = .completed
+                    self?._downloads.value.removeDownload(for: download.episode.id)
+                }
             }
         }
     }
@@ -178,7 +190,9 @@ extension EpisodeDownloader: URLSessionDownloadDelegate {
         
         let progress = Double(totalBytesWritten) / Double(totalBytesExpectedToWrite)
         
-        download._progress.value = progress
+        DispatchQueue.main.async {
+            download._progress.value = progress
+        }
     }
     
     func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {

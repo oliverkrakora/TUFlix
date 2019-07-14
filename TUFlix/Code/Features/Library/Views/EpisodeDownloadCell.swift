@@ -34,11 +34,9 @@ class EpisodeDownloadCell: UITableViewCell {
         let viewModel = EpisodeViewModel(model: download.episode)
         nameLabel.text = viewModel.formattedTitle
         
-        disposable += download.progress.producer.skipRepeats().startWithValues { progress in
-            DispatchQueue.main.async { [weak self] in
-                self?.progressView.progress = Float(progress)
-                self?.progressLabel.text = download.formattedProgress
-            }
+        disposable += download.progress.producer.skipRepeats().startWithValues { [weak self] progress in
+            self?.progressView.progress = Float(progress)
+            self?.progressLabel.text = download.formattedProgress
         }
     }
 }

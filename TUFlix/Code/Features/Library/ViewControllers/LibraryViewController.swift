@@ -29,7 +29,7 @@ class LibraryViewController: UIViewController {
     private lazy var dataSource: DataSource = {
         return DataSource(cellDescriptors: [
             LibraryItemCell.cellDescriptor
-                .didSelect { [unowned self] (item, _) -> SelectionResult in
+                .didSelect { [unowned self] (item, _) in
                     switch item.title {
                     case L10n.Episodes.title:
                         self.showFavoriteEpisodes()
@@ -42,8 +42,8 @@ class LibraryViewController: UIViewController {
             EpisodeDownloadCell.cellDescriptor.trailingSwipeAction { (row, _) in
                 guard let download = row.item as? EpisodeDownloader.Download else { return nil }
                 let action = UIContextualAction(style: .normal, title: L10n.Download.stopTitle, handler: { (_, _, completion) in
-                    EpisodeDownloader.shared.cancelDownload(for: download.episode.id)
-                    completion(true)
+                    let success = EpisodeDownloader.shared.cancelDownload(for: download.episode.id) == nil
+                    completion(success)
                 })
                 return UISwipeActionsConfiguration(actions: [action])
             }

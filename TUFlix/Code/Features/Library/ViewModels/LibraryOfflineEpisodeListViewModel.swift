@@ -11,6 +11,7 @@ import TUFlixKit
 import ReactiveSwift
 
 class LibraryOfflineEpisodeListViewModel: ListViewModelProtocol, SearchableProtocol {
+    
     typealias Item = EpisodeViewModel
     
     let seriesId: Series.Id?

@@ -9,7 +9,7 @@
 import UIKit
 import DataSource
 
-struct LibraryItem {
+struct LibraryItem: Hashable, Diffable {
     let title: String
     let image: UIImage?
 }

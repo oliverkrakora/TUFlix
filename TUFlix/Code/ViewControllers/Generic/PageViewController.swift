@@ -83,6 +83,11 @@ class PageViewController: UIViewController {
         updateSearchController()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationItem.searchController?.isActive = false
+    }
+    
     private func setupToolbar() {
         if let toolbar = toolbar {
             toolbar.translatesAutoresizingMaskIntoConstraints = false
