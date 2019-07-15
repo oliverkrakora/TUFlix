@@ -120,7 +120,6 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
         controller.searchBar.barStyle = .black
         controller.searchBar.delegate = self
         navigationItem.searchController = controller
-        navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     // MARK: Networking

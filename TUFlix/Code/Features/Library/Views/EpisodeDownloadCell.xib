@@ -19,19 +19,19 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="KDV-oK-ZIU">
-                        <rect key="frame" x="16" y="8" width="382" height="60.5"/>
+                        <rect key="frame" x="20" y="8" width="374" height="60.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="{Episode name}" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j5k-dW-gTU">
-                                <rect key="frame" x="0.0" y="0.0" width="382" height="26"/>
+                                <rect key="frame" x="0.0" y="0.0" width="374" height="26"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="H5I-Gb-YIn">
-                                <rect key="frame" x="0.0" y="30" width="382" height="3"/>
+                                <rect key="frame" x="0.0" y="30" width="374" height="3"/>
                             </progressView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="{Progress}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k6X-lI-9RU">
-                                <rect key="frame" x="0.0" y="36" width="382" height="24.5"/>
+                                <rect key="frame" x="0.0" y="36" width="374" height="24.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -40,8 +40,8 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="KDV-oK-ZIU" firstAttribute="leading" secondItem="Qei-md-X81" secondAttribute="leading" constant="16" id="4Ew-Tl-1ea"/>
-                    <constraint firstAttribute="trailing" secondItem="KDV-oK-ZIU" secondAttribute="trailing" constant="16" id="GWu-Y8-Eof"/>
+                    <constraint firstItem="KDV-oK-ZIU" firstAttribute="leading" secondItem="Qei-md-X81" secondAttribute="leadingMargin" id="4Ew-Tl-1ea"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="KDV-oK-ZIU" secondAttribute="trailing" id="GWu-Y8-Eof"/>
                     <constraint firstItem="KDV-oK-ZIU" firstAttribute="top" secondItem="Qei-md-X81" secondAttribute="top" constant="8" id="VhA-QE-fhM"/>
                     <constraint firstAttribute="bottom" secondItem="KDV-oK-ZIU" secondAttribute="bottom" constant="8" id="XFN-WS-TL9"/>
                 </constraints>

@@ -18,10 +18,6 @@ class EpisodeCell: UITableViewCell {
     
     @IBOutlet private var creationDateLabel: UILabel!
     
-    @IBOutlet private var durationLabel: UILabel!
-    
-    @IBOutlet private var footerStackView: UIStackView!
-    
     @IBOutlet private var isFavoriteIndicatorView: TriangleView!
     
     private var viewModel: EpisodeViewModel!
@@ -47,7 +43,6 @@ class EpisodeCell: UITableViewCell {
         creatorTitleLabel.isHidden = episode.formattedCreatorName?.isEmpty ?? true
         creationDateLabel.text = episode.formattedCreationDate
         creationDateLabel.isHidden = !showEpisodeNames
-        durationLabel.text = episode.formattedDuration
     }
 }
 

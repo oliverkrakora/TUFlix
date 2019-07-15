@@ -18,23 +18,23 @@
                 <rect key="frame" x="0.0" y="0.0" width="376" height="82.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="gaK-EB-Hwo">
-                        <rect key="frame" x="16" y="8" width="344" height="66.5"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="gaK-EB-Hwo">
+                        <rect key="frame" x="20" y="8" width="348" height="66.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TITLE" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mhr-ZY-g8J">
-                                <rect key="frame" x="0.0" y="0.0" width="344" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="TITLE" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mhr-ZY-g8J">
+                                <rect key="frame" x="0.0" y="0.0" width="348" height="20.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Creator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HA9-6l-h3j">
-                                <rect key="frame" x="0.0" y="28" width="344" height="17"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Creator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HA9-6l-h3j">
+                                <rect key="frame" x="0.0" y="28.5" width="348" height="14.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Contributor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXg-XF-fks">
-                                <rect key="frame" x="0.0" y="53" width="344" height="13.5"/>
+                                <rect key="frame" x="0.0" y="51" width="348" height="15.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -63,12 +63,12 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="gaK-EB-Hwo" firstAttribute="leading" secondItem="cJ6-Gs-v8q" secondAttribute="leading" constant="16" id="29D-y8-IUZ"/>
+                    <constraint firstItem="gaK-EB-Hwo" firstAttribute="leading" secondItem="cJ6-Gs-v8q" secondAttribute="leadingMargin" id="29D-y8-IUZ"/>
                     <constraint firstItem="zho-e3-Gdz" firstAttribute="width" secondItem="zho-e3-Gdz" secondAttribute="height" multiplier="1:1" id="a8B-lw-zoT"/>
                     <constraint firstItem="zho-e3-Gdz" firstAttribute="top" secondItem="cJ6-Gs-v8q" secondAttribute="top" id="aig-DL-sWg"/>
                     <constraint firstItem="gaK-EB-Hwo" firstAttribute="top" secondItem="cJ6-Gs-v8q" secondAttribute="top" constant="8" id="hLX-OO-0tP"/>
                     <constraint firstAttribute="bottom" secondItem="gaK-EB-Hwo" secondAttribute="bottom" constant="8" id="nvF-j6-yVE"/>
-                    <constraint firstAttribute="trailing" secondItem="gaK-EB-Hwo" secondAttribute="trailing" constant="16" id="tCE-VF-gb6"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="gaK-EB-Hwo" secondAttribute="trailing" id="tCE-VF-gb6"/>
                 </constraints>
             </tableViewCellContentView>
             <constraints>

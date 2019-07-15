@@ -19,16 +19,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="taR-W5-DeS">
-                        <rect key="frame" x="16" y="8" width="382" height="39.5"/>
+                        <rect key="frame" x="20" y="8" width="374" height="39.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IXe-oA-B7M">
-                                <rect key="frame" x="0.0" y="9.5" width="325" height="20.5"/>
+                                <rect key="frame" x="0.0" y="9.5" width="317" height="20.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ipY-x0-4P1">
-                                <rect key="frame" x="333" y="4.5" width="51" height="31"/>
+                                <rect key="frame" x="325" y="4.5" width="51" height="31"/>
                                 <connections>
                                     <action selector="didToggle:" destination="ffl-Nq-i0i" eventType="valueChanged" id="vKl-iM-7s1"/>
                                 </connections>
@@ -38,8 +38,8 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="taR-W5-DeS" secondAttribute="bottom" constant="8" id="DI6-5F-VAp"/>
-                    <constraint firstItem="taR-W5-DeS" firstAttribute="leading" secondItem="91M-B8-DoD" secondAttribute="leading" constant="16" id="JwX-4s-NEb"/>
-                    <constraint firstAttribute="trailing" secondItem="taR-W5-DeS" secondAttribute="trailing" constant="16" id="lu1-wr-bNL"/>
+                    <constraint firstItem="taR-W5-DeS" firstAttribute="leading" secondItem="91M-B8-DoD" secondAttribute="leadingMargin" id="JwX-4s-NEb"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="taR-W5-DeS" secondAttribute="trailing" id="lu1-wr-bNL"/>
                     <constraint firstItem="taR-W5-DeS" firstAttribute="top" secondItem="91M-B8-DoD" secondAttribute="top" constant="8" id="zuw-5n-OyZ"/>
                 </constraints>
             </tableViewCellContentView>
