@@ -33,10 +33,9 @@ public struct SearchResult<Item: SearchResultItem>: Decodable, PageProtocol {
     
     public let limit: Int
     
-    public let total: Int?
+    public let total: Int
     
     public var hasNext: Bool {
-        guard let total = total else { return true }
         return offset < total
     }
     

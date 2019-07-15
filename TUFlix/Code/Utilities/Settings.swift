@@ -13,10 +13,7 @@ class Settings: Codable {
     private static let userDefaultsKey = "settings"
     
     static let shared: Settings = {
-        if let decoded: Settings = UserDefaults.standard.decode(for: userDefaultsKey) {
-            return decoded
-        }
-        return Settings()
+        return UserDefaults.standard.decode(for: userDefaultsKey) ?? Settings()
     }()
     
     var preferDateOverTitleInSeries: Bool = true {
