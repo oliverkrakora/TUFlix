@@ -102,8 +102,22 @@ internal enum L10n {
   }
 
   internal enum Series {
+    /// %@ has %d new episodes available to watch
+    internal static func newEpisodesAvailableTitle(_ p1: String, _ p2: Int) -> String {
+      return L10n.tr("Localizable", "series.new_episodes_available_title", p1, p2)
+    }
     /// Series
     internal static let title = L10n.tr("Localizable", "series.title")
+    internal enum Subscribe {
+      /// Notifications are deactivated
+      internal static let failedTitle = L10n.tr("Localizable", "series.subscribe.failed_title")
+      internal enum Failed {
+        /// You will not receive notifications when new episodes will become available for "%@". You can change this in the settings.
+        internal static func description(_ p1: String) -> String {
+          return L10n.tr("Localizable", "series.subscribe.failed.description", p1)
+        }
+      }
+    }
   }
 
   internal enum Settings {
@@ -114,6 +128,12 @@ internal enum L10n {
       internal static let preferDateDescription = L10n.tr("Localizable", "settings.series.preferDateDescription")
       /// Prefer creation date over title
       internal static let preferDateTitle = L10n.tr("Localizable", "settings.series.preferDateTitle")
+      internal enum AutoSubscribe {
+        /// For series that you like you will receive notifications when new episodes become available.
+        internal static let description = L10n.tr("Localizable", "settings.series.auto_subscribe.description")
+        /// Automatically subscribe to favorite series
+        internal static let title = L10n.tr("Localizable", "settings.series.auto_subscribe.title")
+      }
     }
   }
 }

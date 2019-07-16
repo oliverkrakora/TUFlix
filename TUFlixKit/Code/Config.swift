@@ -27,10 +27,28 @@ public struct Config {
         }
     }
     
+    public static var seriesCheckInterval: TimeInterval {
+        switch Environment.current() {
+        case .debug:
+            // Check every minute for new series
+            return 60
+        default:
+            // Check every eight hours for new series
+            return 3600 * 8
+        }
+    }
+    
+    public struct Notification {
+        public struct SeriesEpisodeUpdate {
+            public static let threadIdentifier = "SeriesEpisodeUpdate"
+            
+            public static let categoryIdentifier = threadIdentifier
+        }
+    }
+    
     // MARK: Cache
     
     public struct Cache {
-        
         static let defaultExpiration: Expiration = .seconds(5 * 60.0)
     }
 

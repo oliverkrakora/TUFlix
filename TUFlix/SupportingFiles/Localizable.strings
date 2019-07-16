@@ -52,11 +52,21 @@
 
 "series.title" = "Series";
 
+"series.subscribe.failed_title" = "Notifications are deactivated";
+
+"series.subscribe.failed.description" = "You will not receive notifications when new episodes will become available for \"%@\". You can change this in the settings.";
+
+"series.new_episodes_available_title" = "%@ has %d new episodes available to watch";
+
 "browse.title" = "Browse";
 
 "library.title" = "Library";
 
 "settings.title" = "Settings";
+
+"settings.series.auto_subscribe.title" = "Automatically subscribe to favorite series";
+
+"settings.series.auto_subscribe.description" = "For series that you like you will receive notifications when new episodes become available.";
 
 "settings.series.preferDateTitle" = "Prefer creation date over title";
 

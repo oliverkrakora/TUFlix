@@ -22,6 +22,12 @@ class Settings: Codable {
         }
     }
     
+    var autoSubscribeToFavoriteSeries: Bool = true {
+        didSet {
+            persist()
+        }
+    }
+    
     private init() {}
     
     private func persist() {

@@ -18,11 +18,19 @@ class SettingsViewController: UIViewController {
         ToggleCell.descriptor
         ], sectionDescriptors: [
             SectionDescriptor<String>().header { (title, _) -> HeaderFooter in
-                return .title(title)
+                switch title {
+                case L10n.Series.title:
+                    return .title(title)
+                case L10n.Settings.Series.AutoSubscribe.title:
+                    return .title("")
+                default: return .none
+                }
                 }.footer { (title, _) -> HeaderFooter in
                     switch title {
                     case L10n.Series.title:
                         return .title(L10n.Settings.Series.preferDateDescription)
+                    case L10n.Settings.Series.AutoSubscribe.title:
+                        return .title(L10n.Settings.Series.AutoSubscribe.description)
                     default:
                         return .none
                     }
@@ -51,10 +59,18 @@ class SettingsViewController: UIViewController {
         let seriesEpisodeNameToggle = ToggleItem(title: L10n.Settings.Series.preferDateTitle, isOn: Settings.shared.preferDateOverTitleInSeries) { isOn in
             Settings.shared.preferDateOverTitleInSeries = isOn
         }
+        
+        let subscribeToSeriesToggle = ToggleItem(title: L10n.Settings.Series.AutoSubscribe.title, isOn: Settings.shared.autoSubscribeToFavoriteSeries) { isOn in
+            Settings.shared.autoSubscribeToFavoriteSeries = isOn
+        }
+        
         dataSource.sections = [
             Section(L10n.Series.title, items: [
                 seriesEpisodeNameToggle
-                ])
+                ]),
+            Section(L10n.Settings.Series.AutoSubscribe.title, items: [
+                subscribeToSeriesToggle
+            ])
         ]
         dataSource.reloadDataAnimated(tableView)
     }

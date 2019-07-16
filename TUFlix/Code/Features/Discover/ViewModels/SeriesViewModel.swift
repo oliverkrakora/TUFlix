@@ -37,8 +37,23 @@ class SeriesViewModel: Matchable {
         return SeriesManager.shared.isInFavorites(series: model)
     }
     
+    var isSubscribed: Bool {
+        return SeriesManager.shared.isSubscribed(for: model.identifier)
+    }
+    
     func likeSeries() {
         SeriesManager.shared.addToFavorites(series: model)
+        if Settings.shared.autoSubscribeToFavoriteSeries {
+            subscribeSeries()
+        }
+    }
+    
+    func subscribeSeries() {
+        SeriesManager.shared.subscribe(for: model.identifier)
+    }
+    
+    func unsubscribeSeries() {
+        SeriesManager.shared.unsubscribe(for: model.identifier)
     }
     
     func unlikeSeries() {
