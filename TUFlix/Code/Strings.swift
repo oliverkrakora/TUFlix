@@ -126,6 +126,8 @@ internal enum L10n {
     /// Settings
     internal static let title = L10n.tr("Localizable", "settings.title")
     internal enum Reset {
+      /// Did you finish the semester? Then let it all out and press this button!
+      internal static let description = L10n.tr("Localizable", "settings.reset.description")
       /// Reset
       internal static let title = L10n.tr("Localizable", "settings.reset.title")
     }

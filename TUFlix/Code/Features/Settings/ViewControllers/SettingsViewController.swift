@@ -37,6 +37,8 @@ class SettingsViewController: UIViewController {
                     return .title(title)
                 case L10n.Settings.Series.AutoSubscribe.title:
                     return .title("")
+                case L10n.Settings.Reset.title:
+                    return .title("")
                 default: return .title(title)
                 }
                 }.footer { (title, _) -> HeaderFooter in
@@ -45,6 +47,8 @@ class SettingsViewController: UIViewController {
                         return .title(L10n.Settings.Series.preferDateDescription)
                     case L10n.Settings.Series.AutoSubscribe.title:
                         return .title(L10n.Settings.Series.AutoSubscribe.description)
+                    case L10n.Settings.Reset.title:
+                        return .title(L10n.Settings.Reset.description)
                     default:
                         return .none
                     }
@@ -85,7 +89,7 @@ class SettingsViewController: UIViewController {
             Section(L10n.Settings.Series.AutoSubscribe.title, items: [
                 subscribeToSeriesToggle
             ]),
-            Section("", items: [L10n.Settings.Reset.title])
+            Section(L10n.Settings.Reset.title, items: [L10n.Settings.Reset.title])
         ]
         dataSource.reloadDataAnimated(tableView)
     }
