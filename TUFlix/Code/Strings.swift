@@ -102,10 +102,12 @@ internal enum L10n {
   }
 
   internal enum Series {
-    /// %@ has %d new episodes available to watch
-    internal static func newEpisodesAvailableTitle(_ p1: String, _ p2: Int) -> String {
-      return L10n.tr("Localizable", "series.new_episodes_available_title", p1, p2)
+    /// %d new episodes were added to %@
+    internal static func newEpisodesAvailableSubtitle(_ p1: Int, _ p2: String) -> String {
+      return L10n.tr("Localizable", "series.new_episodes_available_subtitle", p1, p2)
     }
+    /// New episodes are available to watch
+    internal static let newEpisodesAvailableTitle = L10n.tr("Localizable", "series.new_episodes_available_title")
     /// Series
     internal static let title = L10n.tr("Localizable", "series.title")
     internal enum Subscribe {
@@ -123,6 +125,16 @@ internal enum L10n {
   internal enum Settings {
     /// Settings
     internal static let title = L10n.tr("Localizable", "settings.title")
+    internal enum Reset {
+      /// Reset
+      internal static let title = L10n.tr("Localizable", "settings.reset.title")
+    }
+    internal enum ResetAlert {
+      /// This will remove all your liked series/episodes and delete all downloaded episodes
+      internal static let description = L10n.tr("Localizable", "settings.reset_alert.description")
+      /// Do you want to reset the app?
+      internal static let title = L10n.tr("Localizable", "settings.reset_alert.title")
+    }
     internal enum Series {
       /// Episodes listed inside series will be displayed with the creation date rather then the original title.
       internal static let preferDateDescription = L10n.tr("Localizable", "settings.series.preferDateDescription")

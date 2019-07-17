@@ -52,6 +52,7 @@ class SeriesListViewController<T: ListViewModelProtocol>: ListViewController<T> 
     
     func likeSeries(_ series: SeriesViewModel) {
         series.likeSeries()
+        
         UNUserNotificationCenter.current().requestAuthorization(options: .alert) { (isAuthorized, error) in
             if (!isAuthorized || error != nil) && Settings.shared.autoSubscribeToFavoriteSeries {
                 let alert = UIAlertController(title: L10n.Series.Subscribe.failedTitle, message: L10n.Series.Subscribe.Failed.description(series.formattedTitle ?? ""), preferredStyle: .alert)

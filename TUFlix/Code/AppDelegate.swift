@@ -27,12 +27,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SeriesManager.shared.checkSubscribedSeriesAction.apply().startWithResult { result in
             switch result {
             case .success(let value):
-                let hasNewEpisodes = value.contains(where: { $0.diff > 0 })
+                let hasNewEpisodes = value.contains(where: { $0.diff > 0 || Environment.current() == .debug })
                 if hasNewEpisodes {
                     SeriesManager.shared.scheduleEpisodeAvailibilityNotifications()
                 }
                 completionHandler(hasNewEpisodes ? .newData : .noData)
             case .failure:
+                print("fetching new series in background failed!")
                 completionHandler(.failed)
             }
         }

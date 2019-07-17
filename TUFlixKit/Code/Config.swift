@@ -30,8 +30,8 @@ public struct Config {
     public static var seriesCheckInterval: TimeInterval {
         switch Environment.current() {
         case .debug:
-            // Check every minute for new series
-            return 60
+            // Check every hour for new series
+            return 3600
         default:
             // Check every eight hours for new series
             return 3600 * 8

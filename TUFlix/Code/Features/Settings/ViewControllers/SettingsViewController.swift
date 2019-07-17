@@ -15,7 +15,21 @@ class SettingsViewController: UIViewController {
     
     private lazy var dataSource: DataSource = {
       return DataSource(cellDescriptors: [
-        ToggleCell.descriptor
+        ToggleCell.descriptor,
+        SimpleCell.descriptor.configure { (title, cell, _) in
+            switch title {
+            case L10n.Settings.Reset.title:
+                cell.textLabel?.textColor = Asset.unlikeColor.color
+            default: break
+            }
+            
+            cell.textLabel?.text = title
+            }.didSelect { [weak self] (title, _) -> SelectionResult in
+                if title == L10n.Settings.Reset.title {
+                    self?.eraseAppContent()
+                }
+                return .deselect
+            }
         ], sectionDescriptors: [
             SectionDescriptor<String>().header { (title, _) -> HeaderFooter in
                 switch title {
@@ -23,7 +37,7 @@ class SettingsViewController: UIViewController {
                     return .title(title)
                 case L10n.Settings.Series.AutoSubscribe.title:
                     return .title("")
-                default: return .none
+                default: return .title(title)
                 }
                 }.footer { (title, _) -> HeaderFooter in
                     switch title {
@@ -70,8 +84,20 @@ class SettingsViewController: UIViewController {
                 ]),
             Section(L10n.Settings.Series.AutoSubscribe.title, items: [
                 subscribeToSeriesToggle
-            ])
+            ]),
+            Section("", items: [L10n.Settings.Reset.title])
         ]
         dataSource.reloadDataAnimated(tableView)
+    }
+    
+    private func eraseAppContent() {
+        let alert = UIAlertController(title: L10n.Settings.ResetAlert.title, message: L10n.Settings.ResetAlert.description, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: L10n.Settings.Reset.title, style: .destructive, handler: { _ in
+            EpisodeManager.shared.reset()
+            SeriesManager.shared.reset()
+        }))
+        alert.addAction(UIAlertAction(title: L10n.Global.Cancel.title, style: .cancel, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
     }
 }

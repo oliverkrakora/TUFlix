@@ -85,6 +85,16 @@ class EpisodeManager {
         offlineEpisodes.removeAll(where: { $0.identifier == episode.identifier })
     }
     
+    func removeOfflineEpisodes() {
+        try? FileManager.default.trashItem(at: episodesDiskLocation, resultingItemURL: nil)
+        offlineEpisodes.removeAll()
+    }
+    
+    func reset() {
+        favoriteEpisodes.removeAll()
+        removeOfflineEpisodes()
+    }
+    
     func handleFinishedDownload(download: EpisodeDownloader.Download, currentLocation: URL, callback: @escaping ((Error?) -> Void)) {
         if !FileManager.default.fileExists(atPath: episodesDiskLocation.absoluteString) {
             try? FileManager.default.createDirectory(at: episodesDiskLocation, withIntermediateDirectories: true, attributes: nil)

@@ -11,7 +11,7 @@ public enum Environment: String {
     case staging = "Staging"
 
     /// Returns the current enviroment the app is currently running.
-    static func current() -> Environment {
+    public static func current() -> Environment {
         guard
             let configurationString = Bundle.main.infoDictionary!["_Configuration"] as? String,
             let environment = Environment(rawValue: configurationString)
@@ -24,7 +24,7 @@ public enum Environment: String {
 
     /// Returns the current App version, build number and environment
     /// e.g. `1.0 (3) Release`
-    static var appInfo: String {
+    public static var appInfo: String {
         guard let infoDict = Bundle.main.infoDictionary,
             let version = infoDict["CFBundleShortVersionString"],
             let build = infoDict["CFBundleVersion"] else {

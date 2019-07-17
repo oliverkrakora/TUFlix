@@ -96,6 +96,12 @@ class SeriesManager {
         return favoriteSeries.contains(series)
     }
     
+    func reset() {
+        favoriteSeries.removeAll()
+        subscribedSeries.removeAll()
+        seriesChecks.removeAll()
+    }
+    
     private func persistFavorites() {
         UserDefaults.standard.encode(favoriteSeries, key: defaultsKey, encoder: Encoders.standardJSON)
     }
@@ -136,18 +142,22 @@ class SeriesManager {
     
     func scheduleEpisodeAvailibilityNotifications() {
         let notificationRequests = seriesChecks
-            .filter { $0.diff > 0 } // Get only series that have new episodes
+            .filter { $0.diff > 0 || Environment.current() == .debug } // Get only series that have new episodes
             .compactMap { seriesCheck -> UNNotificationRequest? in
             guard let series = self.favoriteSeries.first(where: { $0.identifier == seriesCheck.identifier }) else { return nil }
             
             let content = UNMutableNotificationContent()
-            content.title = L10n.Series.newEpisodesAvailableTitle(series.title ?? "", seriesCheck.diff)
+            content.title = L10n.Series.newEpisodesAvailableTitle
+            content.body = L10n.Series.newEpisodesAvailableSubtitle(seriesCheck.diff, series.title ?? "")
             content.threadIdentifier = Config.Notification.SeriesEpisodeUpdate.threadIdentifier
-            content.categoryIdentifier = Config.Notification.SeriesEpisodeUpdate.categoryIdentifier
             return UNNotificationRequest(identifier: seriesCheck.identifier, content: content, trigger: UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false))
         }
         notificationRequests.forEach {
-            UNUserNotificationCenter.current().add($0, withCompletionHandler: nil)
+            UNUserNotificationCenter.current().add($0, withCompletionHandler: { error in
+                if let error = error {
+                    print("scheduling notification failed with error: \(error)")
+                }
+            })
         }
     }
 }
