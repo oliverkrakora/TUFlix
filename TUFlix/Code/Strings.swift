@@ -132,7 +132,7 @@ internal enum L10n {
       internal static let title = L10n.tr("Localizable", "settings.reset.title")
     }
     internal enum ResetAlert {
-      /// This will remove all your liked series/episodes and delete all downloaded episodes
+      /// This will remove all your liked series/episodes and delete all downloaded episodes.
       internal static let description = L10n.tr("Localizable", "settings.reset_alert.description")
       /// Do you want to reset the app?
       internal static let title = L10n.tr("Localizable", "settings.reset_alert.title")

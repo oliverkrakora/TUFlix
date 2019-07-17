@@ -80,4 +80,4 @@
 
 "settings.reset_alert.title" = "Do you want to reset the app?";
 
-"settings.reset_alert.description" = "This will remove all your liked series/episodes and delete all downloaded episodes";
+"settings.reset_alert.description" = "This will remove all your liked series/episodes and delete all downloaded episodes.";
