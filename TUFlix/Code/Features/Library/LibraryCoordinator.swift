@@ -8,8 +8,11 @@
 
 import UIKit
 import TUFlixKit
+import ReactiveSwift
 
 class LibraryCoordinator: NavigationCoordinator {
+    
+    private var disposable: Disposable?
     
     func start() {
         let libraryVC = LibraryViewController()
@@ -26,6 +29,28 @@ class LibraryCoordinator: NavigationCoordinator {
         navigationController.setViewControllers([libraryVC], animated: false)
         navigationController.tabBarItem.title = libraryVC.tabBarItem.title
         navigationController.tabBarItem.image = Asset.libraryIcon.image
+        setupBindings()
+        updateBadgeCount()
+    }
+    
+    deinit {
+        disposable?.dispose()
+    }
+    
+    private func setupBindings() {
+        disposable = SeriesManager.shared.didChangeSignal.observeValues { [weak self] _ in
+            self?.updateBadgeCount()
+        }
+    }
+    
+    private func updateBadgeCount() {
+        let count = SeriesManager.shared.numberOfSeriesWithNewEpisodes
+        
+        if count > 0 {
+            navigationController.tabBarItem.badgeValue = Formatters.numberFormatter.string(from: SeriesManager.shared.numberOfSeriesWithNewEpisodes as NSNumber)
+        } else {
+            navigationController.tabBarItem.badgeValue = nil
+        }
     }
     
     private func showFavoriteEpisodes() {

@@ -102,9 +102,9 @@ internal enum L10n {
   }
 
   internal enum Series {
-    /// %d new episodes were added to %@
-    internal static func newEpisodesAvailableSubtitle(_ p1: Int, _ p2: String) -> String {
-      return L10n.tr("Localizable", "series.new_episodes_available_subtitle", p1, p2)
+    /// %d series have new episodes to watch.
+    internal static func newEpisodesAvailableSubtitle(_ p1: Int) -> String {
+      return L10n.tr("Localizable", "series.new_episodes_available_subtitle", p1)
     }
     /// New episodes are available to watch
     internal static let newEpisodesAvailableTitle = L10n.tr("Localizable", "series.new_episodes_available_title")

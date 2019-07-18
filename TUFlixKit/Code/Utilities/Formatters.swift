@@ -31,4 +31,10 @@ public struct Formatters {
         formatter.numberStyle = .percent
         return formatter
     }()
+    
+    public static let numberFormatter: NumberFormatter = {
+       let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
 }

@@ -58,7 +58,7 @@
 
 "series.new_episodes_available_title" = "New episodes are available to watch";
 
-"series.new_episodes_available_subtitle" = "%d new episodes were added to %@";
+"series.new_episodes_available_subtitle" = "%d series have new episodes to watch.";
 
 "browse.title" = "Browse";
 

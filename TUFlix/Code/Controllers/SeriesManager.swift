@@ -19,6 +19,7 @@ class SeriesManager {
         private(set)var oldTotal: Int
         private(set)var newTotal: Int
         private(set)var checkDate: Date
+        var wasSeen: Bool
         
         var diff: Int {
             return abs(newTotal - oldTotal)
@@ -28,6 +29,7 @@ class SeriesManager {
             self.oldTotal = self.newTotal
             self.newTotal = newTotal
             self.checkDate = Date()
+            self.wasSeen = false
         }
         
         func hash(into hasher: inout Hasher) {
@@ -63,12 +65,25 @@ class SeriesManager {
         }
     }
     
-    private(set)var seriesChecks: Set<SeriesCheck>
+    private(set)var seriesChecks: Set<SeriesCheck> {
+        didSet {
+            persistSubscriptionChecks()
+            didChangeObserver.input.send(value: ())
+        }
+    }
+    
+    var numberOfSeriesWithNewEpisodes: Int {
+        return seriesChecks.filter { $0.diff > 0 || Environment.current() == .debug }.count
+    }
     
     private init() {
         self.favoriteSeries = UserDefaults.standard.decode(for: defaultsKey, decoder: Decoders.standardJSON) ?? []
         self.subscribedSeries = UserDefaults.standard.decode(for: subscribedDefaultsKey, decoder: Decoders.standardJSON) ?? []
         self.seriesChecks = UserDefaults.standard.decode(for: subscriptionCheckKey, decoder: Decoders.standardJSON) ?? []
+    }
+    
+    func hasNewEpisodesAvailable(series: Series.Id) -> Bool {
+        return seriesChecks.contains(where: { $0.identifier == series })
     }
     
     func addToFavorites(series: Series) {
@@ -90,6 +105,9 @@ class SeriesManager {
     func removeFromFavorites(series: Series) {
         favoriteSeries.removeAll(where: { $0.identifier == series.identifier })
         subscribedSeries.removeAll(where: { $0 == series.identifier })
+        if let index = seriesChecks.firstIndex(where: { $0.identifier == series.identifier }) {
+            seriesChecks.remove(at: index)
+        }
     }
     
     func isInFavorites(series: Series) -> Bool {
@@ -125,7 +143,7 @@ class SeriesManager {
                         existingCheck.update(with: pageResult.total)
                         existingChecks.insert(existingCheck)
                     } else {
-                        let check = SeriesCheck(identifier: seriesId, oldTotal: pageResult.total, newTotal: pageResult.total, checkDate: Date())
+                        let check = SeriesCheck(identifier: seriesId, oldTotal: pageResult.total, newTotal: pageResult.total, checkDate: Date(), wasSeen: false)
                         existingChecks.insert(check)
                     }
                 }
@@ -140,24 +158,19 @@ class SeriesManager {
         }
     }()
     
-    func scheduleEpisodeAvailibilityNotifications() {
-        let notificationRequests = seriesChecks
+    func scheduleEpisodeAvailibilityNotification() {
+        let seriesWithNewContent = seriesChecks
             .filter { $0.diff > 0 || Environment.current() == .debug } // Get only series that have new episodes
-            .compactMap { seriesCheck -> UNNotificationRequest? in
-            guard let series = self.favoriteSeries.first(where: { $0.identifier == seriesCheck.identifier }) else { return nil }
-            
-            let content = UNMutableNotificationContent()
-            content.title = L10n.Series.newEpisodesAvailableTitle
-            content.body = L10n.Series.newEpisodesAvailableSubtitle(seriesCheck.diff, series.title ?? "")
-            content.threadIdentifier = Config.Notification.SeriesEpisodeUpdate.threadIdentifier
-            return UNNotificationRequest(identifier: seriesCheck.identifier, content: content, trigger: UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false))
-        }
-        notificationRequests.forEach {
-            UNUserNotificationCenter.current().add($0, withCompletionHandler: { error in
-                if let error = error {
-                    print("scheduling notification failed with error: \(error)")
-                }
-            })
+        
+        let content = UNMutableNotificationContent()
+        content.title = L10n.Series.newEpisodesAvailableTitle
+        content.body = L10n.Series.newEpisodesAvailableSubtitle(seriesWithNewContent.count)
+        
+        let request = UNNotificationRequest(identifier: "newEpisodes", content: content, trigger: UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false))
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Failed to schedule notification with error \(error)")
+            }
         }
     }
 }

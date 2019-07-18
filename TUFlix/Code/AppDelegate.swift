@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             case .success(let value):
                 let hasNewEpisodes = value.contains(where: { $0.diff > 0 || Environment.current() == .debug })
                 if hasNewEpisodes {
-                    SeriesManager.shared.scheduleEpisodeAvailibilityNotifications()
+                    SeriesManager.shared.scheduleEpisodeAvailibilityNotification()
                 }
                 completionHandler(hasNewEpisodes ? .newData : .noData)
             case .failure:
