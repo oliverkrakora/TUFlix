@@ -86,7 +86,7 @@ class EpisodeManager {
     }
     
     func removeOfflineEpisodes() {
-        try? FileManager.default.trashItem(at: episodesDiskLocation, resultingItemURL: nil)
+        try? FileManager.default.removeItem(at: episodesDiskLocation)
         offlineEpisodes.removeAll()
     }
     

@@ -81,6 +81,7 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.hidesSearchBarWhenScrolling = false
         setupStatefulViews()
         setupBindings()
         setupSearchController()
@@ -117,7 +118,6 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
         controller.dimsBackgroundDuringPresentation = false
         controller.hidesNavigationBarDuringPresentation = true
         controller.obscuresBackgroundDuringPresentation = false
-        controller.searchBar.barStyle = .black
         controller.searchBar.delegate = self
         navigationItem.searchController = controller
     }

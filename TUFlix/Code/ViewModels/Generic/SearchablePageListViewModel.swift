@@ -43,10 +43,6 @@ class SearchablePageListViewModel<Page: PageProtocol, MappedItem>: ListViewModel
         return currentPagingViewModel.loadNextPageAction
     }
     
-    var loadDataAction: Action<(), [MappedItem], Error> {
-        return currentPagingViewModel.loadDataAction
-    }
-    
     init(resourceProvider: @escaping PageListViewModel<Page, MappedItem>.PageProvider,
          searchResourceProvider: @escaping SearchableResourceProvider, mapping: @escaping PageListViewModel<Page, MappedItem>.ItemMapper) {
         pagingViewModel = PageListViewModel(provider: resourceProvider, mapper: mapping)

@@ -22,9 +22,7 @@ class LibraryViewController: UIViewController {
     
     private let disposable = CompositeDisposable()
     
-    private var tableView: UITableView {
-        return view as! UITableView
-    }
+    private var tableView: UITableView!
     
     private lazy var dataSource: DataSource = {
         return DataSource(cellDescriptors: [
@@ -45,6 +43,7 @@ class LibraryViewController: UIViewController {
                     let success = EpisodeDownloader.shared.cancelDownload(for: download.episode.identifier) == nil
                     completion(success)
                 })
+                action.backgroundColor = Asset.unlikeColor.color
                 return UISwipeActionsConfiguration(actions: [action])
             }
             ], sectionDescriptors: [
@@ -72,7 +71,19 @@ class LibraryViewController: UIViewController {
     // MARK: Lifecycle
     
     override func loadView() {
-        view = UITableView(frame: .zero, style: .plain)
+        view = UIView()
+        
+        tableView = UITableView(frame: .zero, style: .plain)
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tableView)
+        
+        NSLayoutConstraint.activate([
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
     override func viewDidLoad() {

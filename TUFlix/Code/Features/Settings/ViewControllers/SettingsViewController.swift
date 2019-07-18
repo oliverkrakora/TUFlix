@@ -57,8 +57,18 @@ class SettingsViewController: UIViewController {
     }()
     
     override func loadView() {
-        self.tableView = UITableView(frame: .zero, style: .grouped)
-        view = tableView
+        view = UIView()
+        tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tableView)
+        
+        NSLayoutConstraint.activate([
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
+        
         tableView.dataSource = dataSource
         tableView.delegate = dataSource
     }

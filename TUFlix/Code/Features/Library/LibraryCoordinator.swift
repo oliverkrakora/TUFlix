@@ -14,6 +14,11 @@ class LibraryCoordinator: NavigationCoordinator {
     
     private var disposable: Disposable?
     
+    override init(navigationController: UINavigationController = UINavigationController()) {
+        navigationController.view.backgroundColor = .white
+        super.init(navigationController: navigationController)
+    }
+    
     func start() {
         let libraryVC = LibraryViewController()
         libraryVC.title = L10n.Library.title

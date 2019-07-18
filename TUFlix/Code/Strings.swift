@@ -18,7 +18,7 @@ internal enum L10n {
   }
 
   internal enum Download {
-    /// Remove
+    /// Remove download
     internal static let deleteTitle = L10n.tr("Localizable", "download.delete_title")
     /// Download
     internal static let startTitle = L10n.tr("Localizable", "download.start_title")

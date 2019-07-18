@@ -31,13 +31,6 @@ class PageListViewModel<Page: PageProtocol, MappedItem>: ListViewModelProtocol {
     
     private var lastPageConfig: API.PagingConfig?
     
-    lazy var loadDataAction: Action<(), [MappedItem], Error> = {
-        return Action { [unowned self] in
-            self.loadNextPageAction.apply(false)
-                .mapError { $0 as Error }
-        }
-    }()
-    
     lazy var loadNextPageAction: Action<Bool, [MappedItem], Error> = {
         return Action { [unowned self] shouldReset in
             let mapper = self.mapper
@@ -91,8 +84,8 @@ class PageListViewModel<Page: PageProtocol, MappedItem>: ListViewModelProtocol {
     }
     
     func loadData(reset: Bool = false) -> SignalProducer<[MappedItem], Error> {
-        return loadDataAction
-            .apply()
+        return loadNextPageAction
+            .apply(reset)
             .mapError { $0 as Error }
     }
     

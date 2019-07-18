@@ -68,7 +68,7 @@ class PageViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             pagingViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            pagingViewController.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            pagingViewController.view.topAnchor.constraint(equalTo: view.topAnchor),
             pagingViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             bottomConstraint
             ])
@@ -128,6 +128,7 @@ class PageViewController: UIViewController {
         navigationItem.searchController = vc.navigationItem.searchController
         navigationItem.leftBarButtonItems = vc.navigationItem.leftBarButtonItems
         navigationItem.rightBarButtonItems = vc.navigationItem.rightBarButtonItems
+        navigationItem.hidesSearchBarWhenScrolling = vc.navigationItem.hidesSearchBarWhenScrolling
         
         navigationController?.view.setNeedsLayout()
     }

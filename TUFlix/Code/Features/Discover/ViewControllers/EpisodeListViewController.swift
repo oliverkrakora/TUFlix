@@ -102,9 +102,15 @@ class EpisodeListViewController<T: ListViewModelProtocol>: ListViewController<T>
                                 return (L10n.Download.startTitle, viewModel.download)
                             }
                         }()
-                        return UIContextualAction(style: .normal, title: titleAndAction.title, handler: { (_, _, completion) in
+                        let action = UIContextualAction(style: .normal, title: titleAndAction.title, handler: { (_, _, completion) in
                             completion(titleAndAction.action())
                         })
+                        switch action.title {
+                        case L10n.Download.deleteTitle, L10n.Download.stopTitle:
+                            action.backgroundColor = Asset.unlikeColor.color
+                        default: break
+                        }
+                        return action
                     }()
                     
                     return UISwipeActionsConfiguration(actions: [
