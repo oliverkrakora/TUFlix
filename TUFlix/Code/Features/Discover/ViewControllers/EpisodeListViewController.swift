@@ -52,7 +52,6 @@ class EpisodeListViewController<T: ListViewModelProtocol>: ListViewController<T>
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.contentInset.bottom = toolbar.frame.height
-        setupStatefulViews(insets: UIEdgeInsets(top: 0, left: 0, bottom: toolbar.frame.height, right: 0))
     }
     
     override func cellDescriptors() -> [CellDescriptorType] {

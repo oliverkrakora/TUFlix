@@ -18,7 +18,7 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
     
     private(set) var tableView: UITableView!
     
-    private lazy var pagingStateView: PageLoadingStateView = {
+    private lazy var pagingStateView: PageLoadingStateView = { [unowned self] in
         let view = PageLoadingStateView(frame: CGRect(origin: .zero, size: CGSize(width: self.view.bounds.width, height: 100)))
         view.retryClosure = { [unowned self] in
             self.loadData()
@@ -36,6 +36,18 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
                                         self.loadData()
         })
     }()
+    
+    var emptyStateView: EmptyStateView? {
+        return emptyView as? EmptyStateView
+    }
+    
+    var errorStateView: ErrorStateView? {
+        return errorView as? ErrorStateView
+    }
+    
+    var loadingStateView: LoadingStateView? {
+        return loadingView as? LoadingStateView
+    }
     
     private(set) var viewModel: T!
     

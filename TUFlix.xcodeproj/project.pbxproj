@@ -52,6 +52,7 @@
 		5C9BAD3A22B53E4D00B62F6D /* PageListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BAD3922B53E4D00B62F6D /* PageListViewModel.swift */; };
 		5C9BAD3C22B5404A00B62F6D /* SearchablePageListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BAD3B22B5404A00B62F6D /* SearchablePageListViewModel.swift */; };
 		5C9E5F5522E310ED009245C9 /* PageLoadingStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9E5F5422E310ED009245C9 /* PageLoadingStateView.swift */; };
+		5C9E5F5722E3254C009245C9 /* ViewControllerAspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9E5F5622E3254C009245C9 /* ViewControllerAspect.swift */; };
 		5CAC31C222BC03D2007DD8AD /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAC31C122BC03D2007DD8AD /* LibraryViewController.swift */; };
 		5CAC31C522BC03F5007DD8AD /* LibraryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAC31C422BC03F5007DD8AD /* LibraryItemCell.swift */; };
 		5CAC31C722BC03FF007DD8AD /* LibraryItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CAC31C622BC03FF007DD8AD /* LibraryItemCell.xib */; };
@@ -176,6 +177,7 @@
 		5C9BAD3922B53E4D00B62F6D /* PageListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageListViewModel.swift; sourceTree = "<group>"; };
 		5C9BAD3B22B5404A00B62F6D /* SearchablePageListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchablePageListViewModel.swift; sourceTree = "<group>"; };
 		5C9E5F5422E310ED009245C9 /* PageLoadingStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageLoadingStateView.swift; sourceTree = "<group>"; };
+		5C9E5F5622E3254C009245C9 /* ViewControllerAspect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerAspect.swift; sourceTree = "<group>"; };
 		5CAC31C122BC03D2007DD8AD /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		5CAC31C422BC03F5007DD8AD /* LibraryItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryItemCell.swift; sourceTree = "<group>"; };
 		5CAC31C622BC03FF007DD8AD /* LibraryItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LibraryItemCell.xib; sourceTree = "<group>"; };
@@ -480,6 +482,7 @@
 				5C1A10F822B623D400A3CDDF /* KeyboardObserver.swift */,
 				5C59962222C8F5D500B675F1 /* Settings.swift */,
 				5CC61FB222DB8E200085B189 /* Builder.swift */,
+				5C9E5F5622E3254C009245C9 /* ViewControllerAspect.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -860,6 +863,7 @@
 				5C1A10FE22B6383300A3CDDF /* TriangleView.swift in Sources */,
 				765B657B0FA46A02854F40E5261A6246 /* AppCoordinator.swift in Sources */,
 				5CB4792E2275B6A300116ADE /* LoadingStateView.swift in Sources */,
+				5C9E5F5722E3254C009245C9 /* ViewControllerAspect.swift in Sources */,
 				5CC61FB122DA026C0085B189 /* LibraryOfflineEpisodeListViewModel.swift in Sources */,
 				5CB479362275B9F200116ADE /* Nibable.swift in Sources */,
 				D51A245877C12FF7791CCEB4D18B055E /* AppDelegate.swift in Sources */,
