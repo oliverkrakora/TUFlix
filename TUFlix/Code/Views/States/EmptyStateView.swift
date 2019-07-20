@@ -15,6 +15,8 @@ class EmptyStateView: UIView, StatefulPlaceholderView {
     
     @IBOutlet private var subtitleLabel: UILabel!
     
+    @IBOutlet private var stackView: UIStackView!
+    
     private var insets: UIEdgeInsets = .zero
     
     private var retry: (() -> Void)?

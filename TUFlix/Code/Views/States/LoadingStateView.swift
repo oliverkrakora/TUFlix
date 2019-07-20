@@ -13,13 +13,16 @@ class LoadingStateView: UIView, StatefulPlaceholderView {
     
     @IBOutlet private var titleLabel: UILabel!
     
+    @IBOutlet private var stackView: UIStackView!
+    
     @IBOutlet private var activityIndicator: UIActivityIndicatorView!
     
     private var insets: UIEdgeInsets = .zero
     
     @discardableResult
-    func prepare(with title: String, insets: UIEdgeInsets = .zero) -> LoadingStateView {
+    func prepare(with title: String?, insets: UIEdgeInsets = .zero) -> LoadingStateView {
         titleLabel.text = title
+        titleLabel.isHidden = title == nil
         self.insets = insets
         return self
     }

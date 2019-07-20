@@ -36,7 +36,7 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="yvb-dO-tzL" secondAttribute="bottom" priority="250" constant="8" id="8ch-sg-XyN"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="yvb-dO-tzL" secondAttribute="bottom" priority="250" id="8ch-sg-XyN"/>
                 <constraint firstItem="yvb-dO-tzL" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" priority="250" constant="8" id="XVa-1J-vvF"/>
                 <constraint firstItem="yvb-dO-tzL" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="gNs-2L-3rZ"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="yvb-dO-tzL" secondAttribute="trailing" constant="16" id="lyM-k6-5Ic"/>
@@ -45,6 +45,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="stackView" destination="yvb-dO-tzL" id="645-tS-qWa"/>
                 <outlet property="subtitleLabel" destination="upz-Ny-0tn" id="dAk-OR-hoq"/>
                 <outlet property="titleLabel" destination="eVh-lK-cZ9" id="oe9-dm-IL7"/>
             </connections>

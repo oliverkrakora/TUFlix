@@ -15,9 +15,12 @@ class ErrorStateView: UIView, StatefulPlaceholderView {
     
     @IBOutlet private var subtitleLabel: UILabel!
     
+    @IBOutlet private var stackView: UIStackView!
+    
     private var insets: UIEdgeInsets = .zero
     
     private var retry: (() -> Void)?
+    
     
     private lazy var tapRecognizer: UITapGestureRecognizer = {
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTap))

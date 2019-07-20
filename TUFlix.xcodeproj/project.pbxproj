@@ -51,6 +51,7 @@
 		5C9BAD2522B2D90400B62F6D /* ScrollViewPagingHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BAD2422B2D90400B62F6D /* ScrollViewPagingHandler.swift */; };
 		5C9BAD3A22B53E4D00B62F6D /* PageListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BAD3922B53E4D00B62F6D /* PageListViewModel.swift */; };
 		5C9BAD3C22B5404A00B62F6D /* SearchablePageListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BAD3B22B5404A00B62F6D /* SearchablePageListViewModel.swift */; };
+		5C9E5F5522E310ED009245C9 /* PageLoadingStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9E5F5422E310ED009245C9 /* PageLoadingStateView.swift */; };
 		5CAC31C222BC03D2007DD8AD /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAC31C122BC03D2007DD8AD /* LibraryViewController.swift */; };
 		5CAC31C522BC03F5007DD8AD /* LibraryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAC31C422BC03F5007DD8AD /* LibraryItemCell.swift */; };
 		5CAC31C722BC03FF007DD8AD /* LibraryItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CAC31C622BC03FF007DD8AD /* LibraryItemCell.xib */; };
@@ -174,6 +175,7 @@
 		5C9BAD3322B3E77900B62F6D /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		5C9BAD3922B53E4D00B62F6D /* PageListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageListViewModel.swift; sourceTree = "<group>"; };
 		5C9BAD3B22B5404A00B62F6D /* SearchablePageListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchablePageListViewModel.swift; sourceTree = "<group>"; };
+		5C9E5F5422E310ED009245C9 /* PageLoadingStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageLoadingStateView.swift; sourceTree = "<group>"; };
 		5CAC31C122BC03D2007DD8AD /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		5CAC31C422BC03F5007DD8AD /* LibraryItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryItemCell.swift; sourceTree = "<group>"; };
 		5CAC31C622BC03FF007DD8AD /* LibraryItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LibraryItemCell.xib; sourceTree = "<group>"; };
@@ -491,6 +493,7 @@
 				5CB4792D2275B6A300116ADE /* LoadingStateView.swift */,
 				5CB479312275B7C500116ADE /* ErrorStateView.xib */,
 				5CB479332275B7CE00116ADE /* ErrorStateView.swift */,
+				5C9E5F5422E310ED009245C9 /* PageLoadingStateView.swift */,
 			);
 			path = States;
 			sourceTree = "<group>";
@@ -894,6 +897,7 @@
 				5C9BAD2522B2D90400B62F6D /* ScrollViewPagingHandler.swift in Sources */,
 				7AC65D543DBCF7326EA275513A9D06DA /* UIWindow+TopViewController.swift in Sources */,
 				5C016D3A22BBB90500FC8CEC /* LibraryCoordinator.swift in Sources */,
+				5C9E5F5522E310ED009245C9 /* PageLoadingStateView.swift in Sources */,
 				5CD23CD922D51D8A0033AA8A /* EpisodeDownloadCell.swift in Sources */,
 				5C2A3F7A226B188700B5D178 /* SeriesViewModel.swift in Sources */,
 				5C55D97422B5419F002B4897 /* ListViewController.swift in Sources */,

@@ -18,6 +18,14 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
     
     private(set) var tableView: UITableView!
     
+    private lazy var pagingStateView: PageLoadingStateView = {
+        let view = PageLoadingStateView(frame: CGRect(origin: .zero, size: CGSize(width: self.view.bounds.width, height: 100)))
+        view.retryClosure = { [unowned self] in
+            self.loadData()
+        }
+        return view
+    }()
+    
     private lazy var dataSource: DataSource = {
         return DataSource(cellDescriptors: cellDescriptors(), sectionDescriptors: sectionDescriptors())
     }()
@@ -32,6 +40,8 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
     private(set) var viewModel: T!
     
     private var requestDisposable: Disposable?
+    
+    private var lastLoadFailed: Bool = false
     
     private var bindingsDisposable = CompositeDisposable()
     
@@ -69,7 +79,7 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
             return control
         }()
         
-        tableView.tableFooterView = UIView()
+        tableView.tableFooterView = pagingStateView
         
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -129,9 +139,12 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
         guard !viewModel.isLoadingData() || reset else { return }
         
         startLoading()
+        pagingStateView.startLoading()
         requestDisposable?.dispose()
         requestDisposable = viewModel.loadData(reset: reset).startWithResult { [weak self] result in
+            self?.lastLoadFailed = result.error != nil
             self?.endLoading(animated: true, error: result.error, completion: nil)
+            self?.pagingStateView.endLoading(animated: true, error: result.error, completion: nil)
             self?.tableView.refreshControl?.endRefreshing()
             switch result {
             case .success:
@@ -172,7 +185,7 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
     // MARK: UITableViewDelegate
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard viewModel.hasContent() && viewModel.hasAdditionalDataToLoad() else { return }
+        guard viewModel.hasContent() && viewModel.hasAdditionalDataToLoad() && !lastLoadFailed else { return }
         
         pagingHelper.scrollViewDidScroll(scrollView)
     }

@@ -62,7 +62,7 @@ class PageViewController: UIViewController {
         view.addSubview(pagingViewController.view)
         pagingViewController.didMove(toParent: self)
         
-        let bottomConstraint = pagingViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        let bottomConstraint = pagingViewController.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         
         bottomConstraint.priority = .defaultLow
         
