@@ -138,6 +138,7 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
     private func setupSearchController() {
         guard viewModel is SearchableProtocol else {
             navigationItem.searchController = nil
+            self.definesPresentationContext = false
             return
         }
         
@@ -147,6 +148,7 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
         controller.obscuresBackgroundDuringPresentation = false
         controller.searchBar.delegate = self
         navigationItem.searchController = controller
+        self.definesPresentationContext = true
     }
     
     // MARK: Networking

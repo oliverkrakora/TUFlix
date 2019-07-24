@@ -83,11 +83,6 @@ class PageViewController: UIViewController {
         updateSearchController()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationItem.searchController?.isActive = false
-    }
-    
     private func setupToolbar() {
         if let toolbar = toolbar {
             toolbar.translatesAutoresizingMaskIntoConstraints = false
@@ -129,7 +124,7 @@ class PageViewController: UIViewController {
         navigationItem.leftBarButtonItems = vc.navigationItem.leftBarButtonItems
         navigationItem.rightBarButtonItems = vc.navigationItem.rightBarButtonItems
         navigationItem.hidesSearchBarWhenScrolling = vc.navigationItem.hidesSearchBarWhenScrolling
-        
+        self.definesPresentationContext = navigationItem.searchController != nil
         navigationController?.view.setNeedsLayout()
     }
 }

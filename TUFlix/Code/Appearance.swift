@@ -42,6 +42,7 @@ struct Appearance {
         UINavigationBar.appearance().tintColor = Asset.primaryColor.color
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: Asset.primaryColor.color]
         UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().barStyle = .default
         
         // SegmentedControl
         UISegmentedControl.appearance().tintColor = Asset.primaryColor.color
@@ -59,6 +60,7 @@ struct Appearance {
         UIToolbar.appearance().tintColor = Asset.primaryColor.color
         UIToolbar.appearance().barTintColor = .white
         UIToolbar.appearance().isTranslucent = false
+        UIToolbar.appearance().barStyle = .default
         toggleToolbarLabelColor = .black
     }
 }
