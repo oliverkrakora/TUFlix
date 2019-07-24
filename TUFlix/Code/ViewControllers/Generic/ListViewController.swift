@@ -16,6 +16,8 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
     
     // MARK: Properties
     
+    var aspects: [ViewControllerAspect<UIViewController>] = []
+    
     private(set) var tableView: UITableView!
     
     private lazy var pagingStateView: PageLoadingStateView = { [unowned self] in
@@ -108,11 +110,13 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
         setupBindings()
         setupSearchController()
         loadData()
+        aspects.aspects(for: .viewDidLoad).forEach { $0.closure(self) }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupInitialViewState()
+        aspects.aspects(for: .viewWillAppear).forEach { $0.closure(self) }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -120,6 +124,7 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
         if let selectedRow = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: selectedRow, animated: true)
         }
+        aspects.aspects(for: .viewDidAppear).forEach { $0.closure(self) }
     }
     
     func cellDescriptors() -> [CellDescriptorType] {

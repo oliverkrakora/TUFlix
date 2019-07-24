@@ -63,9 +63,20 @@ class LibraryCoordinator: NavigationCoordinator {
         let vc = Builder.ViewController.episodeListViewController(title: L10n.Episodes.likedTitle,
                                                                   viewModel: viewModel)
         
+        vc.aspects = [
+            ViewControllerAspect(kind: .viewDidLoad) { _ in
+                vc.emptyStateView?.prepare(with: L10n.Episodes.Liked.State.Empty.title, retryClosure: vc.emptyStateView?.retry)
+            }
+        ]
+        
         let offlineViewModel = LibraryOfflineEpisodeListViewModel(series: nil)
         let offlineVC = Builder.ViewController.episodeListViewController(title: L10n.Episodes.AvailableOffline.title,
                                                                          viewModel: offlineViewModel)
+        offlineVC.aspects = [
+            ViewControllerAspect(kind: .viewDidLoad) { _ in
+                offlineVC.emptyStateView?.prepare(with: L10n.Episodes.Offline.State.Empty.title, retryClosure: offlineVC.emptyStateView?.retry)
+            }
+        ]
         
         let pageVC = PageViewController.create(with: [vc, offlineVC])
         push(pageVC, animated: true)
@@ -94,12 +105,24 @@ class LibraryCoordinator: NavigationCoordinator {
                                                                        showEpisodeNameToggle: false,
                                                                        showEpisodesNames: displayEpisodeNames)
         
+        likedVC.aspects = [
+            ViewControllerAspect(kind: .viewDidLoad, { _ in
+                likedVC.emptyStateView?.prepare(with: L10n.Series.Liked.State.Empty.title, retryClosure: likedVC.emptyStateView?.retry)
+            })
+        ]
+        
         let offlineViewModel = LibraryOfflineEpisodeListViewModel(series: series.model.identifier)
         
         let offlineVC = Builder.ViewController.episodeListViewController(title: L10n.Episodes.AvailableOffline.title,
                                                                          viewModel: offlineViewModel,
                                                                          showEpisodeNameToggle: false,
                                                                          showEpisodesNames: displayEpisodeNames)
+        
+        offlineVC.aspects = [
+            ViewControllerAspect(kind: .viewDidLoad) { _ in
+                offlineVC.emptyStateView?.prepare(with: L10n.Episodes.Offline.State.Empty.title, retryClosure: offlineVC.emptyStateView?.retry)
+            }
+        ]
     
         let pageVC = PageViewController.create(with: [likedVC, offlineVC, allVC])
         

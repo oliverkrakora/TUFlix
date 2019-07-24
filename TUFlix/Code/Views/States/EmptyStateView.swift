@@ -19,7 +19,7 @@ class EmptyStateView: UIView, StatefulPlaceholderView {
     
     private var insets: UIEdgeInsets = .zero
     
-    private var retry: (() -> Void)?
+    private(set) var retry: (() -> Void)?
     
     private lazy var tapRecognizer: UITapGestureRecognizer = {
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTap))

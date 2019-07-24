@@ -22,7 +22,7 @@ class ToggleToolbar: UIToolbar {
     
     let toggleLabel: UILabel = {
        let label = UILabel()
-        label.textColor = .white
+        label.textColor = Appearance.toggleToolbarLabelColor
         return label
     }()
     

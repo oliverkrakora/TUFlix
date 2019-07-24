@@ -2,6 +2,8 @@ import UIKit
 
 /// Defines the global appearance for the application.
 struct Appearance {
+    
+    static private(set)var toggleToolbarLabelColor: UIColor!
     /// Sets the global appearance for the application.
     /// Call this method early in the applicaiton's setup, i.e. in `applicationDidFinishLaunching:`
     static func setup() {
@@ -31,6 +33,7 @@ struct Appearance {
         UIToolbar.appearance().tintColor = Asset.primaryColor.color
         UIToolbar.appearance().barTintColor = Asset.primaryTextColor.color
         UIToolbar.appearance().isTranslucent = false
+        toggleToolbarLabelColor = .white
     }
     
     private static func setupWhiteAppeareanceWithPrimaryTint() {
@@ -56,5 +59,6 @@ struct Appearance {
         UIToolbar.appearance().tintColor = Asset.primaryColor.color
         UIToolbar.appearance().barTintColor = .white
         UIToolbar.appearance().isTranslucent = false
+        toggleToolbarLabelColor = .black
     }
 }

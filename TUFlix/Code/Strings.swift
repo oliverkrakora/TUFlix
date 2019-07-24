@@ -51,6 +51,22 @@ internal enum L10n {
       /// Offline
       internal static let title = L10n.tr("Localizable", "episodes.available_offline.title")
     }
+    internal enum Liked {
+      internal enum State {
+        internal enum Empty {
+          /// You haven't liked any episodes yet
+          internal static let title = L10n.tr("Localizable", "episodes.liked.state.empty.title")
+        }
+      }
+    }
+    internal enum Offline {
+      internal enum State {
+        internal enum Empty {
+          /// You haven't downloaded any episodes yet
+          internal static let title = L10n.tr("Localizable", "episodes.offline.state.empty.title")
+        }
+      }
+    }
     internal enum PlayUnavailable {
       /// The selected episode can not be streamed
       internal static let title = L10n.tr("Localizable", "episodes.play_unavailable.title")
@@ -110,6 +126,14 @@ internal enum L10n {
     internal static let newEpisodesAvailableTitle = L10n.tr("Localizable", "series.new_episodes_available_title")
     /// Series
     internal static let title = L10n.tr("Localizable", "series.title")
+    internal enum Liked {
+      internal enum State {
+        internal enum Empty {
+          /// You haven't liked any series yet
+          internal static let title = L10n.tr("Localizable", "series.liked.state.empty.title")
+        }
+      }
+    }
     internal enum Subscribe {
       /// Notifications are deactivated
       internal static let failedTitle = L10n.tr("Localizable", "series.subscribe.failed_title")

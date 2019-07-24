@@ -26,6 +26,10 @@
 
 "episodes.liked_title" = "Liked";
 
+"episodes.liked.state.empty.title" = "You haven't liked any episodes yet";
+
+"episodes.offline.state.empty.title" = "You haven't downloaded any episodes yet";
+
 "episodes.all_title" = "All";
 
 "episode.add_like_title" = "Like";
@@ -59,6 +63,8 @@
 "series.new_episodes_available_title" = "New episodes are available to watch";
 
 "series.new_episodes_available_subtitle" = "%d series have new episodes to watch.";
+
+"series.liked.state.empty.title" = "You haven't liked any series yet";
 
 "browse.title" = "Browse";
 

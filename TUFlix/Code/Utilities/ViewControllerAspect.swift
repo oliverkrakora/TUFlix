@@ -8,10 +8,27 @@
 
 import UIKit
 
-enum ViewControllerAspect<T: UIViewController> {
-    case viewDidLoad(((T) -> Void))
-    case viewWillAppear((T) -> Void)
-    case viewDidAppear((T) -> Void)
-    case viewWillDisAppear((T) -> Void)
-    case viewDidDisAppear((T) -> Void)
+struct ViewControllerAspect<T: UIViewController> {
+    enum Kind: String, CaseIterable {
+        case viewDidLoad
+        case viewWillAppear
+        case viewDidAppear
+        case viewWillDisAppear
+        case viewDidDisappear
+    }
+    
+    let kind: Kind
+    let closure: ((T) -> Void)
+    
+    init( kind: Kind, _ closure: @escaping ((T) -> Void)) {
+        self.kind = kind
+        self.closure = closure
+    }
+}
+
+extension Array where Element == ViewControllerAspect<UIViewController> {
+    
+    func aspects(for kind: Element.Kind) -> [Element] {
+        return filter { $0.kind == kind }
+    }
 }
