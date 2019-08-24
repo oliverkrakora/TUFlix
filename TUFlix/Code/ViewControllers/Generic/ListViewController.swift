@@ -21,10 +21,11 @@ class ListViewController<T: ListViewModelProtocol>: UIViewController, UITableVie
     private(set) var tableView: UITableView!
     
     private lazy var pagingStateView: PageLoadingStateView = { [unowned self] in
-        let view = PageLoadingStateView(frame: CGRect(origin: .zero, size: CGSize(width: self.view.bounds.width, height: 100)))
+        let view = PageLoadingStateView(frame: .zero)
         view.retryClosure = { [unowned self] in
             self.loadData()
         }
+        view.frame.size = view.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
         return view
     }()
     

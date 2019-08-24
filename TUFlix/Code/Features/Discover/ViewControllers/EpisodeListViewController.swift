@@ -70,8 +70,7 @@ class EpisodeListViewController<T: ListViewModelProtocol>: ListViewController<T>
                     }
                     
                     let favoriteAction: UIContextualAction = {
-                        let title = viewModel.isFavorite ? L10n.Episode.removeLikeTitle : L10n.Episode.addLikeTitle
-                        let action = UIContextualAction(style: .normal, title: title, handler: { (_, _, completion) in
+                        let action = UIContextualAction(style: .normal, title: nil, handler: { (_, _, completion) in
                             if viewModel.isFavorite {
                                 viewModel.unlikeEpisode()
                             } else {
@@ -79,6 +78,7 @@ class EpisodeListViewController<T: ListViewModelProtocol>: ListViewController<T>
                             }
                             completion(true)
                         })
+                        action.image = viewModel.isFavorite ? Asset.starFilled.image : Asset.starOutlined.image
                         action.backgroundColor = viewModel.isFavorite ? Asset.unlikeColor.color : Asset.likeColor.color
                         return action
                     }()
@@ -101,12 +101,15 @@ class EpisodeListViewController<T: ListViewModelProtocol>: ListViewController<T>
                                 return (L10n.Download.startTitle, viewModel.download)
                             }
                         }()
-                        let action = UIContextualAction(style: .normal, title: titleAndAction.title, handler: { (_, _, completion) in
+                        let action = UIContextualAction(style: .normal, title: nil, handler: { (_, _, completion) in
                             completion(titleAndAction.action())
                         })
-                        switch action.title {
+                        switch titleAndAction.title {
                         case L10n.Download.deleteTitle, L10n.Download.stopTitle:
                             action.backgroundColor = Asset.unlikeColor.color
+                            action.image = Asset.deleteIcon.image
+                        case L10n.Download.startTitle:
+                            action.image = Asset.downloadIcon.image
                         default: break
                         }
                         return action

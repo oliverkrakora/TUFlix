@@ -44,6 +44,7 @@ class LibraryViewController: UIViewController {
                     completion(success)
                 })
                 action.backgroundColor = Asset.unlikeColor.color
+                action.image = Asset.deleteIcon.image
                 return UISwipeActionsConfiguration(actions: [action])
             }
             ], sectionDescriptors: [

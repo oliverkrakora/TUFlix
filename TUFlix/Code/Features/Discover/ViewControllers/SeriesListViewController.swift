@@ -30,8 +30,7 @@ class SeriesListViewController<T: ListViewModelProtocol>: ListViewController<T> 
                     }
                     
                     let action: UIContextualAction = {
-                        let title = viewModel.isFavorite ? L10n.Episode.removeLikeTitle : L10n.Episode.addLikeTitle
-                        let action = UIContextualAction(style: .normal, title: title, handler: { [weak self] (_, _, completion) in
+                        let action = UIContextualAction(style: .normal, title: nil, handler: { [weak self] (_, _, completion) in
                             if viewModel.isFavorite {
                                 viewModel.unlikeSeries()
                             } else {
@@ -40,6 +39,7 @@ class SeriesListViewController<T: ListViewModelProtocol>: ListViewController<T> 
                             completion(true)
                         })
                         action.backgroundColor = viewModel.isFavorite ? Asset.unlikeColor.color : Asset.likeColor.color
+                        action.image = viewModel.isFavorite ? Asset.starFilled.image : Asset.starOutlined.image
                         return action
                     }()
                     
