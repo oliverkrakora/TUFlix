@@ -105,7 +105,10 @@ class EpisodeListViewController<T: ListViewModelProtocol>: ListViewController<T>
                             completion(titleAndAction.action())
                         })
                         switch titleAndAction.title {
-                        case L10n.Download.deleteTitle, L10n.Download.stopTitle:
+                        case L10n.Download.stopTitle:
+                            action.backgroundColor = Asset.unlikeColor.color
+                            action.image = Asset.cancelIcon.image
+                        case L10n.Download.deleteTitle:
                             action.backgroundColor = Asset.unlikeColor.color
                             action.image = Asset.deleteIcon.image
                         case L10n.Download.startTitle:

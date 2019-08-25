@@ -173,6 +173,10 @@ internal enum L10n {
         internal static let title = L10n.tr("Localizable", "settings.series.auto_subscribe.title")
       }
     }
+    internal enum SourceIcons {
+      /// Asset were provided by icons8.com
+      internal static let title = L10n.tr("Localizable", "settings.source_icons.title")
+    }
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

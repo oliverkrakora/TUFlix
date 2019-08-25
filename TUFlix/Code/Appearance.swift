@@ -7,7 +7,7 @@ struct Appearance {
     /// Sets the global appearance for the application.
     /// Call this method early in the applicaiton's setup, i.e. in `applicationDidFinishLaunching:`
     static func setup() {
-//        setupBrandingAppeareance()
+        //        setupBrandingAppeareance()
         setupWhiteAppeareanceWithPrimaryTint()
     }
     
@@ -38,10 +38,12 @@ struct Appearance {
     
     private static func setupWhiteAppeareanceWithPrimaryTint() {
         // NavigationBar
-        UINavigationBar.appearance().barTintColor = .white
+        //        Don't set the color explicitally to get the translucent effect
+        
+        //        UINavigationBar.appearance().barTintColor = .white
         UINavigationBar.appearance().tintColor = Asset.primaryColor.color
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: Asset.primaryColor.color]
-        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().isTranslucent = true
         UINavigationBar.appearance().barStyle = .default
         
         // SegmentedControl
@@ -53,13 +55,14 @@ struct Appearance {
         
         //TabBar
         UITabBar.appearance().tintColor = Asset.primaryColor.color
-        UITabBar.appearance().barTintColor = .white
-        UITabBar.appearance().isTranslucent = false
+        //        Don't set the color explicitally to get the translucent effect
+        //        UITabBar.appearance().barTintColor = .white
+        UITabBar.appearance().isTranslucent = true
         
         //Toolbar
         UIToolbar.appearance().tintColor = Asset.primaryColor.color
-        UIToolbar.appearance().barTintColor = .white
-        UIToolbar.appearance().isTranslucent = false
+//        UIToolbar.appearance().barTintColor = .white
+        UIToolbar.appearance().isTranslucent = true
         UIToolbar.appearance().barStyle = .default
         toggleToolbarLabelColor = .black
     }

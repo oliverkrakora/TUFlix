@@ -22,6 +22,7 @@ internal enum Asset {
   internal static let primaryColor = ColorAsset(name: "primaryColor")
   internal static let primaryTextColor = ColorAsset(name: "primaryTextColor")
   internal static let unlikeColor = ColorAsset(name: "unlikeColor")
+  internal static let cancelIcon = ImageAsset(name: "cancel_icon")
   internal static let deleteIcon = ImageAsset(name: "delete_icon")
   internal static let discoverIcon = ImageAsset(name: "discover_icon")
   internal static let downloadIcon = ImageAsset(name: "download_icon")

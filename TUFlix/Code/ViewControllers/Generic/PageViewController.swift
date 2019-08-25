@@ -62,15 +62,11 @@ class PageViewController: UIViewController {
         view.addSubview(pagingViewController.view)
         pagingViewController.didMove(toParent: self)
         
-        let bottomConstraint = pagingViewController.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        
-        bottomConstraint.priority = .defaultLow
-        
         NSLayoutConstraint.activate([
             pagingViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            pagingViewController.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            pagingViewController.view.topAnchor.constraint(equalTo: view.topAnchor),
             pagingViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomConstraint
+            pagingViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             ])
         setupToolbar()
     }
@@ -81,6 +77,18 @@ class PageViewController: UIViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.searchController = searchController
         updateSearchController()
+    }
+    
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        viewControllers.forEach {
+            let diff = UIEdgeInsets(top: abs(view.safeAreaInsets.top - $0.view.safeAreaInsets.top),
+                                    left: 0,
+                                    bottom: abs(view.safeAreaInsets.bottom - $0.view.safeAreaInsets.bottom),
+                                    right: 0)
+            $0.additionalSafeAreaInsets = diff
+            
+        }
     }
     
     private func setupToolbar() {
